@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/style.min.css">
+	<link rel="stylesheet" href="css/app.min.css">
+</head>
+<body class="fixed-sidebar mini-navbar">
+	<div class="sidebar">
+		<div class="sidebar-inner" id="side-menu">
+			<div class="brand-top">
+				<div class="brand">
+                    <a href="">
+					<img src="images/logo.png" alt="">
+                    <h3>APT-MESOS</h3></a>
+				</div>			
+			</div>
+			<div class="navbar">
+                <a class="navbar-minimalize"><span class="navbar-minimalize-inner"><span class="si-menu"></span></span></a>
+				<ul class="nav">
+					<li class="active"><a href=""><span class="si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
+					<li><a href=""><span class="si-browser"></span><span class="nav-label">Tasks</span></a></li>
+					<li><a href=""><span class="si-server"></span><span class="nav-label">Cluster</span></a></li>
+				</ul>
+			</div>	
+		</div>
+	</div>
+	<div class="main-wrapper" id="main-wrapper">
+		<div class="header">
+			<!-- <h3 class="tab-title">Task Manager | </h3> -->
+		</div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content mailbox-content">
+                        <div class="file-manager">
+                            <button class="btn btn-block btn-primary compose-mail" data-toggle="modal" data-target="#addTask">Add Task</button>
+                            <div class="space-25"></div>
+                            <h5>Status</h5>
+                            <ul class="category-list" style="padding: 0">
+                                <li>
+                                    <a href="#"> <i class="fa fa-circle text-navy"></i> Running</a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-circle text-danger"></i> Staging</a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-circle text-primary"></i> Killed</a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-circle text-info"></i> Failed</a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-circle text-warning"></i> Finished</a>
+                                </li>
+                            </ul>
+
+                            <h5 class="tag-title">Label</h5>
+                            <ul class="tag-list" style="padding: 0">
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10 animated fadeInRight">
+                <div class="mail-box-header">
+
+                    <form method="get" action="index.html" class="pull-right mail-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" name="search" placeholder="Search all tasks...">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <h2>
+                    All Tasks (16)
+                </h2>
+                    <div class="mail-tools tooltip-demo m-t-md">
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-white btn-sm"><span class="si-angle-left"></span>
+                            </button>
+                            <button class="btn btn-white btn-sm"><span class="si-angle-right"></span>
+                            </button>
+
+                        </div>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="refresh"><span class="si-refresh-2"></span>
+                        </button>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="kill"><span class="si-close-circle"></span>
+                        </button>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="delete"><span class="si-trash"></span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="mail-box">
+                    <table class="table table-hover table-mail">
+                    	<thead>
+                    		<tr>
+                    			<th>Choose</th>
+                    			<th>ID</th>
+                    			<th>Name</th>
+                    			<th>Docker Image</th>
+                    			<th>Cpus</th>
+                    			<th>Memory</th>
+                    			<th>Status</th>
+                    			<th>SubmitTime</th>
+                    			<th>Output</th>
+                    		</tr>
+                    	</thead>
+                        <tbody>
+                            <tr class="read">
+                                <td class="check-mail">
+                                    <input type="checkbox" class="i-checks">
+                                </td>
+                                <td>1</td>
+                                <td class="mail-subject">Hadoop Namenode Test</td>
+                                <td>hadoop</td>
+                                <td>0.1</td>
+                                <td>16 MiB</td>
+                                <td class=""><span class="label label-info">Finished</span></td>
+                                <td class="mail-date">上午9:21</td>
+                                <td>stdout stderr</td>
+                            </tr>
+                            <tr class="read">
+                                <td class="check-mail">
+                                    <input type="checkbox" class="i-checks">
+                                </td>
+                                <td>2</td>
+                                <td class="mail-subject">Java EE Test</td>
+                                <td>java</td>
+                                <td>0.1</td>
+                                <td>16 MiB</td>
+                                <td class=""><span class="label label-warning">Staging</span></td>
+                                <td class="mail-date">上午9:21</td>
+                                <td><a href="#">stdout</a> <a href="">stderr</a></td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>		
+</div>
+<div class="modal inmodal fade" id="addTask" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="si-close modal-close" aria-hidden="true"></span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Create task</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>H+</strong> 是一个完全响应式，基于Bootstrap3.3.5最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的jQuery插件，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/main.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green"
+        })
+    });
+
+</script>
+</body>
+</html>
