@@ -69,6 +69,10 @@ ins {
     opacity: .3;
 }
 
+.modal-md {
+    width: 700px;
+}
+
 .inmodal {
     .modal-header {
         padding: 15px;
@@ -95,3 +99,72 @@ ins {
     }
 }
 
+.modal-body {
+    .row.full-bleed {
+        margin-left: -30px;
+        margin-right: -30px;
+        .panel {
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 0;
+            .panel-heading {
+                background-color: #f6f7fa;
+                padding: 0;
+                .panel-title {
+                    a {
+                        display: block;
+                        padding: 5px 15px;
+                        font-size: 14px;
+                        span {
+                            font-size: 30px;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    label {
+        font-weight: 200;
+    }
+    h4 {
+        font-size: 18px;
+        padding: 5px 0; 
+    }
+    .form-control {
+        font-weight: 200;
+    }
+    .panel {
+        margin-bottom: 0;
+        .panel-body {
+            padding: 20px 30px 0;
+        }
+    }
+}
+
+/* Input */
+.form-control {
+    font-weight: 200;
+    &:focus, &:active, &:visited{
+        border-color: #0e9aef !important;
+    }
+}
+
+.duplicable-row {
+    div[class^=col-]:last-child .form-group {
+        display: inline-block;
+        width: 120px;
+    }
+    .controls {
+        margin-left: 5px;
+        display: inline-block;
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            span {
+                font-size: 28px;
+            }            
+        }
+    }
+}
