@@ -13,4 +13,9 @@ $(document).ready(function() {
         $("body").toggleClass("mini-navbar"),
         SmoothlyMenu()
     })
+
+    $(".i-checks").iCheck({
+        checkboxClass: "icheckbox_square-green",
+        radioClass: "iradio_square-green"
+    })    
 })

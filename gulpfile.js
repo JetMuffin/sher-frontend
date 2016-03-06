@@ -1,91 +1,195 @@
+
 var gulp = require('gulp'),
-    imagemin = require('gulp-imagemin'),       
-    sass = require('gulp-sass'),     
-    minifycss = require('gulp-minify-css'),   
-    uglify  = require('gulp-uglify'),        
-    rename = require('gulp-rename'),          
-    concat  = require('gulp-concat'),         
-    clean = require('gulp-clean'),           
-    tinylr = require('tiny-lr'),               
-    server = tinylr(),
-    browserSync = require('browser-sync'),
-    port = 35729,
-    livereload = require('gulp-livereload');   
+    webserver = require('gulp-webserver'),
+    del = require('del'),
+    sass = require('gulp-sass'),
+    jshint = require('gulp-jshint'),
+    sourcemaps = require('gulp-sourcemaps'),
+    spritesmith = require('gulp.spritesmith'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    uglify = require('gulp-uglify'),
+    gutil = require('gulp-util'),
+    ngAnnotate = require('browserify-ngannotate');
 
-gulp.task('html', function() {
-    gulp.src('./src/*.html')
-        .pipe(gulp.dest('./dist/'))
-        .pipe(livereload(server))
+var CacheBuster = require('gulp-cachebust');
+var cachebust = new CacheBuster();
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// cleans the build output
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('clean', function (cb) {
+    del([
+        'dist'
+    ], cb);
 });
 
-gulp.task('scss', function () {
-  	gulp.src('./src/scss/*.scss')
-    	.pipe(sass.sync().on('error', sass.logError))
-    	.pipe(gulp.dest('./css'))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
-        .pipe(livereload(server))
-        .pipe(gulp.dest('./dist/css'));     
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// runs bower to install frontend dependencies
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('bower', function() {
+
+    var install = require("gulp-install");
+
+    return gulp.src(['./bower.json'])
+        .pipe(install());
 });
 
-gulp.task('css', function () {
-    gulp.src('./src/css/*.css')
-        .pipe(minifycss())
-        .pipe(livereload(server))
-        .pipe(gulp.dest('./dist/css'));       
-})
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// runs sass, creates css source maps
+//
+/////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('images', function(){
-    gulp.src('./src/images/**/*')
-        .pipe(imagemin())
-        .pipe(livereload(server))
-        .pipe(gulp.dest('./dist/images'));
-})
-
-gulp.task('fonts', function () {
-	gulp.src('./src/fonts/*')
-		.pipe(gulp.dest('./dist/fonts'))
+gulp.task('build-scss', ['clean'], function() {
+    return gulp.src('./src/scss/*')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(cachebust.resources())
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('js', function () {
+gulp.task('build-css', ['clean'], function() {
+    return gulp.src('./src/css/*')
+        .pipe(gulp.dest('./dist'));    
+});
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// fills in the Angular template cache, to prevent loading the html templates via
+// separate http requests
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('build-template-cache', ['clean'], function() {
+    
+    var ngHtml2Js = require("gulp-ng-html2js"),
+        concat = require("gulp-concat");
+    
+    return gulp.src("./src/partials/*.html")
+        .pipe(ngHtml2Js({
+            moduleName: "sherPartials",
+            prefix: "/partials/"
+        }))
+        .pipe(concat("templateCachePartials.js"))
+        .pipe(gulp.dest("./dist"));
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// runs jshint
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('jshint', function() {
     gulp.src('./src/js/*.js')
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('./dist/js'))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(uglify())
-        .pipe(livereload(server))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
 });
 
-gulp.task('serve', function() {
-    browserSync({
-        files: "**",
-        server: {
-            baseDir: "./"
-        }
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// Build a minified Javascript bundle - the order of the js files is determined
+// by browserify
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('build-js', ['clean'], function() {
+    var b = browserify({
+        entries: './src/js/app.js',
+        debug: true,
+        paths: ['./src/js/controllers', './src/js/services', './src/js/directives'],
+        transform: [ngAnnotate]
     });
-    gulp.watch('./src/*.html',['html']);
-    gulp.watch('./src/scss/*.scss',['scss']);
-    gulp.watch('./src/css/*.css',['css']);    
-    gulp.watch('./src/images/**/*',['images']);
-    gulp.watch('./src/js/*.js',['js']);
-    browserSync.reload();
+
+    return b.bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(cachebust.resources())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .on('error', gutil.log)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./dist/js/'));
 });
 
-gulp.task('clean', function() {
-    gulp.src(['./dist/css', './dist/js', './dist/images', '.dist/fonts'], {read: false})
-        .pipe(clean());
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// full build (except sprites), applies cache busting to the main page css and js bundles
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('build', [ 'clean', 'bower','build-scss', 'build-css', 'build-template-cache', 'jshint', 'build-js'], function() {
+    return gulp.src('./src/index.html')
+        .pipe(cachebust.references())
+        .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['clean'], function(){
-    gulp.start('html','css','images','js', 'fonts', 'scss');
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// watches file system and triggers a build when a modification is detected
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('watch', function() {
+    return gulp.watch(['./src/index.html','./src/partials/*.html', './src/scss/*.*css', './js/**/*.js'], ['build']);
 });
 
-gulp.task('watch',function(){
-	livereload.listen()
-	gulp.watch('./src/*.html',['html']);
-    gulp.watch('./src/scss/*.scss',['scss']);
-	gulp.watch('./src/css/*.css',['css']);
-	gulp.watch('./src/images/**/*',['images']);
-	gulp.watch('./src/js/*.js',['js']);
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// launches a web server that serves files in the current directory
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('webserver', ['watch','build'], function() {
+    gulp.src('.')
+        .pipe(webserver({
+            livereload: false,
+            directoryListing: true,
+            open: "http://localhost:8000/dist/index.html"
+        }));
 });
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// launch a build upon modification and publish it to a running server
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('dev', ['watch', 'webserver']);
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// generates a sprite png and the corresponding sass sprite map.
+// This is not included in the recurring development build and needs to be run separately
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('sprite', function () {
+
+    var spriteData = gulp.src('./images/*.png')
+        .pipe(spritesmith({
+            imgName: 'todo-sprite.png',
+            cssName: '_todo-sprite.scss',
+            algorithm: 'top-down',
+            padding: 5
+        }));
+
+    spriteData.css.pipe(gulp.dest('./dist'));
+    spriteData.img.pipe(gulp.dest('./dist'))
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+// installs and builds everything, including sprites
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('default', ['sprite','build']);
