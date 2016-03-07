@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
     spritesmith = require('gulp.spritesmith'),
+    imagemin = require('gulp-imagemin'),       
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
@@ -48,8 +49,8 @@ gulp.task('bower', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-scss', ['clean'], function() {
-    return gulp.src('./src/scss/*')
+gulp.task('build-css', ['clean'], function() {
+    return gulp.src('./scss/*')
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(cachebust.resources())
@@ -57,10 +58,6 @@ gulp.task('build-scss', ['clean'], function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('build-css', ['clean'], function() {
-    return gulp.src('./src/css/*')
-        .pipe(gulp.dest('./dist'));    
-});
 /////////////////////////////////////////////////////////////////////////////////////
 //
 // fills in the Angular template cache, to prevent loading the html templates via
@@ -73,7 +70,7 @@ gulp.task('build-template-cache', ['clean'], function() {
     var ngHtml2Js = require("gulp-ng-html2js"),
         concat = require("gulp-concat");
     
-    return gulp.src("./src/partials/*.html")
+    return gulp.src("./partials/*.html")
         .pipe(ngHtml2Js({
             moduleName: "sherPartials",
             prefix: "/partials/"
@@ -89,10 +86,11 @@ gulp.task('build-template-cache', ['clean'], function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('jshint', function() {
-    gulp.src('./src/js/*.js')
+    gulp.src('/js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -103,9 +101,9 @@ gulp.task('jshint', function() {
 
 gulp.task('build-js', ['clean'], function() {
     var b = browserify({
-        entries: './src/js/app.js',
+        entries: './js/app.js',
         debug: true,
-        paths: ['./src/js/controllers', './src/js/services', './src/js/directives'],
+        paths: ['./js/controllers', './js/services', './js/directives'],
         transform: [ngAnnotate]
     });
 
@@ -126,8 +124,8 @@ gulp.task('build-js', ['clean'], function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', [ 'clean', 'bower','build-scss', 'build-css', 'build-template-cache', 'jshint', 'build-js'], function() {
-    return gulp.src('./src/index.html')
+gulp.task('build', [ 'clean', 'bower','build-css','build-template-cache', 'jshint', 'build-js', 'images'], function() {
+    return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
 });
@@ -139,7 +137,7 @@ gulp.task('build', [ 'clean', 'bower','build-scss', 'build-css', 'build-template
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function() {
-    return gulp.watch(['./src/index.html','./src/partials/*.html', './src/scss/*.*css', './js/**/*.js'], ['build']);
+    return gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -185,6 +183,12 @@ gulp.task('sprite', function () {
     spriteData.css.pipe(gulp.dest('./dist'));
     spriteData.img.pipe(gulp.dest('./dist'))
 });
+
+gulp.task('images', function(){
+    gulp.src('./images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('./dist/images'));
+})
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
