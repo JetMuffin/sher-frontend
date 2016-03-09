@@ -9,12 +9,12 @@
   <title>Sher - Frontend</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/style.min.css">
   <link rel="stylesheet" href="styles/animate.min.css">
-  <link rel="stylesheet" href="styles/app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="styles/app.min.css">
+  <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body class="fixed-sidebar mini-navbar">
 <div class="sidebar">
@@ -29,9 +29,9 @@
     <div class="navbar">
       <a class="navbar-minimalize"><span class="navbar-minimalize-inner"><span class="si-menu"></span></span></a>
       <ul class="nav">
-        <li><a href=""><span class="si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
-        <li class="active"><a href="#/task"><span class="si-browser"></span><span class="nav-label">Tasks</span></a></li>
-        <li><a href="#/view2"><span class="si-server"></span><span class="nav-label">Cluster</span></a></li>
+        <li ui-sref-active="active"><a href=""><span class="si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
+        <li ui-sref-active="active"><a ui-sref="task"><span class="si-browser"></span><span class="nav-label">Tasks</span></a></li>
+        <li ui-sref-active="active"><a href="#/view2"><span class="si-server"></span><span class="nav-label">Cluster</span></a></li>
       </ul>
     </div>
   </div>
@@ -45,7 +45,7 @@
     <div class="header">
       <!-- <h3 class="tab-title">Task Manager | </h3> -->
     </div>
-    <div ng-view></div>
+    <div ui-view></div>
   </div>
 
   <div>Angular seed app: v<span app-version></span></div>
@@ -53,15 +53,19 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="lib/iCheck/icheck.min.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-resource/angular-resource.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="scripts/sher.js"></script>
   <script src="app.js"></script>
-  <script src="task/task.js"></script>
+  <script src="task/task.controller.js"></script>
+  <script src="task/task.service.js"></script>
   <script src="view2/view2.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>

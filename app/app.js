@@ -2,11 +2,18 @@
 
 // Declare app level module which depends on views, and components
 angular.module('sher', [
-  'ngRoute',
+  'ui.router',
   'sher.task',
   'sher.view2',
   'sher.version'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/task'});
+config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/task');
+
+  $stateProvider
+      .state("task", {
+        url: "/task?state",
+        templateUrl: "task/task.html",
+        controller: 'TaskCtrl'
+      });
 }]);

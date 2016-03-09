@@ -9,19 +9,22 @@
                         <h5>Status</h5>
                         <ul class="category-list" style="padding: 0">
                             <li>
-                                <a href="#"> <i class="fa fa-circle text-info"></i> Running</a>
+                                <a ui-sref="task({state:0})"> <i class="fa fa-circle"></i> All</a>
                             </li>
                             <li>
-                                <a href="#"> <i class="fa fa-circle text-primary"></i> Staging</a>
+                                <a ui-sref="task({state:1})"> <i class="fa fa-circle text-info"></i> Running</a>
                             </li>
                             <li>
-                                <a href="#"> <i class="fa fa-circle text-warning"></i> Killed</a>
+                                <a ui-sref="task({state:6})"> <i class="fa fa-circle text-navy"></i> Staging</a>
                             </li>
                             <li>
-                                <a href="#"> <i class="fa fa-circle text-danger"></i> Failed</a>
+                                <a ui-sref="task({state:4})"> <i class="fa fa-circle text-warning"></i> Killed</a>
                             </li>
                             <li>
-                                <a href="#"> <i class="fa fa-circle text-navy"></i> Finished</a>
+                                <a ui-sref="task({state:3})"> <i class="fa fa-circle text-danger"></i> Failed</a>
+                            </li>
+                            <li>
+                                <a ui-sref="task({state:2})"> <i class="fa fa-circle text-primary"></i> Finished</a>
                             </li>
                         </ul>
 
@@ -34,71 +37,60 @@
             </div>
         </div>
         <div class="col-sm-10 animated fadeInRight">
-            <div class="mail-box-header">
-
-                <form method="get" action="index.html" class="pull-right mail-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="search" placeholder="Search all tasks...">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <h2>
-                    All Tasks ({{tasks.length}})
-                </h2>
-                <div class="mail-tools tooltip-demo m-t-md">
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-white btn-sm"><span class="si-angle-left"></span>
-                        </button>
-                        <button class="btn btn-white btn-sm"><span class="si-angle-right"></span>
-                        </button>
-
-                    </div>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="refresh"><span class="si-refresh-2"></span>
-                    </button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="kill"><span class="si-close-circle"></span>
-                    </button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="delete"><span class="si-trash"></span>
-                    </button>
-
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h2>
+                        Tasks | {{filter}} ({{tasks.length}})
+                    </h2>
                 </div>
-            </div>
-            <div class="mail-box">
-                <table class="table table-hover table-mail">
-                    <thead>
-                    <tr>
-                        <th>Choose</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Slave</th>
-                        <th>Cpus</th>
-                        <th>Memory</th>
-                        <th>Status</th>
-                        <th>Time</th>
-                        <th>Output</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="read" ng-repeat="task in tasks">
-                            <td class="check-mail">
-                                <input type="checkbox" class="i-checks">
-                            </td>
-                            <td>{{task.id}}</td>
-                            <td class="mail-subject">{{task.name}}</td>
-                            <td>{{task.docker_image}}</td>
-                            <td>{{task.slave_hostname}}</td>
-                            <td>{{task.cpus}}</td>
-                            <td>{{task.mem}} MiB</td>
-                            <td class=""><span class="label label-{{task.label_class}}">{{task.status}}</span></td>
-                            <td class="mail-date">{{task.create_time| date:"MM/dd/yyyy @ h:mma"}}</td>
-                            <td><a href="#">stdout</a> <a href="">stderr</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="ibox-content">
+                    <div class="clearfix table-tools">
+                        <form method="get" action="index.html" class="pull-right mail-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" name="search" placeholder="Search all tasks...">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped tasks">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Slave</th>
+                                <th>Cpus</th>
+                                <th>Memory</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="read" ng-repeat="task in tasks | filter: {state: 2}">
+                                <td>{{task.id}}</td>
+                                <td class="mail-subject">{{task.name}}</td>
+                                <td>{{task.docker_image}}</td>
+                                <td>{{task.slave_hostname}}</td>
+                                <td>{{task.cpus}}</td>
+                                <td>{{task.mem}} MiB</td>
+                                <td class=""><span class="label label-{{task.label_class}}">{{task.status}}</span></td>
+                                <td class="mail-date">{{task.create_time| date:"MM/dd/yyyy @ h:mma"}}</td>
+                                <td class="mail-options">
+                                    <a href="#" title="kill"><span class="si-close-circle"></span></a>
+                                    <a href="#" title="delete"><span class="si-trash"></span></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
