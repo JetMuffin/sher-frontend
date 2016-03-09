@@ -4,9 +4,16 @@
 
 var FILTER_NAME = ['All', 'Running', 'Finished', 'Failed', 'Killed', 'Lost', 'Staging', 'Error'];
 
-angular.module('sher.task', ['ngResource'])
+angular.module('sher.task', ['ngResource', 'ui.bootstrap'])
 
-.controller('TaskCtrl', ['$scope', '$http', '$timeout', '$stateParams', 'Tasks', function($scope, $http, $timeout, $stateParams, Tasks) {
+.controller('TaskCtrl', [
+    '$scope',
+    '$http',
+    '$timeout',
+    '$stateParams',
+    '$uibModal',
+    'Tasks',
+function($scope, $http, $timeout, $stateParams, $uibModal, Tasks) {
     $scope.state = $stateParams.state || "0";
     $scope.filter = FILTER_NAME[parseInt($scope.state)];
 
@@ -56,9 +63,34 @@ angular.module('sher.task', ['ngResource'])
         //TODO
     }
 
+    // 打开提交任务的模态框
+    $scope.openTaskModal = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'task/task.modal.html',
+            controller: TaskModalCtrl,
+            size: 'md',
+            resolve: {
+
+            }
+        });
+    }
+
+    // 模块对话框控制器
+    var TaskModalCtrl = function ($scope, $uibModalInstance) {
+        $scope.ok = function () {
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    };
 
     reload($scope.state);
     //setInterval(function(){
     //    Tasks.monitor(reload($scope.state))
     //},1000)
-}])
+}]);
+
+

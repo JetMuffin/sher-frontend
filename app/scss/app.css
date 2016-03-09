@@ -869,26 +869,26 @@ ins {
 .modal-md {
   width: 700px; }
 
-.inmodal .modal-header {
+.modal-header {
   padding: 15px;
   text-align: left; }
 
-.inmodal .modal-title {
+.modal-title {
   font-size: 18px;
   font-weight: 200; }
 
-.inmodal .modal-body {
+.modal-body {
   background-color: #fff; }
 
-.inmodal .modal-close {
+.modal-close {
   font-size: 32px; }
 
-.inmodal .modal-footer {
+.modal-footer {
   background-color: #f7f6fa;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 10px 15px; }
-  .inmodal .modal-footer button {
+  .modal-footer button {
     font-weight: 200; }
 
 .modal-body .row.full-bleed {

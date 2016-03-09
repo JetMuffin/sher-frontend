@@ -5,7 +5,6 @@ angular.module('sher', [
   'ui.router',
   'sher.task',
   'sher.view2',
-  'sher.version'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/task');

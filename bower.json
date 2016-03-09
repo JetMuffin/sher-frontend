@@ -17,6 +17,9 @@
     "jquery.gritter": "^1.7.4",
     "font-awesome": "^4.5.0",
     "iCheck": "^1.0.2",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "angular-animate": "^1.5.0",
+    "angular-touch": "^1.5.0",
+    "angular-bootstrap": "^1.2.4"
   }
 }
