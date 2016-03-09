@@ -9,7 +9,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest('./app/scss/'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
-        .pipe(gulp.dest('./app/styles'));
+        .pipe(gulp.dest('./app/css'));
 });
 
 gulp.task('watch',function(){

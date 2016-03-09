@@ -72,27 +72,30 @@ ins {
 .modal-md {
     width: 700px;
 }
-.modal-header {
-    padding: 15px;
-    text-align: left;
-}
-.modal-title {
-    font-size: 18px;
-    font-weight: 200;
-}
-.modal-body {
-    background-color: #fff;
-}
-.modal-close {
-    font-size: 32px;
-}
-.modal-footer {
-    background-color: rgb(247,246,250);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 10px 15px;
-    button {
+
+.inmodal {
+    .modal-header {
+        padding: 15px;
+        text-align: left;
+    }
+    .modal-title {
+        font-size: 18px;
         font-weight: 200;
+    }
+    .modal-body {
+        background-color: #fff;
+    }
+    .modal-close {
+        font-size: 32px;
+    }
+    .modal-footer {
+        background-color: rgb(247,246,250);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 10px 15px;
+        button {
+            font-weight: 200;
+        }
     }
 }
 
@@ -127,7 +130,7 @@ ins {
     }
     h4 {
         font-size: 18px;
-        padding: 5px 0; 
+        padding: 5px 0;
     }
     .form-control {
         font-weight: 200;
@@ -161,7 +164,7 @@ ins {
             vertical-align: middle;
             span {
                 font-size: 28px;
-            }            
+            }
         }
     }
 }

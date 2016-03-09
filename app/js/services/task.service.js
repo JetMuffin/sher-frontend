@@ -60,7 +60,7 @@ angular.module('sher.task')
                         }
                     }
                     tasks.sort(function(a, b) {
-                        return a.create_time - b.create_time;
+                        return b.create_time - a.create_time;
                     })
                 })
             },
@@ -76,13 +76,29 @@ angular.module('sher.task')
             },
 
             // 获取指定状态的任务
-            getTasks: function(state) {
-                if(state === "0") {
+            //getTasks: function(state) {
+            //    if(state === "0") {
+            //        return tasks;
+            //    } else {
+            //        var result = [];
+            //        for (var i = 0; i < tasks.length; i++) {
+            //            if(tasks[i].state === state) {
+            //                result.push(tasks[i]);
+            //            }
+            //        }
+            //        return result;
+            //    }
+            //},
+
+            // 搜索任务
+            getTasks: function(key) {
+                if(key == 'all') {
                     return tasks;
                 } else {
                     var result = [];
+                    var pattern = new RegExp(key,'ig');
                     for (var i = 0; i < tasks.length; i++) {
-                        if(tasks[i].state === state) {
+                        if(JSON.stringify(tasks[i]).match(pattern)) {
                             result.push(tasks[i]);
                         }
                     }
@@ -126,6 +142,26 @@ angular.module('sher.task')
                 }).success(function(response) {
                     return callback && callback(response);
                 });
-            }
+            },
+
+            // 删除任务
+            deleteTask: function(id, callback) {
+                $http({
+                    method: 'DELETE',
+                    url: API + '/tasks/' + id
+                }).success(function(response) {
+                    return callback && callback(response);
+                })
+            },
+
+            // 杀死任务
+            killTask: function(id, callback) {
+                $http({
+                    method: 'PUT',
+                    url: API + '/tasks/' + id + '/kill'
+                }).success(function(response) {
+                    return callback && callback(response);
+                })
+            },
         }
     }])

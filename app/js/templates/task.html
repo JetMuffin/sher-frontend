@@ -9,25 +9,25 @@
                         <h5>Status</h5>
                         <ul class="category-list" style="padding: 0">
                             <li>
-                                <a ui-sref="task({state:0})"> <i class="fa fa-circle"></i> All</a>
+                                <a ui-sref="task({query: 'all'})"> <i class="fa fa-circle"></i> All</a>
                             </li>
                             <li>
-                                <a ui-sref="task({state:1})"> <i class="fa fa-circle text-info"></i> Running</a>
+                                <a ui-sref="task({query: 'running'})"> <i class="fa fa-circle text-info"></i> Running</a>
                             </li>
                             <li>
-                                <a ui-sref="task({state:6})"> <i class="fa fa-circle text-navy"></i> Staging</a>
+                                <a ui-sref="task({query: 'staging'})"> <i class="fa fa-circle text-navy"></i> Staging</a>
                             </li>
                             <li>
-                                <a ui-sref="task({state:4})"> <i class="fa fa-circle text-warning"></i> Killed</a>
+                                <a ui-sref="task({query: 'killed'})"> <i class="fa fa-circle text-warning"></i> Killed</a>
                             </li>
                             <li>
-                                <a ui-sref="task({state:3})"> <i class="fa fa-circle text-danger"></i> Failed</a>
+                                <a ui-sref="task({query: 'failed'})"> <i class="fa fa-circle text-danger"></i> Failed</a>
                             </li>
                             <li>
-                                <a ui-sref="task({state:2})"> <i class="fa fa-circle text-primary"></i> Finished</a>
+                                <a ui-sref="task({query: 'finished'})"> <i class="fa fa-circle text-primary"></i> Finished</a>
                             </li>
                         </ul>
-
+                        <div class="clearfix"></div>
                         <h5 class="tag-title">Label</h5>
                         <ul class="tag-list" style="padding: 0">
                         </ul>
@@ -43,11 +43,11 @@
                         Tasks | {{filter}} ({{tasks.length}})
                     </h2>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content mailbox-main">
                     <div class="clearfix table-tools">
-                        <form method="get" action="index.html" class="pull-right mail-search">
+                        <form ng-submit="search()" class="pull-right mail-search">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" name="search" placeholder="Search all tasks...">
+                                <input type="text" class="form-control input-sm" ng-model="search_key" placeholder="Search all tasks...">
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-sm btn-primary">
                                         Search
@@ -55,6 +55,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
 
                     <div class="table-responsive">
@@ -73,7 +75,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="read" ng-repeat="task in tasks | filter: {state: 2}">
+                            <tr class="read" ng-repeat="task in tasks">
                                 <td>{{task.id}}</td>
                                 <td class="mail-subject">{{task.name}}</td>
                                 <td>{{task.docker_image}}</td>
@@ -81,10 +83,10 @@
                                 <td>{{task.cpus}}</td>
                                 <td>{{task.mem}} MiB</td>
                                 <td class=""><span class="label label-{{task.label_class}}">{{task.status}}</span></td>
-                                <td class="mail-date">{{task.create_time| date:"MM/dd/yyyy @ h:mma"}}</td>
+                                <td class="mail-date">{{task.create_time | relativeDate}}</td>
                                 <td class="mail-options">
-                                    <a href="#" title="kill"><span class="si-close-circle"></span></a>
-                                    <a href="#" title="delete"><span class="si-trash"></span></a>
+                                    <a ng-click="kill(task)" title="kill"><span class="si-close-circle"></span></a>
+                                    <a ng-click="delete(task)" title="delete"><span class="si-trash"></span></a>
                                 </td>
                             </tr>
                             </tbody>
