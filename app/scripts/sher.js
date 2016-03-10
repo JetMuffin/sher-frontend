@@ -12,15 +12,11 @@ function SmoothlyMenu() {
 }
 
 $(document).ready(function() {
-    // 边栏缩小/放大
+    // 边栏缩小
     $(".navbar-minimalize").click(function() {
         $("body").toggleClass("mini-navbar"),
             SmoothlyMenu()
     })
 
-    // 初始化icheck
-    $(".i-checks").iCheck({
-        checkboxClass: "icheckbox_square-green",
-        radioClass: "iradio_square-green"
-    })
+
 })

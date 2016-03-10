@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     minifycss = require('gulp-minify-css'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    wiredep = require('wiredep').stream;
 
 gulp.task('css', function () {
     gulp.src('./app/scss/*.scss')
@@ -15,3 +16,4 @@ gulp.task('css', function () {
 gulp.task('watch',function(){
     gulp.watch('./app/scss/*.scss',['css']);
 });
+

@@ -16,7 +16,7 @@ angular.module('sher.task', ['ngResource', 'ui.bootstrap'])
     'Tasks',
 function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
     $scope.query = $stateParams.query || "all";
-    $scope.filter = $stateParams.query
+    $scope.filter = $scope.query
 
     // 加载数据
     var reload = function (query) {
@@ -84,13 +84,37 @@ var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
                 mode: "RW"
             }
         ],
-        portMappings: [
+        port_mappings: [
             {
                 container_port: "8000",
                 host_port: "8080",
                 protocol: "TCP"
             }
         ]
+    }
+
+    $scope.addPortMapping = function() {
+        $scope.task.port_mappings.push({
+            container_port: "8000",
+                host_port: "8080",
+            protocol: "TCP"
+        })
+    }
+
+    $scope.deletePortMapping = function(index) {
+        $scope.task.port_mappings.splice(index, 1);
+    }
+
+    $scope.addVolume = function() {
+        $scope.task.volumes.push({
+            container_path: "/data",
+            host_path: "/vagrant",
+            mode: "RW"
+        })
+    }
+
+    $scope.deleteVolume = function(index) {
+        $scope.task.volumes.splice(index, 1);
     }
 
     $scope.submit = function () {
