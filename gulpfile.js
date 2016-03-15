@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     wiredep = require('wiredep').stream;
 
-gulp.task('css', function () {
+gulp.task('scss', function () {
     gulp.src('./app/scss/*.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest('./app/scss/'))
@@ -12,6 +12,11 @@ gulp.task('css', function () {
         .pipe(minifycss())
         .pipe(gulp.dest('./app/css'));
 });
+
+gulp.task('css', function () {
+    gulp.src('./app/scss/*.css')
+        .pipe(gulp.dest('./app/css'))
+})
 
 gulp.task('watch',function(){
     gulp.watch('./app/scss/*.scss',['css']);
