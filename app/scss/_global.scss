@@ -50,3 +50,54 @@ h1, h2, h3, h4, h5, p {
     	border-color: darken(#0e9aef, 5%);
     }
 }
+
+.btn-primary.active[disabled], .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+	background-color: lighten(#0e9aef, 10%);
+	border-color: lighten(#0e9aef, 10%);
+}
+
+.mail-subject {
+	min-width: 150px;
+}
+
+.option-group {
+	margin-top: 10px;
+	li {
+		margin-left: 5px;
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+	.si {
+		font-size: 20px;
+		float: left;
+		margin-right: 5px;
+	}
+}
+
+.ibox-title {
+    padding: 6px 15px 7px;
+}
+
+.basic-information {
+	margin-top: 10px;
+	.dl-horizontal {
+		dt {
+			width: 120px;
+			padding: 2px;
+		}
+		dd {
+			margin-left: 140px;
+			padding: 2px;
+		}
+	}
+}
+
+.details-tab {
+	margin: 10px -20px;
+	.md-content {
+		.md-tabs {
+			border: none;
+		}
+	}
+}

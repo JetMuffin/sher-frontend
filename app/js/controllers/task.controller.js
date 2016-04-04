@@ -17,7 +17,7 @@ angular.module('sher.task', ['ngResource', 'ui.bootstrap'])
 function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query
-
+	
     // 加载数据
     var reload = function (query) {
         Tasks.refresh().$promise.then(function(response) {
@@ -31,19 +31,9 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
         Tasks.submitTask(task, reload($scope.query))
     }
 
-    // 杀死任务
-    $scope.kill = function (task) {
-        Tasks.killTask(task.id, reload($scope.query));
-    }
-
-    // 删除任务
-    $scope.delete = function (task) {
-        Tasks.deleteTask(task.id, reload($scope.query));
-    }
-
     // 搜索任务
     $scope.search = function () {
-        $state.go('task', {query: $scope.search_key})
+        $state.go('navbar.task', {query: $scope.search_key})
     }
 
     // 打开提交任务的模态框
@@ -59,12 +49,13 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
             }
         });
     }
+    
+    $scope.rowClick = function(taskID){
+		$state.go('navbar.detail',{taskID: taskID});
+	};
 
     // 加载任务, 定时监控
     reload($scope.query);
-    setInterval(function(){
-        Tasks.monitor(reload($scope.query))
-    },1000)
 }]);
 
 
@@ -72,9 +63,9 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
 var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
     // 数据初始化
     $scope.task = {
-        cpus:'0.1',
-        mem:'32',
-        disk:'0',
+        cpus: 0.1,
+        mem: 32,
+        disk: 0,
         docker_image:'busybox',
         cmd:'ls',
         volumes: [
@@ -87,7 +78,7 @@ var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
         port_mappings: [
             {
                 container_port: "8000",
-                host_port: "8080",
+                host_port: "31200",
                 protocol: "TCP"
             }
         ]
@@ -96,7 +87,7 @@ var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
     $scope.addPortMapping = function() {
         $scope.task.port_mappings.push({
             container_port: "8000",
-                host_port: "8080",
+                host_port: "31200",
             protocol: "TCP"
         })
     }
