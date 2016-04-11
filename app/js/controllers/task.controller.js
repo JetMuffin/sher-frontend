@@ -4,7 +4,7 @@
 
 var FILTER_NAME = ['All', 'Running', 'Finished', 'Failed', 'Killed', 'Lost', 'Staging', 'Error'];
 
-angular.module('sher.task', ['ngResource', 'ui.bootstrap'])
+angular.module('sher.task', ['ngResource', 'ui.bootstrap', 'ngAnimate', 'toastr'])
 
 .controller('TaskCtrl', [
     '$scope',
@@ -13,8 +13,10 @@ angular.module('sher.task', ['ngResource', 'ui.bootstrap'])
     '$state',
     '$stateParams',
     '$uibModal',
+    '$interval',
+    'toastr',
     'Tasks',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
+function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, toastr, Tasks) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query
 	
@@ -25,6 +27,9 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
             $scope.tasks = Tasks.getTasks(query)
         });
     }
+
+    // 初次加载数据
+    reload();
 
     // 提交任务
     $scope.submitTask = function (task) {
@@ -55,17 +60,24 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, Tasks) {
 	};
 
     // 加载任务, 定时监控
-    reload($scope.query);
+    var timer = $interval(function() {
+        reload($scope.query);
+    }, 1000);
+
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(timer);
+    })    
 }]);
 
 
 // 模块对话框控制器
-var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
+var TaskModalCtrl = function ($scope, $uibModalInstance, toastr, Tasks) {
     // 数据初始化
     $scope.task = {
-        cpus: 0.1,
-        mem: 32,
-        disk: 0,
+        cpus: "0.1",
+        mem: "32",
+        disk: "0",
         docker_image:'busybox',
         cmd:'ls',
         volumes: [
@@ -110,7 +122,9 @@ var TaskModalCtrl = function ($scope, $uibModalInstance, Tasks) {
 
     $scope.submit = function () {
         Tasks.submitTask($scope.task, function(){
-            // TODO 消息通知
+            toastr.success('Create task successful!', 'Notification');
+        }, function() {
+            toastr.error('Create task failed!', 'Error');
         });
         $uibModalInstance.close();
     };

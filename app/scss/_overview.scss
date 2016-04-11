@@ -1,0 +1,24 @@
+.notask {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.cluster-overview {
+	span {
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.fa {
+		margin-left: 10px;
+	}
+	.node-list {
+		.node {
+			img {
+				width: 100%;
+			    padding: 10px 0;				
+			}
+		}
+	}
+}

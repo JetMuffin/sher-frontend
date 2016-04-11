@@ -1,0 +1,82 @@
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight cluster">
+    	<h3 class="cluster-label">Masters</h3>
+    	<div class="col-md-4" ng-repeat="master in masters">
+    		<div class="ibox">
+    			<div class="ibox-title">
+    				<h3>Name <span class="pull-right"><span class="fa fa-circle text-info"></span>{{master.hostname}}</span></h3>
+    			</div>
+    			<div class="ibox-content no-padding">
+    				<ul class="list-group">
+    					<li class="list-group-item row usage">
+    						<div class="col-sm-6 border-right">
+	    						<div class="list-label">Cpu</div>
+    							<pie-chart data="master.cpu_data" options="master.cpu_options"></pie-chart>
+    							<div class="usage-addon">{{master.cpu_alloc}} of {{master.cpu_registered}} cores used</div>
+    						</div>
+    						<div class="col-sm-6">
+	    						<div class="list-label">Memory</div>
+    							<pie-chart data="master.memory_data" options="master.memory_options"></pie-chart>
+    							<div class="usage-addon">{{master.memory_alloc}} of {{master.memory_registered}} MB used</div>
+    						</div>
+    					</li>
+    					<li class="list-group-item">
+    						<div class="list-label">Host</div>
+    						<div class="pull-right">{{master.host}}</div>
+    						<div class="clearfix"></div>
+    					</li>
+    					<li class="list-group-item">
+    						<div class="list-label">OS</div>
+    						<div class="pull-right">{{master.container_os_version}}</div>
+    						<div class="clearfix"></div>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>  
+    	<div class="clearfix"></div>
+    	<h3 class="cluster-label">Slaves</h3>
+    	<div class="col-md-4" ng-repeat="slave in slaves">
+    		<div class="ibox">
+    			<div class="ibox-title">
+    				<h3>Name <span class="pull-right"><span class="fa fa-circle text-info"></span>{{slave.hostname}}</span></h3>
+    			</div>
+    			<div class="ibox-content no-padding">
+    				<ul class="list-group">
+    					<li class="list-group-item row usage">
+    						<div class="col-sm-6 border-right">
+	    						<div class="list-label">Cpu</div>
+    							<pie-chart data="slave.cpu_data" options="slave.cpu_options"></pie-chart>
+    							<div class="usage-addon">{{slave.cpu_alloc}} of {{slave.cpu_registered}} cores allocated</div>
+    						</div>
+    						<div class="col-sm-6">
+	    						<div class="list-label">Memory</div>
+    							<pie-chart data="slave.memory_data" options="slave.memory_options"></pie-chart>
+    							<div class="usage-addon">{{slave.memory_alloc}} of {{slave.memory_registered}} MB allocated</div>
+    						</div>
+    					</li>
+    					<li class="list-group-item">
+    						<div class="list-label">Tasks</div>
+    						<div class="pull-right">{{slave.task_running}} of {{slave.task_total}} running</div>
+    						<div class="clearfix"></div>
+							<div class="progress">
+	                            <div style="width: {{slave.task_complete}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{slave.task_complete}}" role="progressbar" class="progress-bar progress-bar-success">
+	                            </div>
+	                        </div>       						
+    					</li>
+    					<li class="list-group-item">
+    						<div class="list-label">Host</div>
+    						<div class="pull-right">{{slave.host}}</div>
+    						<div class="clearfix"></div>
+    					</li>
+    					<li class="list-group-item">
+    						<div class="list-label">OS</div>
+    						<div class="pull-right">{{slave.container_os_version}}</div>
+    						<div class="clearfix"></div>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>      		
+    </div>
+</div>

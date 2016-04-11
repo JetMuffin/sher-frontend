@@ -73,6 +73,9 @@ h1, h2, h3, h4, h5, p {
 		float: left;
 		margin-right: 5px;
 	}
+	.btn {
+		margin: 2px;
+	}
 }
 
 .ibox-title {
@@ -100,4 +103,22 @@ h1, h2, h3, h4, h5, p {
 			border: none;
 		}
 	}
+}
+
+.fixed-header {
+	.header {
+		position: fixed;
+		width: 100%;
+	    z-index: 1000;		
+	}
+	.main-ui-view {
+		padding-top: 50px;
+	}
+}
+
+
+
+.nodata {
+	position: absolute;
+	top: 40px;
 }

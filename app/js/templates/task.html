@@ -70,7 +70,7 @@
                                 <td>{{task.cpus}}</td>
                                 <td>{{task.mem}} MiB</td>
                                 <td class=""><span class="label label-{{task.label_class}}">{{task.status}}</span></td>
-                                <td class="mail-date">{{task.create_time | relativeDate}}</td>
+                                <td class="mail-date">{{task.create_time*1000 | relativeDate}}</td>
                             </tr>
                             </tbody>
                         </table>

@@ -3,7 +3,10 @@
 		<div style="width:300px;margin-left: auto; margin-right: auto;">
 			<br/><br/><br/>
 			<div style="padding:20px;background-color: #ffffff; border-radius: 8px; box-shadow: 0 12px 30px darkgrey;">
-			<h1 style="text-align: center">Login</h1>
+			<div class="login-header">
+				<img src="/app/images/logo_fullcolor.png" alt="">
+				<h1>APT-MESOS</h1>
+			</div>
 			<br/>
 			<div ng-show="error" class="alert alert-danger">{{error}}</div>
 			<form name="form" ng-submit="login()" role="form">
@@ -26,3 +29,11 @@
 		</div>
 	</div>
 </div>
+
+	<div class="copyright">
+		<a href="https://github.com/icsnju/apt-mesos">Github</a>
+		 · 
+		<a href="mailto:564936642@qq.com">Contact Author</a>
+		<br>
+		© 2016 Institute of Computer Software, Nanjing University
+	</div>

@@ -6,55 +6,96 @@
 		<div class="ibox-content">
 			<div class="row" ng-controller="pieCtrl">
 				<div class="col-sm-4">
-					<h3 style="margin-left:60px">CPU</h3>
+					<h3 style="margin-left:60px">Cpu</h3>
 					<canvas id="pcpu" class="chart chart-doughnut" 
 					  chart-data="cpus" chart-labels="labels" chart-legend="false">
 					</canvas>
 				</div>
 				<div class="col-sm-4">
-					<h3 style="margin-left:60px">MEM</h3>
+					<h3 style="margin-left:60px">Memory</h3>
 					<canvas id="pmem" class="chart chart-doughnut" 
 					  chart-data="mem" chart-labels="labels" chart-legend="false">
 					</canvas> 
 				</div>
 				<div class="col-sm-4">
-					<h3 style="margin-left:60px">NET</h3>
+					<h3 style="margin-left:60px">Task Health</h3>
+					<div ng-if="notask" class="notask">No task</div>
 					<canvas id="pnet" class="chart chart-doughnut" 
-					  chart-data="disk" chart-labels="labels" chart-legend="false">
+					  chart-data="archive_data" chart-labels="archive_label" chart-legend="false">
 					</canvas> 
 				</div>				
 			</div>
 		</div>
 	</div>
-	<div class="ibox">
-		<div class="ibox-title">
-			<h2>Recent Tasks</h2>
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="ibox">
+				<div class="ibox-title">
+					<h2>Recent Tasks</h2>
+				</div>
+				<div class="ibox-content" ng-controller="tableCtrl">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th>Name</th>
+								<th>Image</th>
+								<th>Slave</th>
+								<th>Cpus</th>
+								<th>Memory</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr class="read" ng-repeat="task in tasks" ng-click="rowClick(task.id)">
+								<td class="mail-subject">{{task.name}}</td>
+								<td>{{task.docker_image}}</td>
+								<td>{{task.slave_hostname}}</td>
+								<td>{{task.cpus}}</td>
+								<td>{{task.mem}} MiB</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>			
+				</div>
+			</div>		
 		</div>
-		<div class="ibox-content" ng-controller="tableCtrl">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Image</th>
-						<th>Slave</th>
-						<th>Cpus</th>
-						<th>Memory</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr class="read" ng-repeat="task in tasks" ng-click="rowClick(task.id)">
-						<td>{{task.id}}</td>
-						<td class="mail-subject">{{task.name}}</td>
-						<td>{{task.docker_image}}</td>
-						<td>{{task.slave_hostname}}</td>
-						<td>{{task.cpus}}</td>
-						<td>{{task.mem}} MiB</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>			
-		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="ibox">
+				<div class="ibox-title">
+					<h2>Cluster</h2>
+				</div>
+				<div class="ibox-content cluster-overview" ng-controller="clusterCtrl">
+					<div>
+											
+					</div>
+					<div class="cluster-master">
+						<h3>Master <span class="fa fa-circle text-info"></span> <span class="addon">Running ({{master_running}})</span>
+						<span class="fa fa-circle text-danger"></span> <span class="addon">Lost ({{master_lost}})</span>	</h3>
+						<div class="row node-list">
+							<div class="col-sm-4 node" ng-repeat="master in masters">
+							<ng-switch on="master.state">
+								<a href="#" ng-switch-when="RUNNING">
+									<img src="images/node-running.png" alt="{{master.hostname}}" ></a>
+								<a href="#" ng-switch-when="LOST"><img src="images/node-lost.png" alt="{{master.hostname}}" ></a>								
+							</ng-switch>
+							</div>
+						</div>
+					</div>
+					<div class="cluster-slave">
+						<h3>Slave <span class="fa fa-circle text-info"></span> <span class="addon">Running ({{slave_running}})</span>
+						<span class="fa fa-circle text-danger"></span> <span class="addon">Lost ({{slave_lost}})</span>	</h3>
+						<div class="row node-list">
+							<div class="col-sm-3 node" ng-repeat="slave in slaves">
+							<ng-switch on="slave.state">
+								<a href="#" ng-switch-when="RUNNING">
+									<img src="images/node-running.png" alt="{{slave.hostname}}" ></a>
+								<a href="#" ng-switch-when="LOST"><img src="images/node-lost.png" alt="{{slave.hostname}}" ></a>								
+							</ng-switch>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>		
+		</div>		
 	</div>
 </div>

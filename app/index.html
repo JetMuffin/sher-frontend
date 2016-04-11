@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="lib/angular-material/angular-material.css">
+  <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css">
   <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.css">
   <!-- endbower -->
   <link rel="stylesheet" href="css/style.min.css">
@@ -22,7 +23,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body class="fixed-sidebar mini-navbar">
+<body class="fixed-sidebar fixed-header mini-navbar">
   <div ui-view></div>
   <!-- bower:js -->
   <script src="lib/angular/angular.js"></script>
@@ -31,13 +32,16 @@
   <script src="lib/angular-loader/angular-loader.js"></script>
   <script src="lib/angular-mocks/angular-mocks.js"></script>
   <script src="lib/angular-resource/angular-resource.js"></script>
-  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
   <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="lib/angular-messages/angular-messages.js"></script>
   <script src="lib/angular-animate/angular-animate.js"></script>
   <script src="lib/angular-aria/angular-aria.js"></script>
+  <script src="lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="lib/angular-peity/angular-peity.js"></script>
+  <script src="lib/peity/jquery.peity.min.js"></script>
   <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
   <script src="lib/angular-material/angular-material.js"></script>
   <script src="lib/Chart.js/Chart.js"></script>
@@ -46,9 +50,11 @@
   <script src="scripts/sher.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers/task.controller.js"></script>
+  <script src="js/controllers/cluster.controller.js"></script>
   <script src="js/controllers/task.detail.controller.js"></script>
   <script src="js/controllers/overview.controller.js"></script>
   <script src="js/services/task.service.js"></script>
+  <script src="js/services/node.service.js"></script>
   <script src="js/services/auth.service.js"></script>
   <script src="js/controllers/login.controller.js"></script>
   <script src="js/filters/relative-time.filter.js"></script>

@@ -681,6 +681,8 @@ h1, h2, h3, h4, h5, p {
     font-size: 20px;
     float: left;
     margin-right: 5px; }
+  .option-group .btn {
+    margin: 2px; }
 
 .ibox-title {
   padding: 6px 15px 7px; }
@@ -698,6 +700,18 @@ h1, h2, h3, h4, h5, p {
   margin: 10px -20px; }
   .details-tab .md-content .md-tabs {
     border: none; }
+
+.fixed-header .header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000; }
+
+.fixed-header .main-ui-view {
+  padding-top: 50px; }
+
+.nodata {
+  position: absolute;
+  top: 40px; }
 
 @media screen and (max-width: 780px) {
   .category-list li {
@@ -1096,3 +1110,74 @@ ins {
   right: 10px;
   font-size: 25px;
   top: 10px; }
+
+.login-header {
+  text-align: center; }
+  .login-header h1 {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 200; }
+  .login-header img {
+    width: 60px; }
+
+.jumbotron label h2 {
+  font-size: 16px;
+  font-weight: 200; }
+
+.copyright {
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%; }
+
+.notask {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  text-align: center; }
+
+.cluster-overview span {
+  font-size: 12px;
+  font-weight: normal; }
+
+.cluster-overview .fa {
+  margin-left: 10px; }
+
+.cluster-overview .node-list .node img {
+  width: 100%;
+  padding: 10px 0; }
+
+.cluster .cluster-label {
+  padding: 10px 15px; }
+
+.cluster .ibox .ibox-title span {
+  font-weight: normal;
+  line-height: 22px; }
+
+.cluster .list-label {
+  float: left;
+  font-weight: bold; }
+
+.cluster .progress {
+  width: 100%;
+  height: 10px;
+  margin: 10px 0; }
+
+.cluster .usage {
+  padding: 0 15px; }
+  .cluster .usage .border-right {
+    border-right: 1px solid #e7eaec; }
+  .cluster .usage [class^=col-] {
+    padding: 10px 15px !important;
+    text-align: center; }
+  .cluster .usage .list-label {
+    text-align: left;
+    float: none;
+    padding-bottom: 10px; }
+  .cluster .usage .usage-addon {
+    font-size: 12px;
+    padding-top: 5px; }
+
+.cluster .progress-bar {
+  transition: none;
+  -webkit-transition: none; }

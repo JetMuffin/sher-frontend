@@ -16,23 +16,23 @@
 						<div class="col-sm-4">
 							<dl class="dl-horizontal">
 								<dt>ID</dt>
-								<dd>{{task.id}}</dd>
+								<dd ng-bind="task.id"></dd>
 								<dt>Image</dt>
-								<dd>{{task.docker_image}}</dd>
+								<dd ng-bind="task.docker_image"></dd>
 								<dt>Cpus</dt>
-								<dd>{{task.cpus}}</dd>
+								<dd ng-bind="task.cpus"></dd>
 								<dt>Node</dt>
-								<dd>{{task.slave_hostname}}</dd>
+								<dd ng-bind="task.slave_hostname"></dd>
 							</dl>
 						</div>
 						<div class="col-sm-4">
 							<dl class="dl-horizontal">
 								<dt>Status</dt>
-								<dd><span class="label label-{{task.label_class}}">{{task.status}}</span></dd>
-								<dt>Image</dt>
-								<dd>{{task.docker_image}}</dd>
+								<dd ng-bind="task.status"><span class="label label-{{task.label_class}}"></span></dd>
+								<dt>Create time</dt>
+								<dd>{{task.create_time*1000 | relativeDate}}</dd>
 								<dt>Mem</dt>
-								<dd>{{task.mem}}</dd>
+								<dd ng-bind="task.mem"></dd>
 								<dt>Ports</dt>
 								<dd>
 									<ul>
@@ -50,7 +50,7 @@
 						<button class="btn btn-primary"><span class="si si-plus"></span>Duplicate</button>
 						<button class="btn btn-default" ng-click="kill(task)"><span class="si si-close-circle"></span>Kill</button>
 						<button class="btn btn-danger" ng-click="delete(task)"><span class="si si-trash"></span>Delete</button>
-						<button class="btn" ng-click="openLogModal(task)"><span class="si si-file"></span>Show Output</button>
+						<button class="btn btn-default" ng-click="openLogModal(task)"><span class="si si-file"></span>Show Output</button>
 					</div>					
 				<div ng-cloak="" class="details-tab">
 				  <md-content>
@@ -61,15 +61,20 @@
 								<div class="col-sm-12">
 									<div ng-controller="cpuCtrl">
 									<h2>CPU</h2>
-									<canvas id="cpu" class="chart chart-line" chart-data="data"
-									  chart-labels="labels" chart-legend="true" chart-series="series"
+									<div ng-if="nodata" class="nodata">
+										Task is not running now, no  data to show.
+									</div>
+									<canvas id="cpu" class="chart chart-line" chart-data="data" chart-options="options" chart-labels="labels" chart-legend="true" chart-series="series"
 									  height="60">
 									</canvas>
 									</div>
 									<div ng-controller="memCtrl">
 									<h2>MEM</h2>
+									<div ng-if="nodata" class="nodata">
+										Task is not running now, no  data to show.
+									</div>	
 									<canvas id="mem" class="chart chart-line" chart-data="data"
-									  chart-labels="labels" chart-legend="true" chart-series="series"
+									  chart-labels="labels" chart-legend="true" chart-options="options" chart-series="series"
 									  height="60">
 									</canvas> 
 									</div>
@@ -79,10 +84,9 @@
 					  </md-tab>
 					  <md-tab label="Docker Configuration">
 						<md-content class="md-padding">
-						  <h1 class="md-display-2">Tab Two</h1>
-						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-						  <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-						  <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+						  <pre>
+<code class="hljs json">{{task.docker_json}}</code>
+						  </pre>
 						</md-content>
 					  </md-tab>
 					</md-tabs>

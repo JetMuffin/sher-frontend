@@ -21,4 +21,9 @@ $(document).ready(function() {
     $(document).on("click", "#dockerSetBtn", function() {
         $("#DockerSetting").toggle(500);
     });    
+
+    $('pre code').each(function(i, block) {
+        console.log(block)
+        hljs.highlightBlock(block);
+    });    
 })

@@ -3,6 +3,8 @@ var API = 'http://192.168.33.1:3030/api';
 angular.module('sher.task')
     .factory('Tasks', ['$resource', '$http', function($resource, $http) {
         var tasks = [];
+        var cpu_usage_data = emptyArray(15),
+            mem_usage_data = emptyArray(15);
         var resource = $resource(API + '/tasks', {}, {
             query: {
                 method: 'get',
@@ -66,7 +68,7 @@ angular.module('sher.task')
             },
 
             // 提交任务
-            submitTask: function(task, callback) {
+            submitTask: function(task, callback, errorHandle) {
                 $http({
                     method: 'POST',
                     url: API + '/tasks',
@@ -76,28 +78,34 @@ angular.module('sher.task')
                         'Content-Type': 'application/json; ; charset=UTF-8'
                     }
                 }).success(function(response) {
-                    return callback;
+                    return callback && callback(response);
+                }).error(function(response) {
+                    return errorHandle && errorHandle(response);
                 });
             },
 
             // 删除任务
-            deleteTask: function(id, callback) {
+            deleteTask: function(id, callback, errorHandle) {
                 $http({
                     method: 'DELETE',
                     url: API + '/tasks/' + id
                 }).success(function(response) {
                     return callback && callback(response);
-                })
+                }).error(function(response) {
+                    return errorHandle && errorHandle(response);
+                });
             },
 
             // 杀死任务
-            killTask: function(id, callback) {
+            killTask: function(id, callback, errorHandle) {
                 $http({
                     method: 'PUT',
                     url: API + '/tasks/' + id + '/kill'
                 }).success(function(response) {
                     return callback && callback(response);
-                })
+                }).error(function(response) {
+                    return errorHandle && errorHandle(response);
+                });
             },
 
             // 读取任务输出
@@ -117,8 +125,23 @@ angular.module('sher.task')
                 }).success(function(response) {
                     return callback && callback(response);
                 })
-            }   
+            },
 
+            taskArchive: function() {
+                var archive = [0,0,0,0,0,0];
+                var map = {
+                    "TASK_FINISHED": 0,
+                    "TASK_STAGING": 1,
+                    "TASK_FAILED": 2,
+                    "TASK_RUNNING": 3,
+                    "TASK_KILLED": 4,
+                    "TASK_LOST": 5
+                }
+                for(var i = 0; i < tasks.length; i++) {       
+                    archive[map[tasks[i].state]] ++;
+                }   
+                return archive;
+            }
         }
     }]);
 
@@ -151,6 +174,18 @@ function handleTasks(tasks) {
                 tasks[i].label_class="default";
                 break;
         }
+
+        // 生成docker配置
+        tasks[i].docker_config = {
+            "volumes": tasks[i].volumes || [],
+            "image": tasks[i].docker_image,
+            "port_mappings": tasks[i].port_mappings || [],
+            "network_mode": tasks[i].network_mode,
+            "privileged": tasks[i].privileged,
+            "parameters": tasks[i].parameters || [], 
+        }
+
+        tasks[i].docker_json = JSON.stringify(tasks[i].docker_config, null, "\t");
     }
 
     tasks.sort(function(a, b) {
@@ -159,3 +194,12 @@ function handleTasks(tasks) {
 
     return tasks
 } 
+
+function emptyArray(size) {
+    var data = new Array();
+    for(var i = 0; i < size; i++) {
+        data.push(0);
+    }
+    return data;
+}
+

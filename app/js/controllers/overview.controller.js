@@ -2,32 +2,85 @@
 
 var overview = angular.module("sher.overview", ["chart.js"]);
 
-overview.controller("tableCtrl", ['$scope', 'Tasks', function ($scope, Tasks) {
-	Tasks.refresh();
-	$scope.tasks = Tasks.getTasks().slice(0, 5);
+overview.controller("tableCtrl", ['$scope', '$state', 'Tasks', function ($scope, $state, Tasks) {
+	Tasks.refresh().$promise.then(function(response) {
+        $scope.tasks = Tasks.getTasks().slice(0, 5);
+    });
+
+    $scope.rowClick = function(taskID){
+		$state.go('navbar.detail',{taskID: taskID});
+	};
 }
 ]);
 
-overview.controller("pieCtrl", ['$scope', 'Tasks', function ($scope, Tasks) {
+overview.controller("pieCtrl", ['$scope', '$interval', 'Tasks', function ($scope, $interval, Tasks) {
 	//TODO 增加service
-	Tasks.refresh();
-	Tasks.systemUsage(function(response) {
-		var metrics = response.message;
-	  	$scope.labels = ["free", "used"];
-	  	$scope.cpus = [metrics.free_cpus, metrics.used_cpus];
-	  	$scope.mem = [metrics.free_mem, metrics.used_mem];
-	  	$scope.disk = [metrics.free_disk, metrics.used_disk];	
-	  	console.log($scope.mem)	
-	});
+    var reload = function (query) {
+		Tasks.refresh().$promise.then(function(response) {
+			$scope.archive_data = Tasks.taskArchive();
+		  	$scope.archive_label = ["finished", "staging", "failed", "running", "killed", "lost"];
+			
+			if(isZeroArray($scope.archive_data)) {
+				$scope.notask = true;
+			}
+			
+			Tasks.systemUsage(function(response) {
+				var metrics = response.message;
+			  	$scope.labels = ["free", "used"];
+			  	$scope.cpus = [metrics.free_cpus, metrics.used_cpus];
+			  	$scope.mem = [metrics.free_mem, metrics.used_mem];
+			  	$scope.disk = [metrics.free_disk, metrics.used_disk];	
+			});
+		});
+	}
+
+	reload();
+
+    // 加载任务, 定时监控
+    var timer = $interval(function() {
+        reload($scope.query);
+    }, 1000);
+
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(timer);
+    })  
 }
 ]);
 
-overview.controller("pmemCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [200, 500, 100];
-});
+overview.controller("clusterCtrl", ['$scope', '$interval', '$state', 'Nodes', function ($scope, $interval, $state, Nodes) {
+	var reload = function () {
+		Nodes.refresh().$promise.then(function(response) {
+			$scope.masters = Nodes.getAllMasters();
+			$scope.slaves = Nodes.getAllSlaves().slice(0, 6);;
+			$scope.master_running = Nodes.filterMaster("RUNNING").length;
+			$scope.master_lost = Nodes.filterMaster("LOST").length;
+			$scope.slave_running = Nodes.filterSlave("RUNNING").length;
+			$scope.slave_lost = Nodes.filterSlave("LOST").length;
+	    });
+	}
 
-overview.controller("pnetCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 400];
-});
+	reload();
+
+    // 加载任务, 定时监控
+    var node_timer = $interval(function() {
+        reload();
+    }, 1000);
+
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(node_timer);
+    })  	
+}
+]);
+
+
+function isZeroArray(array) {
+	for(var i = 0; i < array.length; i++) {
+		if(array[i] != 0) {
+			return false;
+		}
+	}
+	return true;
+}
+

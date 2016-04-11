@@ -7,6 +7,7 @@ angular.module('sher', [
   'sher.detail',
   'sher.overview',
   'sher.auth',
+  'sher.cluster',
   'ngRoute',
   'ngCookies'
 ])
@@ -32,6 +33,10 @@ angular.module('sher', [
         url: "/overview",
         templateUrl: "/app/js/templates/overview.html",
         controller: ''
+      }).state("navbar.cluster", {
+        url: "/cluster",
+        templateUrl: "/app/js/templates/cluster.html",
+        controller: 'ClusterCtrl'
       });
   //$locationProvider.html5Mode({enabled:true, requireBase:false});
   $locationProvider.html5Mode({enabled:true});
