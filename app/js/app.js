@@ -8,8 +8,10 @@ angular.module('sher', [
   'sher.overview',
   'sher.auth',
   'sher.cluster',
+  'sher.fs',
   'ngRoute',
-  'ngCookies'
+  'ngCookies',
+  'FileManager'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -37,9 +39,13 @@ angular.module('sher', [
         url: "/cluster",
         templateUrl: "/app/js/templates/cluster.html",
         controller: 'ClusterCtrl'
+      }).state("navbar.filesystem", {
+        url: "/fs",
+        templateUrl: "/app/js/templates/fs.html",
+        controller: 'FileSystemCtrl'
       });
   //$locationProvider.html5Mode({enabled:true, requireBase:false});
-  $locationProvider.html5Mode({enabled:true});
+  // $locationProvider.html5Mode({enabled:true});
   $urlRouterProvider.otherwise('/login');
 }])
 
@@ -59,3 +65,6 @@ angular.module('sher', [
 				}
 			});
 		}]);
+
+
+

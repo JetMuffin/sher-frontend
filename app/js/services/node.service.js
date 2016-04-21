@@ -104,22 +104,21 @@ function handleNodes(nodes) {
         }
 
         // cpu、mem数据格式化
-        nodes[i].cpu_alloc = (nodes[i].cpu_registered - nodes[i].resources.cpus.scalar.value).toFixed(2);
-        nodes[i].memory_registered = parseInt(nodes[i].memory_registered);
-        nodes[i].memory_alloc = (nodes[i].memory_registered - nodes[i].resources.mem.scalar.value);
+        nodes[i].cpu_alloc = (nodes[i].resources.cpus.scalar.value - nodes[i].offered_resources.cpus.scalar.value).toFixed(2);
+        nodes[i].memory_alloc = (nodes[i].resources.mem.scalar.value - nodes[i].offered_resources.mem.scalar.value);
 
         // 生成peity图像数据
-        nodes[i].cpu_data = [nodes[i].cpu_alloc, nodes[i].resources.cpus.scalar.value]
-        nodes[i].memory_data = [nodes[i].memory_alloc, nodes[i].resources.mem.scalar.value]
+        nodes[i].cpu_data = [nodes[i].cpu_alloc, nodes[i].offered_resources.cpus.scalar.value]
+        nodes[i].memory_data = [nodes[i].memory_alloc, nodes[i].offered_resources.mem.scalar.value]
         nodes[i].cpu_options = {
             width: 100,
             height:80,            
-            fill: getUsageColor(nodes[i].cpu_alloc, nodes[i].cpu_registered)      
+            fill: getUsageColor(nodes[i].cpu_alloc, nodes[i].resources.cpus.scalar.value)      
         }
         nodes[i].memory_options = {
             width: 100,
             height:80,                      
-            fill: getUsageColor(nodes[i].memory_alloc, nodes[i].memory_registered)      
+            fill: getUsageColor(nodes[i].memory_alloc, nodes[i].resources.mem.scalar.value)      
         }
 
         // 记录任务完成度

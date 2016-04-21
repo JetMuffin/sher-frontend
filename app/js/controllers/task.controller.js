@@ -62,6 +62,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, to
     // 加载任务, 定时监控
     var timer = $interval(function() {
         reload($scope.query);
+        console.log("test")
     }, 1000);
 
     // 离开页面时删除计时器

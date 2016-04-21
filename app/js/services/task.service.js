@@ -149,6 +149,9 @@ function handleTasks(tasks) {
     for(var i = 0; i < tasks.length; i++) {
         // 转换状态
         switch (tasks[i].state) {
+            case "TASK_WAITING":
+                tasks[i].status="WAITING";
+                tasks[i].label_class="default";
             case "TASK_STAGING":
                 tasks[i].status="STARTING";
                 tasks[i].label_class="primary";
@@ -186,6 +189,10 @@ function handleTasks(tasks) {
         }
 
         tasks[i].docker_json = JSON.stringify(tasks[i].docker_config, null, "\t");
+
+        // 转换类型
+        tasks[i].type = tasks[i].Type == 0 ? "TEST" : "BUILD";
+        tasks[i].type_color = tasks[i].Type == 0 ? "primary" : "info";
     }
 
     tasks.sort(function(a, b) {

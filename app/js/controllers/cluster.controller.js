@@ -21,14 +21,14 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, No
 	reload();
 
     // 加载任务, 定时监控
-    // var node_timer = $interval(function() {
-    //     reload();
-    // }, 1000);
+    var node_timer = $interval(function() {
+        reload();
+    }, 1000);
 
-    // // 离开页面时删除计时器
-    // $scope.$on("$destroy", function(event) {
-    //     $interval.cancel(node_timer);
-    // })     
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(node_timer);
+    })     
 }]);
 
 

@@ -30,7 +30,7 @@
 								<dt>Status</dt>
 								<dd ng-bind="task.status"><span class="label label-{{task.label_class}}"></span></dd>
 								<dt>Create time</dt>
-								<dd>{{task.create_time*1000 | relativeDate}}</dd>
+								<dd>{{task.create_time/1000000 | relativeDate}}</dd>
 								<dt>Mem</dt>
 								<dd ng-bind="task.mem"></dd>
 								<dt>Ports</dt>
