@@ -35,6 +35,10 @@ angular.module('sher', [
         url: "/overview",
         templateUrl: "/app/js/templates/overview.html",
         controller: ''
+      }).state("navbar.job", {
+        url: "/job",
+        templateUrl: "/app/js/templates/job.html",
+        controller: 'JobCtrl'
       }).state("navbar.cluster", {
         url: "/cluster",
         templateUrl: "/app/js/templates/cluster.html",
