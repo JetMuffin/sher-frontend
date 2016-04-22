@@ -62,13 +62,15 @@ gulp.task('watch',function(){
     gulp.watch('./app/scss/*.scss',['scss']);
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('serve', function() {
     browserSync({
         files: "**",
         server: {
             baseDir: "./"
         }
     });
+	gulp.watch('./app/scss/*.scss',['scss']);
+	browserSync.reload();
 });
 
 

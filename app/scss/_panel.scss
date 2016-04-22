@@ -1,3 +1,30 @@
+
+$box-bg: #282e3c;
+$box-line-color: #383e4a;
+$box-title-padding: 15px 15px;
+$box-content-padding: 15px;
+$box-title-fontsize: 18px;
+
+.box {
+	margin-bottom: 20px;
+	.box-title {
+		background-color: $box-bg;
+		padding: $box-title-padding;
+		border-bottom: 1px solid $box-line-color;
+		h2 {
+			font-size: $box-title-fontsize;
+		}
+	}
+
+	.box-content {
+		background: $box-bg;
+		padding: $box-content-padding;
+	}
+}
+
+
+
+
 .cluster {
 	.ibox-title {
 		h5 {

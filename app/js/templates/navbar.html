@@ -1,4 +1,4 @@
-	<div class="sidebar">
+<!-- 	<div class="sidebar">
 	  <div class="sidebar-inner" id="side-menu">
 		<div class="brand-top">
 		  <div class="brand">
@@ -17,13 +17,37 @@
 		</div>
 	  </div>
 	</div>
+ -->	
+	<div class="sidebar">
+		<div class="sidebar-header">
+			<div class="sidebar-header-image">
+				<div class="sidebar-header-image-inner">
+				</div>
+			</div>
+			<h3>Datacenter</h3>
+			<p class="sidebar-header-ip">192.168.33.1</p>
+		</div>
+		<div class="sidebar-menu">
+			<ul>
+				<li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".overview"><span class="sidebar-menu-item-icon si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
+				<li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".task"><span class="sidebar-menu-item-icon si-browser"></span><span class="nav-label">Tasks</span></a></li>
+				<li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".cluster"><span class="sidebar-menu-item-icon si-server"></span><span class="nav-label">Cluster</span></a></li>				
+			</ul>
+		</div>
+		<div class="sidebar-footer">
+			<div class="version-info">
+				<p>DCC Sher v0.3</p>
+			</div>
+			<div class="user-dropdown">
+				<span class="si-user user-icon"></span>
+				jeffchen328@gmail.com
+			</div>
+		</div>
+	</div>	
   <!--[if lt IE 7]>
 	  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
   <div class="main-wrapper" id="main-wrapper">
-	<div class="header">
-	  <!-- <h3 class="tab-title">Task Manager | </h3> -->
-	</div>
 	<div ui-view class="main-ui-view"></div>
   </div>

@@ -1,3 +1,6 @@
+// variables
+@import 'variables';
+
 // font
 @import 'font';
 
@@ -7,8 +10,7 @@
 // responsive
 @import 'responsive';
 
-// modules
-@import 'sidebar';
+
 @import 'header';
 @import 'mail';
 @import 'form';
@@ -18,3 +20,10 @@
 @import 'login';
 @import 'overview';
 @import 'cluster';
+
+// fundation
+@import 'fundation';
+
+// modules
+@import 'sidebar';
+@import 'content';
