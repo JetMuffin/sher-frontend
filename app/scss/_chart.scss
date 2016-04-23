@@ -1,7 +1,12 @@
-$chart-yavis-width: 15%;
-$chart-svg-width: 85%;
+$chart-yavis-width: 18%;
+$chart-svg-width: 82%;
+$chart-svg-height: 140px;
+$chart-svg-small-height: 60px;
+$chart-svg-zindex: 10;
+$chart-bg-zindex: 1;
 
 .chart {
+	position: relative;
 	.chart-title {
 		text-align: center;
 		font-size: 12px;
@@ -16,9 +21,10 @@ $chart-svg-width: 85%;
 	}
 	.chart-yavis {
 		float: left;
+		margin-top: -6px;
 		width: $chart-yavis-width;
 		p {
-			margin-bottom: 45px;
+			margin-bottom: 49px;
 			color: $gray;
 			&:last-child {
 				margin-bottom: 0;
@@ -29,5 +35,44 @@ $chart-svg-width: 85%;
 	.chart-graph {
 		float: left;
 		width: $chart-svg-width;
+		position: relative;
+		svg {
+			z-index: $chart-svg-zindex;
+		}
+	}
+	.chart-bg {
+		width: 100%;
+		opacity: 0.4;
+		filter: alpha(opacity=40);
+		height: $chart-svg-height;
+		position: absolute;
+		bottom: 5px;
+		right: 0;
+		z-index: 0;
+		border-top: 1px solid #3d4149;
+		li.chart-bg-grid {
+			width: 20%;
+			height: 50%;
+			float: left;
+			border-bottom: 1px solid #3d4149;
+			&:nth-child(5n+1), &:nth-child(5n+3), &:nth-child(5n+5) {
+				background: #2c323f;
+			}
+			&:nth-child(5n+2), &:nth-child(5n+4) {
+				background: #282e3c;
+			}			
+		}
+	}
+	&.small {
+		.chart-bg {
+			height: $chart-svg-small-height;
+			li.chart-bg-grid {
+				width: 100%;
+				height: 50%;
+
+				float: none;
+				background: transparent;
+			}
+		}
 	}
 }

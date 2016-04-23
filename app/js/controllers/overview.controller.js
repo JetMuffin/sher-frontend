@@ -15,7 +15,7 @@ overview.controller("tableCtrl", ['$scope', '$state', 'Tasks', function ($scope,
 
 overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($scope, $interval, Tasks) {
     $scope.cpu = {
-        data: [15, 22, 13, 43, 33, 12, 20, 16, 24, 8],
+        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
         options: {
             max: 100,
             min: 0,
@@ -35,7 +35,7 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
             strokeWidth: 2,
             fill: "#3d365e",
             width: "100%",
-            height: "70px",
+            height: "60px",
         }
     };
     $scope.disk = {
@@ -47,7 +47,7 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
             strokeWidth: 2,
             fill: "#3d365e",
             width: "100%",
-            height: "70px",
+            height: "60px",
         }
     };    
     console.log($scope.mem)

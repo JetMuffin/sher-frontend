@@ -20,48 +20,50 @@
 							<p>50%</p>
 							<p>0%</p>
 						</div>
-						<line-chart data="cpu.data" options="cpu.options" class="chart-graph"></line-chart>	
+						<line-chart data="cpu.data" options="cpu.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
 					</div>
 				</div>
-				<div class="col-sm-4 allocation-chart small">
+				<div class="col-sm-4 allocation-chart small chart">
 					<div class="chart-label">Disk Allocation</div>
 					<div class="chart-stat">83<small>%</small></div>	
 					
 					<div class="chart-svg">
-						<line-chart data="disk.data" options="disk.options" class="chart-graph"></line-chart>	
+						<line-chart data="disk.data" options="disk.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
 					</div>									
 				</div>
-				<div class="col-sm-4 allocation-chart small">
+				<div class="col-sm-4 allocation-chart small chart">
 					<div class="chart-label">Memory Allocation</div>
 					<div class="chart-stat">83<small>%</small></div>	
 					
 					<div class="chart-svg">
-						<line-chart data="mem.data" options="mem.options" class="chart-graph"></line-chart>	
+						<line-chart data="mem.data" options="mem.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
 					</div>									
 				</div>				
 			</div>
-<!-- 			<div class="row" ng-controller="dashboardSystemCtrl">
 
-				<div class="col-sm-4">
-					<h3 style="margin-left:60px">Cpu</h3>
-					<canvas id="pcpu" class="chart chart-doughnut" 
-					  chart-data="cpus" chart-labels="labels" chart-legend="false">
-					</canvas>
-				</div>
-				<div class="col-sm-4">
-					<h3 style="margin-left:60px">Memory</h3>
-					<canvas id="pmem" class="chart chart-doughnut" 
-					  chart-data="mem" chart-labels="labels" chart-legend="false">
-					</canvas> 
-				</div>
-				<div class="col-sm-4">
-					<h3 style="margin-left:60px">Task Health</h3>
-					<div ng-if="notask" class="notask">No task</div>
-					<canvas id="pnet" class="chart chart-doughnut" 
-					  chart-data="archive_data" chart-labels="archive_label" chart-legend="false">
-					</canvas> 
-				</div>				
-			</div> -->
 		</div>
 	</div>		
 	</div>
