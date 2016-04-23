@@ -19,7 +19,7 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
         options: {
             max: 100,
             min: 0,
-            stroke: "#8b54d7",
+            stroke: "#9048d6",
             strokeWidth: 2,
             fill: "#3d365e",
             width: "100%",
@@ -50,37 +50,6 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
             height: "60px",
         }
     };    
-    console.log($scope.mem)
- //    var reload = function (query) {
-	// 	Tasks.refresh().$promise.then(function(response) {
-	// 		$scope.archive_data = Tasks.taskArchive();
-	// 	  	$scope.archive_label = ["finished", "staging", "failed", "running", "killed", "lost"];
-			
-	// 		if(isZeroArray($scope.archive_data)) {
-	// 			$scope.notask = true;
-	// 		}
-			
-	// 		Tasks.systemUsage(function(response) {
-	// 			var metrics = response.message;
-	// 		  	$scope.labels = ["free", "used"];
-	// 		  	$scope.cpus = [metrics.free_cpus, metrics.used_cpus];
-	// 		  	$scope.mem = [metrics.free_mem, metrics.used_mem];
-	// 		  	$scope.disk = [metrics.free_disk, metrics.used_disk];	
-	// 		});
-	// 	});
-	// }
-
-	// reload();
-
- //    // 加载任务, 定时监控
- //    var timer = $interval(function() {
- //        reload($scope.query);
- //    }, 1000);
-
- //    // 离开页面时删除计时器
- //    $scope.$on("$destroy", function(event) {
- //        $interval.cancel(timer);
- //    })  
 }
 ]);
 // overview.controller("pieCtrl", ['$scope', '$interval', 'Tasks', function ($scope, $interval, Tasks) {
@@ -117,6 +86,18 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
 //     })  
 // }
 // ]);
+overview.controller("jobCtrl", ['$scope', '$interval', '$state', 'Nodes', function ($scope, $interval, $state, Nodes) {
+	$scope.job = {
+		data: [27, 7, 1],
+		options: {
+			fill: ["#33c87e", "#8b8f9a", "#f94965"],
+			radius: 30,
+			innerRadius: 27,
+		}
+	}
+}
+]);
+
 
 overview.controller("clusterCtrl", ['$scope', '$interval', '$state', 'Nodes', function ($scope, $interval, $state, Nodes) {
 	var reload = function () {

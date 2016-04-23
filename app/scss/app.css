@@ -1150,6 +1150,9 @@ h1, h2, h3, h4, h5 {
 .text-danger {
   color: #f74863; }
 
+.text-lost {
+  color: #82848f; }
+
 .sidebar {
   position: fixed;
   width: 200px;
@@ -1296,8 +1299,7 @@ h1, h2, h3, h4, h5 {
   color: #eeeeee;
   height: 100%;
   width: 100%;
-  padding-left: 235px;
-  position: fixed; }
+  padding-left: 235px; }
 
 .content-title {
   padding: 20px 0;
@@ -1325,6 +1327,67 @@ h1, h2, h3, h4, h5 {
 .allocation-chart.small:last-child {
   margin-top: 10px; }
 
+.job-box {
+  min-height: 328px; }
+  .job-box .job-title {
+    padding: 5px 0 10px 0; }
+  .job-box .job-stat {
+    text-align: center; }
+  .job-box .job-piechart {
+    text-align: center; }
+  .job-box .job-count {
+    font-size: 48px;
+    font-weight: 200;
+    line-height: 64px; }
+  .job-box .job-count-label {
+    line-height: 18px;
+    padding: 18px 0;
+    color: #82848f;
+    float: left;
+    width: 40px; }
+  .job-box .job-kind {
+    text-align: center;
+    margin: 5px 0; }
+    .job-box .job-kind .job-kind-num {
+      font-size: 24px; }
+    .job-box .job-kind:nth-child(2) {
+      border-left: 1px solid #383e4a;
+      border-right: 1px solid #383e4a; }
+  .job-box .job-divider {
+    display: table;
+    white-space: nowrap;
+    height: auto;
+    margin: '';
+    overflow: hidden;
+    line-height: 1;
+    text-align: center;
+    font-size: 12px;
+    color: #82848f;
+    margin-bottom: 10px; }
+    .job-box .job-divider:before, .job-box .job-divider:after {
+      content: '';
+      display: table-cell;
+      position: relative;
+      top: 50%;
+      width: 50%;
+      background-repeat: no-repeat;
+      background-image: url("../images/line.png"); }
+    .job-box .job-divider:before {
+      background-position: right 1em top 50%; }
+    .job-box .job-divider:after {
+      background-position: left 1em top 50%; }
+  .job-box .job-items {
+    padding-top: 10px; }
+  .job-box .job-item {
+    margin: 10px 0; }
+  .job-box .job-item-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background: #626875;
+    float: left;
+    margin-right: 10px; }
+
 .chart {
   position: relative; }
   .chart .chart-title {
@@ -1351,13 +1414,15 @@ h1, h2, h3, h4, h5 {
     width: 82%;
     position: relative; }
     .chart .chart-graph svg {
-      z-index: 10; }
+      z-index: 10;
+      position: absolute;
+      bottom: 0;
+      right: 0; }
   .chart .chart-bg {
     width: 100%;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
+    opacity: 0.6;
+    filter: alpha(opacity=60);
     height: 140px;
-    position: absolute;
     bottom: 5px;
     right: 0;
     z-index: 0;

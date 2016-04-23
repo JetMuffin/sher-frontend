@@ -38,14 +38,16 @@ $chart-bg-zindex: 1;
 		position: relative;
 		svg {
 			z-index: $chart-svg-zindex;
+			position: absolute;
+			bottom: 0;
+			right: 0;
 		}
 	}
 	.chart-bg {
 		width: 100%;
-		opacity: 0.4;
-		filter: alpha(opacity=40);
+		opacity: 0.6;
+		filter: alpha(opacity=60);
 		height: $chart-svg-height;
-		position: absolute;
 		bottom: 5px;
 		right: 0;
 		z-index: 0;
