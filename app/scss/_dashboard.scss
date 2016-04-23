@@ -1,0 +1,23 @@
+.allocation-chart {
+	.chart-label {
+		color: $gray
+	}
+	.chart-stat {
+		font-size: 24px;
+		small {
+			margin-left: 2px;
+			font-size: 18px;
+		}
+	}
+	&.small {
+		.chart-stat {
+			font-size: 16px;
+			small {
+				font-size: 14px;
+			}
+		}
+		&:last-child {
+			margin-top: 10px;
+		}
+	}
+}

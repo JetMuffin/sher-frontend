@@ -1,0 +1,27 @@
+$content-bg: #232835;
+
+$content-padding: 15px 35px;
+
+$content-title-fontsize: 20px;
+$content-title-padding: 20px 0;
+
+.main-wrapper {
+    -webkit-transition: all .5s;
+    transition: all .5s;	
+    background-color: $content-bg;
+    padding: $content-padding;
+    color: $white;
+    height: 100%;
+    width: 100%;
+    padding-left: $sidebar-width+35px;
+    position: fixed;
+}
+
+.content-title {
+	padding: $content-title-padding;
+	font-size: $content-title-fontsize;
+	font-weight: normal;	
+	color: $white;	
+}
+
+

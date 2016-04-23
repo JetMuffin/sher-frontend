@@ -1,16 +1,18 @@
 
 $box-bg: #282e3c;
 $box-line-color: #383e4a;
-$box-title-padding: 15px 15px;
-$box-content-padding: 15px;
+$box-title-padding: 15px 20px;
+$box-content-padding: 20px;
 $box-title-fontsize: 18px;
-
+$box-border-radius: 4px;
 .box {
 	margin-bottom: 20px;
 	.box-title {
 		background-color: $box-bg;
 		padding: $box-title-padding;
 		border-bottom: 1px solid $box-line-color;
+		border-top-left-radius: $box-border-radius;
+		border-top-right-radius: $box-border-radius;
 		h2 {
 			font-size: $box-title-fontsize;
 		}
@@ -19,6 +21,8 @@ $box-title-fontsize: 18px;
 	.box-content {
 		background: $box-bg;
 		padding: $box-content-padding;
+		border-bottom-left-radius: $box-border-radius;
+		border-bottom-right-radius: $box-border-radius;
 	}
 }
 

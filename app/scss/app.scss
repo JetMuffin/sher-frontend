@@ -22,8 +22,11 @@
 @import 'cluster';
 
 // fundation
+@import 'variables';
 @import 'fundation';
 
 // modules
 @import 'sidebar';
 @import 'content';
+@import 'dashboard';
+@import 'chart';

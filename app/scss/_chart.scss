@@ -1,0 +1,33 @@
+$chart-yavis-width: 15%;
+$chart-svg-width: 85%;
+
+.chart {
+	.chart-title {
+		text-align: center;
+		font-size: 12px;
+		line-height: 20px;
+		padding: 10px;
+		.legend {
+			font-weight: bold;
+			color: $purple;
+			margin: 0 5px;
+			font-size: 20px;
+		}
+	}
+	.chart-yavis {
+		float: left;
+		width: $chart-yavis-width;
+		p {
+			margin-bottom: 45px;
+			color: $gray;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+	}
+	.chart-graph {
+		float: left;
+		width: $chart-svg-width;
+	}
+}

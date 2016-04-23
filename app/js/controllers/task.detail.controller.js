@@ -1,6 +1,6 @@
 'use strict';
 
-var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'chart.js', 'ui.router', 'ngAnimate', 'toastr']);
+var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'chart.js', 'ui.router', 'ngAnimate', 'toastr']);
 
 detail.controller("mesCtrl", [
 	'$scope', 
