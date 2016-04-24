@@ -2,9 +2,9 @@
 
 var overview = angular.module("sher.overview", ["chart.js", "angular-peity"]);
 
-overview.controller("tableCtrl", ['$scope', '$state', 'Tasks', function ($scope, $state, Tasks) {
-	Tasks.refresh().$promise.then(function(response) {
-        $scope.tasks = Tasks.getTasks().slice(0, 5);
+overview.controller("tableCtrl", ['$scope', '$state', 'TaskManager', function ($scope, $state, TaskManager) {
+	TaskManager.refresh().$promise.then(function(response) {
+        $scope.tasks = TaskManager.getTaskManager().slice(0, 5);
     });
 
     $scope.rowClick = function(taskID){
@@ -13,9 +13,19 @@ overview.controller("tableCtrl", ['$scope', '$state', 'Tasks', function ($scope,
 }
 ]);
 
-overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($scope, $interval, Tasks) {
+overview.controller("heathyCtrl", ['$scope', '$interval', 'TaskManager', function ($scope, $interval, TaskManager) {
+    var totalPoints = 60;
+
+    var reload = function() {
+        TaskManager.systemUsage(function(response) {
+            $scope.cpu.data = shiftAndPush($scope.cpu.data, response.message.used_cpus, response.message.free_cpus);;
+            $scope.mem.data = shiftAndPush($scope.mem.data, response.message.used_mem, response.message.free_mem);;
+            $scope.disk.data = shiftAndPush($scope.disk.data, response.message.used_disk, response.message.free_disk);;
+        });
+    }
+
     $scope.cpu = {
-        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
+        data: emptyArray(totalPoints),
         options: {
             max: 100,
             min: 0,
@@ -26,8 +36,9 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
             height: "140px",
         }
     };
+
     $scope.mem = {
-    	data: [15, 22, 13, 43, 33, 12, 20, 16, 24, 9],
+    	data: emptyArray(totalPoints),
         options: {
             max: 100,
             min: 0,
@@ -39,7 +50,7 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
         }
     };
     $scope.disk = {
-    	data: [15, 22, 13, 43, 33, 12, 20, 16, 24, 9],
+    	data: emptyArray(totalPoints),
         options: {
             max: 100,
             min: 0,
@@ -50,90 +61,130 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
             height: "60px",
         }
     };    
-}
-]);
-// overview.controller("pieCtrl", ['$scope', '$interval', 'Tasks', function ($scope, $interval, Tasks) {
-// 	//TODO 增加service
-//     var reload = function (query) {
-// 		Tasks.refresh().$promise.then(function(response) {
-// 			$scope.archive_data = Tasks.taskArchive();
-// 		  	$scope.archive_label = ["finished", "staging", "failed", "running", "killed", "lost"];
-			
-// 			if(isZeroArray($scope.archive_data)) {
-// 				$scope.notask = true;
-// 			}
-			
-// 			Tasks.systemUsage(function(response) {
-// 				var metrics = response.message;
-// 			  	$scope.labels = ["free", "used"];
-// 			  	$scope.cpus = [metrics.free_cpus, metrics.used_cpus];
-// 			  	$scope.mem = [metrics.free_mem, metrics.used_mem];
-// 			  	$scope.disk = [metrics.free_disk, metrics.used_disk];	
-// 			});
-// 		});
-// 	}
 
-// 	reload();
+    reload();
+    // 加载任务, 定时监控
+    var timer = $interval(function() {
+        reload();
+    }, 1000);
 
-//     // 加载任务, 定时监控
-//     var timer = $interval(function() {
-//         reload($scope.query);
-//     }, 1000);
-
-//     // 离开页面时删除计时器
-//     $scope.$on("$destroy", function(event) {
-//         $interval.cancel(timer);
-//     })  
-// }
-// ]);
-overview.controller("jobCtrl", ['$scope', '$interval', '$state', function ($scope, $interval, $state) {
-	$scope.job = {
-		data: [27, 7, 1],
-		options: {
-			fill: ["#33c87e", "#8b8f9a", "#f94965"],
-			radius: 30,
-			innerRadius: 27,
-		}
-	}
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(timer);
+    })      
 }
 ]);
 
-overview.controller("taskCtrl", ['$scope', '$interval', '$state', function ($scope, $interval, $state) {
-    $scope.tasks = {
-        running: 263,
-        waiting: 139,
-        waitTimeLastMinite: 23.6,
-        waitTimeUnit: "ms",
-        failureRatePercent: 12
+overview.controller("jobCtrl", ['$scope', '$interval', '$state', 'JobManager', function ($scope, $interval, $state, JobManager) {
+    var reload = function () {
+        JobManager.refresh().$promise.then(function(response) {
+            $scope.jobs = {
+                total: JobManager.getJobs('all'),
+                running: JobManager.getJobs('running'),
+                finished: JobManager.getJobs('finished'),
+                failed: JobManager.getJobs('failed')
+            }
+
+            $scope.job = {
+                data: [$scope.jobs.running.length, $scope.jobs.finished.length, $scope.jobs.failed.length],
+                options: {
+                    fill: ["#33c87e", "#8b8f9a", "#f94965"],
+                    radius: 30,
+                    innerRadius: 27,
+                }
+            }        
+        });
     }
-    $scope.overview = {
-        data: [263, 139],
+    $scope.job = {
+        data: [0, 0, 0],
         options: {
-            fill: ["#33c87e", "#fac543"],
+            fill: ["#33c87e", "#8b8f9a", "#f94965"],
+            radius: 30,
+            innerRadius: 27,
+        }
+    }       
+    reload()
+
+    // 加载任务, 定时监控
+    var timer = $interval(function() {
+        reload();
+    }, 1000);
+
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(timer);
+    })  
+}
+]);
+
+overview.controller("taskCtrl", ['$scope', '$interval', '$state', 'TaskManager', function ($scope, $interval, $state, TaskManager) {
+    $scope.tasks = {
+        running: 0,
+        waiting: 0,
+        waitTimeLastMinite: 0,
+        waitTimeUnit: "ms",
+        failureRatePercent: 0                
+    }
+    var reload = function () {
+        TaskManager.refresh().$promise.then(function(response) {
+            $scope.tasks = {
+                running: TaskManager.getTasks('running').length,
+                waiting: TaskManager.getTasks('waiting').length,
+                waitTimeLastMinite: 23.6,
+                waitTimeUnit: "ms",
+                failureRatePercent: 12                
+            }
+
+            $scope.overview = {
+                data: [$scope.tasks.waiting, $scope.tasks.running],
+                options: {
+                    fill: ["#fac543", "#33c87e"],
+                    radius: 75,
+                    innerRadius: 71,            
+                }
+            }     
+        });
+
+        TaskManager.systemMetric(function (response) {
+            $scope.waitTime.data = []
+            response.message.wait_time.forEach(function (metric) {
+                $scope.waitTime.data.push(metric.value/1000000000)
+            })
+            $scope.failRate.data = []
+            response.message.failure_rate.forEach(function (metric) {
+                $scope.failRate.data.push(metric.value)
+            })            
+        })
+    }    
+
+    reload();
+
+    $scope.overview = {
+        data: [0, 0],
+        options: {
+            fill: ["#fac543", "#33c87e"],
             radius: 75,
             innerRadius: 71,            
         }
     }
     $scope.waitTime = {
-        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
+        data: emptyArray(60),
         options: {
-            max: 100,
-            min: 0,
             stroke: "#f7c543",
             strokeWidth: 2,
-            fill: "#40403e",
+            fill: ["#f7c543"],
             width: "100%",
             height: "120px",
         }
     }
     $scope.failRate = {
-        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
+        data: emptyArray(60),
         options: {
             max: 100,
             min: 0,
             stroke: "#f74a66",
             strokeWidth: 2,
-            fill: "#403343",
+            fill: ["#f74a66"],
             width: "100%",
             height: "120px",
         }
@@ -177,3 +228,15 @@ function isZeroArray(array) {
 	return true;
 }
 
+function emptyArray(size) {
+    var result = [];
+    while (data.length < size) {
+        data.push(0);
+    }
+}
+
+function shiftAndPush(arr, used, free) {
+    arr.shift();
+    arr.push(used/(used+free)*100);
+    return arr;
+}

@@ -6,17 +6,17 @@ detail.controller("mesCtrl", [
 	'$scope', 
 	'$http', 
 	'$stateParams', 
-	'Tasks',
+	'TaskManager',
 	'$uibModal', 
 	"$state", 
 	'$interval',
 	'toastr',
-	function($scope, $http, $stateParams, Tasks, $uibModal, $state, $interval, toastr){
+	function($scope, $http, $stateParams, TaskManager, $uibModal, $state, $interval, toastr){
 	    // 加载数据
 	    var reload = function (query) {
-			Tasks.refresh().$promise.then(function(response) {
+			TaskManager.refresh().$promise.then(function(response) {
 	            //TODO 错误处理
-				$scope.task = Tasks.getById($stateParams.taskID);
+				$scope.task = TaskManager.getById($stateParams.taskID);
 				$scope.refresh_random = Math.random();
 	        });
 	    }		
@@ -44,7 +44,7 @@ detail.controller("mesCtrl", [
 
 	    // 杀死任务
 	    $scope.kill = function (task) {
-	        Tasks.killTask(task.id, function() {
+	        TaskManager.killTask(task.id, function() {
 	        	toastr.info('Kill task successful.', 'Information')
 	        	$state.go('navbar.task');
 	        }, function() {
@@ -54,7 +54,7 @@ detail.controller("mesCtrl", [
 
 	    // 删除任务
 	    $scope.delete = function (task) {
-	        Tasks.deleteTask(task.id, function() {
+	        TaskManager.deleteTask(task.id, function() {
 	        	toastr.info('Delete task successful.', 'Information')
 	        	$state.go('navbar.task');
 	        }, function() {
@@ -69,7 +69,7 @@ detail.controller("mesCtrl", [
 	}
 ]);
 
-detail.controller("cpuCtrl", function ($scope, $http, Tasks) {
+detail.controller("cpuCtrl", function ($scope, $http, TaskManager) {
 	var watcher = $scope.$watch('refresh_random', function(){
 		if($scope.task) {
 			var data = [];
@@ -141,7 +141,7 @@ detail.controller("memCtrl", function ($scope, $http) {
 });
 
 // 日志模块对话框控制器
-var LogModalCtrl = function ($scope, $uibModalInstance, Tasks, task) {
+var LogModalCtrl = function ($scope, $uibModalInstance, TaskManager, task) {
     // 默认在logtab下
     $scope.logTab = 'stderr';
     consoleLog('stderr')
@@ -156,7 +156,7 @@ var LogModalCtrl = function ($scope, $uibModalInstance, Tasks, task) {
 
     function consoleLog(file) {
         $scope.logTab = file;
-        Tasks.getTaskFile(task.id, file, function(response){
+        TaskManager.getTaskFile(task.id, file, function(response){
             $scope.logs = response.message.split('\n');
         });
     }

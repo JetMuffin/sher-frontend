@@ -57,6 +57,9 @@ $chart-bg-zindex: 1;
 			bottom: 0;
 			right: 0;
 		}
+		&.no-avis {
+			width: 100%;
+		}
 	}
 	.chart-bg {
 		width: 100%;

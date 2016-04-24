@@ -1,7 +1,7 @@
 var API = 'http://192.168.33.1:3030/api';
 
 angular.module('sher.task')
-    .factory('Tasks', ['$resource', '$http', function($resource, $http) {
+    .factory('TaskManager', ['$resource', '$http', function($resource, $http) {
         var tasks = [];
         var cpu_usage_data = emptyArray(15),
             mem_usage_data = emptyArray(15);
@@ -122,6 +122,15 @@ angular.module('sher.task')
                 $http({
                     method: 'GET',
                     url: API + '/system/usage'
+                }).success(function(response) {
+                    return callback && callback(response);
+                })
+            },
+
+            systemMetric: function(callback) {
+                $http({
+                    method: 'GET',
+                    url: API + '/system/metric'
                 }).success(function(response) {
                     return callback && callback(response);
                 })

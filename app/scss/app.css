@@ -1154,7 +1154,7 @@ h1, h2, h3, h4, h5 {
 .text-danger {
   color: #f74863; }
 
-.text-lost {
+.text-gray {
   color: #82848f; }
 
 .∑ {
@@ -1224,7 +1224,10 @@ h1, h2, h3, h4, h5 {
       margin-right: 10px;
       font-size: 20px;
       opacity: 0.6;
-      filter: alpha(opacity=60); }
+      filter: alpha(opacity=60);
+      display: inline-block;
+      height: 23px;
+      vertical-align: middle; }
     .sidebar-menu .sidebar-menu-item a {
       color: #a8a8a8;
       display: block;
@@ -1479,6 +1482,8 @@ h1, h2, h3, h4, h5 {
       position: absolute;
       bottom: 0;
       right: 0; }
+    .chart .chart-graph.no-avis {
+      width: 100%; }
   .chart .chart-bg {
     width: 100%;
     opacity: 0.6;
@@ -1513,3 +1518,61 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 40px; }
     .chart.middle .chart-yavis p:last-child {
       margin-bottom: 0; }
+
+.job-filter .btn-group {
+  float: left;
+  margin-right: 10px; }
+  .job-filter .btn-group .btn {
+    background-color: #232835;
+    border-color: #444852; }
+    .job-filter .btn-group .btn.selected {
+      background-color: #3c4457; }
+    .job-filter .btn-group .btn:focus, .job-filter .btn-group .btn:active, .job-filter .btn-group .btn:visited {
+      color: #fff; }
+  .job-filter .btn-group .fa-circle {
+    margin-right: 8px; }
+  .job-filter .btn-group .badge-white {
+    background-color: #ffffff;
+    color: #000;
+    margin-left: 8px; }
+
+.job-filter .job-search {
+  float: left;
+  width: 200px;
+  position: relative; }
+  .job-filter .job-search span {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    color: #444852; }
+
+.job-filter .form-control {
+  background-color: #232835;
+  font-weight: normal;
+  border-color: #444852;
+  border-radius: 3px;
+  padding-left: 25px; }
+  .job-filter .form-control:focus, .job-filter .form-control:active, .job-filter .form-control:visited {
+    border-color: #9056df !important; }
+
+.job-list th {
+  background-color: #2d3340;
+  border-bottom: 1px solid #3F4551 !important;
+  text-transform: uppercase;
+  padding: 12px !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #82848f; }
+
+.job-list td {
+  background-color: #232835;
+  border-color: #444852 !important;
+  padding: 12px !important; }
+
+.job-list .progress {
+  margin: 0;
+  height: 8px;
+  background-color: #1c202b; }
+  .job-list .progress .progress-bar {
+    height: 8px;
+    background-color: #2D4351; }

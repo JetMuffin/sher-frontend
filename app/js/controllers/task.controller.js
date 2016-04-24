@@ -15,16 +15,16 @@ angular.module('sher.task', ['ngResource', 'ui.bootstrap', 'ngAnimate', 'toastr'
     '$uibModal',
     '$interval',
     'toastr',
-    'Tasks',
-function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, toastr, Tasks) {
+    'TaskManager',
+function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, toastr, TaskManager) {
     $scope.query = $stateParams.query || "all";
     $scope.filter = $scope.query
 	
     // 加载数据
     var reload = function (query) {
-        Tasks.refresh().$promise.then(function(response) {
+        TaskManager.refresh().$promise.then(function(response) {
             //TODO 错误处理
-            $scope.tasks = Tasks.getTasks(query)
+            $scope.tasks = TaskManager.getTasks(query)
         });
     }
 
@@ -33,7 +33,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, to
 
     // 提交任务
     $scope.submitTask = function (task) {
-        Tasks.submitTask(task, reload($scope.query))
+        TaskManager.submitTask(task, reload($scope.query))
     }
 
     // 搜索任务
@@ -62,7 +62,6 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, to
     // 加载任务, 定时监控
     var timer = $interval(function() {
         reload($scope.query);
-        console.log("test")
     }, 1000);
 
     // 离开页面时删除计时器
@@ -73,7 +72,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, to
 
 
 // 模块对话框控制器
-var TaskModalCtrl = function ($scope, $uibModalInstance, toastr, Tasks) {
+var TaskModalCtrl = function ($scope, $uibModalInstance, toastr, TaskManager) {
     // 数据初始化
     $scope.task = {
         cpus: "0.1",
@@ -122,7 +121,7 @@ var TaskModalCtrl = function ($scope, $uibModalInstance, toastr, Tasks) {
     }
 
     $scope.submit = function () {
-        Tasks.submitTask($scope.task, function(){
+        TaskManager.submitTask($scope.task, function(){
             toastr.success('Create task successful!', 'Notification');
         }, function() {
             toastr.error('Create task failed!', 'Error');

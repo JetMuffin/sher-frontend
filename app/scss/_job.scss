@@ -1,0 +1,75 @@
+$border-color: darken(#505460, 5%);
+
+.job-filter {
+	.btn-group {
+		float: left;
+		margin-right: 10px;
+		.btn {
+			background-color: $content-bg;
+			border-color: $border-color;
+			&.selected {
+				background-color: #3c4457;
+			}
+			&:focus, &:active, &:visited {
+				color: #fff;
+			}
+		}
+		.fa-circle {
+			margin-right: 8px;
+		}
+		.badge-white {
+			background-color: #ffffff;
+			color: #000;
+			margin-left: 8px;
+		}
+	}
+	.job-search {
+		float: left;
+		width: 200px;
+		position: relative;
+		span {
+			position: absolute;
+			left: 8px;
+			top: 8px;
+			color: $border-color;
+
+		}		
+	}
+
+	.form-control {
+		background-color: $content-bg;
+		font-weight: normal;
+		border-color: $border-color;
+		border-radius: 3px;
+		padding-left: 25px;
+		&:focus, &:active, &:visited{
+			border-color: $purple !important;
+		}
+	}	
+}
+
+.job-list {
+	th {
+		background-color: #2d3340;
+		border-bottom: 1px solid #3F4551 !important;
+		text-transform: uppercase;
+		padding: 12px !important;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		color: $gray;
+	}
+	td {
+		background-color: $content-bg;
+		border-color: $border-color !important;
+		padding: 12px !important;
+	}
+	.progress {
+		margin: 0;
+		height: 8px;
+	    background-color: #1c202b;
+		.progress-bar {
+			height: 8px;
+			background-color: #2D4351;
+		}
+	}
+}

@@ -9,6 +9,7 @@ angular.module('sher', [
   'sher.auth',
   'sher.cluster',
   'sher.fs',
+  'sher.job',
   'ngRoute',
   'ngCookies',
   'FileManager'
@@ -36,7 +37,7 @@ angular.module('sher', [
         templateUrl: "/app/js/templates/overview.html",
         controller: ''
       }).state("navbar.job", {
-        url: "/job",
+        url: "/job?query",
         templateUrl: "/app/js/templates/job.html",
         controller: 'JobCtrl'
       }).state("navbar.cluster", {

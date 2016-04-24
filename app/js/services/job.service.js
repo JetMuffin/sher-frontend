@@ -3,6 +3,8 @@ var API = 'http://192.168.33.1:3030/api';
 angular.module('sher.job')
     .factory('JobManager', ['$resource', '$http', function($resource, $http) {
         var jobs = [];
+        var healthyCount = 0;
+        var unhealthCount = 0;
         var resource = $resource(API + '/jobs', {}, {
             query: {
                 method: 'get',
@@ -97,6 +99,10 @@ angular.module('sher.job')
     }]);
 
 function handleJobs(jobs) {
+    jobs.sort(function(a, b) {
+        return b.create_time - a.create_time;
+    })
+
     return jobs
 } 
 
