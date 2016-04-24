@@ -11,18 +11,20 @@ angular.module('sher.cluster', ['ngResource', 'ui.bootstrap', 'ngAnimate', 'angu
 
     'Nodes',
 function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, Nodes) {
-	var reload = function () {
+    $scope.query = $stateParams.query || "all";
+
+	var reload = function (query) {
 		Nodes.refresh().$promise.then(function(response) {
-			$scope.masters = Nodes.getAllMasters();
-			$scope.slaves = Nodes.getAllSlaves();
+			$scope.nodes = Nodes.filterNodes(query);
+            console.log($scope.nodes);
 	    });
 	}
 
-	reload();
+	reload($scope.query);
 
     // 加载任务, 定时监控
     var node_timer = $interval(function() {
-        reload();
+        reload($scope.query);
     }, 1000);
 
     // 离开页面时删除计时器

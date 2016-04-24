@@ -3,8 +3,7 @@ var HEARTBEAT_INTERVAL = 10;
 
 angular.module('sher')
     .factory('Nodes', ['$resource', '$http', function($resource, $http) {
-        var masters = [],
-            slaves = [];
+        var nodes = [];
         var resource = $resource(API + '/nodes', {}, {
             query: {
                 method: 'get',
@@ -25,41 +24,27 @@ angular.module('sher')
             refresh: function() {
                 return getNodes(function(response) {
                     nodes = handleNodes(response.message);
-                    masters = nodes.master
-                    slaves = nodes.slave
                 })
             },
 
             // 重置数据
             resetData: function() {
-                masters = [];
-                slaves = [];
+                nodes = [];
             },
 
             // 获取全部的Master
-            getAllMasters: function() {
-                return masters;
+            getAllNodes: function() {
+                return nodes;
             },
 
-            getAllSlaves: function() {
-                return slaves;
-            },
-
-            filterMaster: function(state) {
-                var result = [];
-                for(var i = 0; i < masters.length; i++) {
-                    if(masters[i].state == state) {
-                        result.push(masters[i]);
-                    }
+            filterNodes: function(health) {
+                if(health == 'all') {
+                    return nodes;
                 }
-                return result;
-            },
-
-            filterSlave: function(state) {
                 var result = [];
-                for(var i = 0; i < slaves.length; i++) {
-                    if(slaves[i].state == state) {
-                        result.push(slaves[i]);
+                for(var i = 0; i < nodes.length; i++) {
+                    if(nodes[i].health.toLowerCase() == health.toLowerCase()) {
+                        result.push(nodes[i]);
                     }
                 }
                 return result;
@@ -67,21 +52,14 @@ angular.module('sher')
 
             // 按ID获取任务
             getById: function(id) {
-                if (masters.length) {
-                    for (var i = 0; i < masters.length; i++) {
-                        if (masters[i].id === id) {
-                            return masters[i];
+                if (nodes.length) {
+                    for (var i = 0; i < nodes.length; i++) {
+                        if (nodes[i].id === id) {
+                            return nodes[i];
                         }
                     }
-                } else if (slaves.length) {
-                    for (var i = 0; i < slaves.length; i++) {
-                        if (slaves[i].id === id) {
-                            return slaves[i];
-                        }
-                    }
-                } else {
-                    return null;
-                }
+                }  
+                return null;
             },
         }
     }]);
@@ -89,18 +67,15 @@ angular.module('sher')
 function handleNodes(nodes) {
     var oneMegabyte = 1024 * 1024;
     var oneGigabyte = 1024 * oneMegabyte;       
-    var result = {
-        master: [],
-        slave: []
-    };
+    var result = []
     for(var i = 0; i < nodes.length; i++) {
         // 检查节点是否down了
         last_update_time = nodes[i].last_update_time;
         var now = Date.parse(new Date()) / 1000;
         if(now - last_update_time > HEARTBEAT_INTERVAL) {
-            nodes[i].state = "LOST";
+            nodes[i].health = "Unhealthy";
         } else {
-            nodes[i].state = "RUNNING";
+            nodes[i].health = "Healthy";
         }
 
         // cpu、mem数据格式化
@@ -132,28 +107,14 @@ function handleNodes(nodes) {
                 }
             })
         }
-        if(nodes[i].task_total != 0) {
-            nodes[i].task_complete = parseInt((1-nodes[i].task_running/nodes[i].task_total)*100);
-        } else {
-            nodes[i].task_complete = 0;
-        }
 
-        // 归档
-        if(nodes[i].is_master) {
-            result.master.push(nodes[i]);
-        } 
-        if(nodes[i].is_slave) {
-            result.slave.push(nodes[i]);
-        }
+        result.push(nodes[i]);
     }
 
-    result.master.sort(function(a, b) {
+    result.sort(function(a, b) {
         return b.hostname < a.hostname;
     });
 
-    result.slave.sort(function(a, b) {
-        return b.hostname < a.hostname;
-    });            
     return result;
 }
 

@@ -40,8 +40,8 @@ angular.module('sher', [
         url: "/job?query",
         templateUrl: "/app/js/templates/job.html",
         controller: 'JobCtrl'
-      }).state("navbar.cluster", {
-        url: "/cluster",
+      }).state("navbar.node", {
+        url: "/node?query",
         templateUrl: "/app/js/templates/cluster.html",
         controller: 'ClusterCtrl'
       }).state("navbar.filesystem", {
