@@ -102,3 +102,63 @@
 	}
 }
 
+.task-overview-box {
+	.task-overview-svg {
+		width: 100%;
+		text-align: center;
+		position: relative;
+	}
+	.task-overview-stat {
+		text-align: center;
+		width: 100%;
+		position: absolute;
+		height: 100%;
+		top: 0;
+		font-size: 40px;
+		font-weight: 200;
+		line-height: 30px;
+	    padding: 47px 0;
+		small {
+			display: block;
+			color: $gray;
+			font-size: 14px;
+			font-weight: normal;
+		}
+	}
+	.task-overview-addon {
+		margin-top: 20px;
+		.task-overview-item {
+			float: left;
+			font-size: 20px;
+			font-weight: 300;
+			text-align: center;
+			small {
+				display: block;
+				font-size: 12px;
+				font-weight: normal;
+			}
+			&:first-child {
+				border-right: 1px solid #383e4a;
+			}
+		}
+	}
+}
+
+.waittime-chart.chart {
+	width: 100%;
+}
+
+.waittime-chart {
+	.chart-stat {
+		text-align: center;
+		font-size: 28px;
+		font-weight: 200;
+		small {
+			margin-left: 5px;
+		}
+	}
+	.chart-label {
+		text-align: center;
+		margin-bottom: 22px;
+	}
+}

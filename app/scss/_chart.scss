@@ -2,11 +2,27 @@ $chart-yavis-width: 18%;
 $chart-svg-width: 82%;
 $chart-svg-height: 140px;
 $chart-svg-small-height: 60px;
+$chart-svg-middle-height: 120px;
 $chart-svg-zindex: 10;
 $chart-bg-zindex: 1;
 
 .chart {
 	position: relative;
+	&.purple {
+		.legend {
+			color : $purple;
+		}
+	}
+	&.yellow {
+		.legend {
+			color : $yellow;
+		}
+	}
+	&.red {
+		.legend {
+			color : $red;
+		}
+	}		
 	.chart-title {
 		text-align: center;
 		font-size: 12px;
@@ -14,7 +30,6 @@ $chart-bg-zindex: 1;
 		padding: 10px;
 		.legend {
 			font-weight: bold;
-			color: $purple;
 			margin: 0 5px;
 			font-size: 20px;
 		}
@@ -53,14 +68,14 @@ $chart-bg-zindex: 1;
 		z-index: 0;
 		border-top: 1px solid #3d4149;
 		li.chart-bg-grid {
-			width: 20%;
+			width: 16.66%;
 			height: 50%;
 			float: left;
 			border-bottom: 1px solid #3d4149;
-			&:nth-child(5n+1), &:nth-child(5n+3), &:nth-child(5n+5) {
+			&:nth-child(5n+1), &:nth-child(6n+3), &:nth-child(6n+5) {
 				background: #2c323f;
 			}
-			&:nth-child(5n+2), &:nth-child(5n+4) {
+			&:nth-child(6n+2), &:nth-child(6n+4), &:nth-child(6n) {
 				background: #282e3c;
 			}			
 		}
@@ -76,5 +91,23 @@ $chart-bg-zindex: 1;
 				background: transparent;
 			}
 		}
+	}
+	&.middle {
+		.chart-bg {
+			height: $chart-svg-middle-height;
+			
+		}
+		.chart-title {
+			padding: 0;
+			line-height: normal;
+		}
+		.chart-yavis {
+			p {
+				margin-bottom: 40px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}		
 	}
 }

@@ -86,7 +86,7 @@ overview.controller("heathyCtrl", ['$scope', '$interval', 'Tasks', function ($sc
 //     })  
 // }
 // ]);
-overview.controller("jobCtrl", ['$scope', '$interval', '$state', 'Nodes', function ($scope, $interval, $state, Nodes) {
+overview.controller("jobCtrl", ['$scope', '$interval', '$state', function ($scope, $interval, $state) {
 	$scope.job = {
 		data: [27, 7, 1],
 		options: {
@@ -98,6 +98,48 @@ overview.controller("jobCtrl", ['$scope', '$interval', '$state', 'Nodes', functi
 }
 ]);
 
+overview.controller("taskCtrl", ['$scope', '$interval', '$state', function ($scope, $interval, $state) {
+    $scope.tasks = {
+        running: 263,
+        waiting: 139,
+        waitTimeLastMinite: 23.6,
+        waitTimeUnit: "ms",
+        failureRatePercent: 12
+    }
+    $scope.overview = {
+        data: [263, 139],
+        options: {
+            fill: ["#33c87e", "#fac543"],
+            radius: 75,
+            innerRadius: 71,            
+        }
+    }
+    $scope.waitTime = {
+        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
+        options: {
+            max: 100,
+            min: 0,
+            stroke: "#f7c543",
+            strokeWidth: 2,
+            fill: "#40403e",
+            width: "100%",
+            height: "120px",
+        }
+    }
+    $scope.failRate = {
+        data: [15, 22, 73, 43, 33, 12, 20, 16, 24, 8],
+        options: {
+            max: 100,
+            min: 0,
+            stroke: "#f74a66",
+            strokeWidth: 2,
+            fill: "#403343",
+            width: "100%",
+            height: "120px",
+        }
+    }    
+}
+]);
 
 overview.controller("clusterCtrl", ['$scope', '$interval', '$state', 'Nodes', function ($scope, $interval, $state, Nodes) {
 	var reload = function () {

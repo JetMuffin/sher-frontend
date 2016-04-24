@@ -1,5 +1,11 @@
+$content-bg: #232835;
+
 html,body {
   height: 100%;
+}
+
+body {
+  background-color: $content-bg;
 }
 
 .clickable {
@@ -37,6 +43,7 @@ html,body {
   }
 }
 
+
 h1, h2, h3, h4, h5 {
   font-weight: normal;
 }
@@ -51,4 +58,8 @@ h1, h2, h3, h4, h5 {
 
 .text-lost {
   color: $gray;
+}
+
+.∑{
+  color: $yellow;
 }
