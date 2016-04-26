@@ -1,4 +1,4 @@
-$sidebar-bg: #fff;
+$sidebar-bg: #1c202b;
 $sidebar-width: 200px;
 
 $sidebar-header-ip-color: #a364e6;
@@ -6,7 +6,7 @@ $sidebar-header-image-bg: #d2d8df;
 
 $sidebar-menu-color:  #a8a8a8;
 $sidebar-menu-active-color: #905ae4;
-$sidebar-menu-active-bg: #faf7fe;
+$sidebar-menu-active-bg: lighten($sidebar-bg, 5%);
 $sidebar-menu-active-border: #793ac6;
 
 
@@ -98,7 +98,7 @@ $sidebar-menu-active-border: #793ac6;
     a {
       color: $sidebar-menu-color;
       display: block;
-      padding: 12px 15px;
+      padding: 12px 25px;
       cursor: pointer;
 
       .sidebar-menu-item-label {
@@ -175,7 +175,7 @@ $sidebar-menu-active-border: #793ac6;
 	text-align: center;
 	.version-info {
 	    padding: 15px 0;
-	    border-bottom: 1px solid #ddd;
+	    border-bottom: 1px solid $gray;
 	    p {
 	      opacity: 0.5;
 	    }		

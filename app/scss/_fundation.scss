@@ -1,4 +1,4 @@
-$content-bg: #232835;
+$content-bg: #232937;
 
 html,body {
   height: 100%;
@@ -60,6 +60,32 @@ h1, h2, h3, h4, h5 {
   color: $gray;
 }
 
-.∑{
+.text-warning {
   color: $yellow;
+}
+
+.btn-primary {
+    background-color: $purple;
+    border-color: $purple;
+    color: #FFF;
+    &:active, &:hover, &:focus {
+      background-color: darken($purple, 5%);
+      border-color: darken($purple, 5%);
+    }
+}
+
+.btn-primary.active[disabled], .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+  background-color: lighten($purple, 10%);
+  border-color: lighten($purple, 10%);
+}
+
+.badge-white {
+  line-height: 7px;
+}
+
+.form-control {
+    border-radius: 5px;
+    &:focus, &:active, &:visited{
+        border-color: $purple !important;
+    }
 }

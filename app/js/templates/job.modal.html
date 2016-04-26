@@ -1,0 +1,110 @@
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="si-close modal-close" ng-click="cancel()"></span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Create Job</h4>
+                </div>
+                <div class="modal-body job">
+                    <uib-tabset active="activePill" vertical="true" type="pills" class="vertical-tabs">
+                        <uib-tab index="0" heading="Build">
+                            <div class="form-group">
+                                <label for="name-field" class="control-label">Job Name</label>
+                                <div><input type="text" id="name-field" ng-model="job.name" class="form-control"></div>
+                            </div>                           
+                            <div class="form-group">
+                                <label for="name-field" class="control-label">Image</label>
+                                <div><input type="text" id="name-field" ng-model="job.image" class="form-control"></div>
+                                <p class="tips">The image will be ignored if context directory was specified.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="name-field" class="control-label">Context Directory</label>
+                                <div><input type="text" id="name-field" ng-model="job.context_dir" class="form-control"></div>
+                            </div>                            
+                        </uib-tab>
+                        <uib-tab index="1" heading="Tasks">
+                           <uib-accordion close-others="true">
+                                <uib-accordion-group heading="Task #{{$index+1}}" is-open="true" ng-repeat="task in job.tasks track by $index">
+                                <div class="row">
+                                    <h5>Basic</h5>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cpus-field" class="control-label">Instance</label>
+                                            <div><input type="text" id="cpus-field" ng-model="task.scale" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="cmd-field" class="control-label">Command</label>
+                                            <div><textarea type="text" id="cmd-field" ng-model="task.cmd" class="form-control"></textarea></div>
+                                        </div>                 
+                                    </div>               
+                                </div>
+                                <div class="row">
+                                    <h5>Resource</h5>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cpus-field" class="control-label">Cpus</label>
+                                            <div><input type="text" id="cpus-field" ng-model="task.cpus" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="mem-field" class="control-label">Memory(MB)</label>
+                                            <div><input type="text" id="mem-field" ng-model="task.mem" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="disk-field" class="control-label">Disk Space(MB)</label>
+                                            <div><input type="text" id="disk-field" ng-model="task.disk" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-repeat="resource in task.custom_resources">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="cpus-field" class="control-label">Resource Name</label>
+                                            <div><input type="text" ng-model="resource.name" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                           <label class="control-label">Resource Type</label>
+                                            <div><select type="text" ng-model="resource.type" class="form-control">
+                                                <option value="Scalar">Scalar</option>
+                                                <option value="Range">Range</option>
+                                            </select></div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="disk-field" class="control-label">Resource Value</label>
+                                            <div><input type="text" id="disk-field" ng-model="resource.value" class="form-control" ></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>  
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="task-number-controls controls pull-right">
+                                <a ng-click="addTask()"><span class="si-plus"></span></a>
+                                <a ng-show="job.tasks.length>1" ng-click="deleteTask()"><span class="si-less"></span></a>
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="2" heading="Volumes">
+                            <div class="form-group" ng-repeat="volume in job.volumes track by $index">
+                                <label for="name-field" class="control-label">Directory</label>
+                                <div><input type="text" id="name-field" ng-model="job.volumes[$index]" class="form-control"></div>
+                            </div> 
+                            <div class="controls pull-right">
+                                <a ng-click="addVolume()"><span class="si-plus"></span></a>
+                                <a ng-show="job.volumes.length>1" ng-click="deleteVolume()"><span class="si-less"></span></a>
+                            </div>                                             
+                            <p class="tips">The specified directories will be mapping to the same path of docker containers.</p>
+                        </uib-tab>
+                    </uib-tabset>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="submit()">Create</button>
+                </div>

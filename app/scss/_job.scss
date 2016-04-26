@@ -9,6 +9,9 @@ $border-color: darken(#505460, 5%);
 			border-color: $border-color;
 			&.selected {
 				background-color: #3c4457;
+				.badge-white {
+					background-color: #fff;
+				}
 			}
 			&:focus, &:active, &:visited {
 				color: #fff;
@@ -18,8 +21,8 @@ $border-color: darken(#505460, 5%);
 			margin-right: 8px;
 		}
 		.badge-white {
-			background-color: #ffffff;
-			color: #000;
+  			background-color: #626875;
+			color: #232836;
 			margin-left: 8px;
 		}
 	}

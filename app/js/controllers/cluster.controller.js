@@ -16,7 +16,6 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, No
 	var reload = function (query) {
 		Nodes.refresh().$promise.then(function(response) {
 			$scope.nodes = Nodes.filterNodes(query);
-            console.log($scope.nodes);
 	    });
 	}
 

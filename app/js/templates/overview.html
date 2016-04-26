@@ -1,4 +1,4 @@
-<div id="overview" class="animated fadeInRight">
+<div id="overview">
 	<h3 class="content-title">
 		Dashboard
 	</h3>
@@ -11,7 +11,7 @@
 			<div class="row">
 				<div class="col-sm-8 allocation-chart chart purple">
 					<h5 class="chart-label">CPU Allocation</h5>
-					<div class="chart-stat">{{cpu.data[cpu.data.length-1]}}<small>%</small></div>
+					<div class="chart-stat">{{cpu.data[cpu.data.length-1] | number:2}}<small>%</small></div>
 			
 					<div class="chart-svg">
 						<p class="chart-title"><span class="legend">-</span>CPU Allocation(%)</p>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="col-sm-4 allocation-chart small chart">
 					<div class="chart-label">Disk Allocation</div>
-					<div class="chart-stat">{{mem.data[mem.data.length-1]}}<small>%</small></div>	
+					<div class="chart-stat">{{disk.data[disk.data.length-1] | number:2 }}<small>%</small></div>	
 					
 					<div class="chart-svg">
 						<line-chart data="disk.data" options="disk.options" class="chart-graph">
@@ -53,7 +53,7 @@
 				</div>
 				<div class="col-sm-4 allocation-chart small chart">
 					<div class="chart-label">Memory Allocation</div>
-					<div class="chart-stat">{{disk.data[disk.data.length-1]}}<small>%</small></div>	
+					<div class="chart-stat">{{mem.data[mem.data.length-1] | number:2}}<small>%</small></div>	
 					
 					<div class="chart-svg">
 						<line-chart data="mem.data" options="mem.options" class="chart-graph">
@@ -156,7 +156,7 @@
 		<div class="box-content task-waittime-box" ng-controller="taskCtrl">
 			<div class="task-waittime-svg">
 				<div class="col-sm-8 waittime-chart chart middle yellow">
-					<div class="chart-stat">{{waitTime.data[waitTime.data.length-1]}}<small>s</small></div>
+					<div class="chart-stat">{{waitTime.data[waitTime.data.length-1] | number:2}}<small>s</small></div>
 					<h5 class="chart-label text-warning">Task Wait Time</h5>
 			
 					<div class="chart-svg">
@@ -187,7 +187,7 @@
 		<div class="box-content task-waittime-box" ng-controller="taskCtrl">
 			<div class="task-waittime-svg">
 				<div class="col-sm-8 waittime-chart chart middle red">
-					<div class="chart-stat">{{failRate.data[failRate.data.length-1]}}<small>%</small></div>
+					<div class="chart-stat">{{failRate.data[failRate.data.length-1] | number:2}}<small>%</small></div>
 					<h5 class="chart-label text-danger">Task Failure Rate</h5>
 			
 					<div class="chart-svg">

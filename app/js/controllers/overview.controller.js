@@ -157,7 +157,6 @@ overview.controller("taskCtrl", ['$scope', '$interval', '$state', 'TaskManager',
         })
     }    
 
-    reload();
 
     $scope.overview = {
         data: [0, 0],
@@ -189,6 +188,18 @@ overview.controller("taskCtrl", ['$scope', '$interval', '$state', 'TaskManager',
             height: "120px",
         }
     }    
+    
+    reload();
+
+    // 加载任务, 定时监控
+    var timer = $interval(function() {
+        reload();
+    }, 1000);
+
+    // 离开页面时删除计时器
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(timer);
+    })      
 }
 ]);
 

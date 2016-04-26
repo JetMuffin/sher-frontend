@@ -1,6 +1,6 @@
-<div id="node" class="animated fadeInRight">
+<div id="node">
     <h3 class="content-title">
-        {{jobs.length}} Nodes
+        {{nodes.length}} Nodes
     </h3>
    <div class="row">
         <div class="job-filter m-b col-sm-12">
@@ -35,17 +35,17 @@
                         </td>
                         <td at-title="cpu" at-sortable class="node-resource">
                             <div class="progress">
-                                <div style="width: {{item.cpu_alloc/item.offered_resources.cpus.scalar.value*100}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{item.cpu_alloc/item.offered_resources.cpus.scalar.value*100}}" role="progressbar" class="progress-bar progress-bar-success">
+                                <div style="width: {{item.cpu_alloc/item.resources.cpus.scalar.value*100}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{item.cpu_alloc/item.resources.cpus.scalar.value*100}}" role="progressbar" class="progress-bar progress-bar-success">
                                 </div>
                             </div> 
-                            <span>{{item.cpu_alloc/item.offered_resources.cpus.scalar.value*100}}%</span> 
+                            <span>{{item.cpu_alloc/item.resources.cpus.scalar.value*100 | number:0}}%</span> 
                         </td>
                         <td at-title="mem" at-sortable class="node-resource">
                             <div class="progress">
-                                <div style="width: {{item.memory_alloc/item.offered_resources.mem.scalar.value*100}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{item.memory_alloc/item.offered_resources.mem.scalar.value*100}}" role="progressbar" class="progress-bar progress-bar-success">
+                                <div style="width: {{item.memory_alloc/item.resources.mem.scalar.value*100}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{item.memory_alloc/item.resources.mem.scalar.value*100}}" role="progressbar" class="progress-bar progress-bar-success">
                                 </div>
                             </div>  
-                            <span>{{item.memory_alloc/item.offered_resources.mem.scalar.value*100}}%</span>
+                            <span>{{item.memory_alloc/item.resources.mem.scalar.value*100 | number:0}}%</span>
                         </td>    
                         <td at-title="role" at-sortable class="node-role">
                             <span class="label" ng-if="item.is_master">Master</span>

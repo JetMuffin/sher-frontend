@@ -1,0 +1,101 @@
+.modal-body.job {
+	padding: 0;
+	h5 {
+		font-size: 16px;
+		font-weight: bold;
+		padding: 5px 15px;
+	}
+	min-height: 300px;
+	// max-height: 450px;
+	// overflow: scroll;
+}
+
+.vertical-tabs {
+	.nav-pills {
+		padding: 10px 0;
+	    border-right: 1px solid #ddd;	
+	    width: 20%;	
+	    position: absolute;
+	    height: 100%;
+		.nav-item {
+			border-radius: 0;
+			a {
+				background-color: #fff;
+				color: #c8c8c8;
+				border-radius: 0;
+				padding: 10px 20px 10px 20px;
+				&:hover {
+					color: $purple;
+				}
+			}
+			&.active {
+				border-left: none;
+				a {
+					color: $purple;
+					border-radius: 0;
+					border-right: 2px solid $purple;
+					&:focus, &:hover {
+						background-color: #fff;
+					}
+				}
+			}
+		}
+	}
+	.tips {
+		margin-top: 5px;
+		font-size: 12px;
+		color: #c8c8c8;
+	}
+	.tab-content {
+		width: 80%;
+		margin-left: 20%;
+	}
+	.tab-pane {
+		padding: 15px 20px;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+.panel-group {
+	.panel {
+		border: none;
+		border-bottom: 1px solid #ddd;
+		border-radius: 0;
+	}
+	&:first-child {
+		margin: -15px -20px;
+	}
+	.panel-heading {
+		padding: 0;
+		color: #676a6c;
+		.accordion-toggle {
+			display: block;
+			padding: 10px 15px;
+		}
+		h4 {
+			font-size: 16px;
+			font-weight: bold;
+			padding: 0;
+		}
+	}
+}
+
+.controls {
+	font-size: 25px;
+	a {
+		color: $purple;
+		&:hover {
+			color: darken($purple, 10%);
+		}
+	}
+}
+
+.task-number-controls {
+	margin-top: 20px;
+}
+
+.panel-group .panel+.panel {
+	margin-top: 0;
+}

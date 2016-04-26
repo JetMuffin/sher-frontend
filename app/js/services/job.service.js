@@ -68,11 +68,12 @@ angular.module('sher.job')
             },
 
             // 提交任务
-            submitJob: function(task, callback, errorHandle) {
+            submitJob: function(job, callback, errorHandle) {
+                job = checkFormat(job);
                 $http({
                     method: 'POST',
                     url: API + '/jobs',
-                    data : task,
+                    data : job,
                     headers:{
                         'Accept': 'application/json',
                         'Content-Type': 'application/json; ; charset=UTF-8'
@@ -98,6 +99,15 @@ angular.module('sher.job')
         }
     }]);
 
+function checkFormat(job) {
+    job.cpus = parseFloat(job.cpus);
+    job.mem = parseFloat(job.mem);
+    job.disk = parseFloat(job.disk);
+    for(var i = 0; i < job.tasks.length; i++) {
+        job.tasks[i].scale = parseInt(job.tasks[i].scale);
+    }
+    return job;
+}
 function handleJobs(jobs) {
     jobs.sort(function(a, b) {
         return b.create_time - a.create_time;

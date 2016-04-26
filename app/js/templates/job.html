@@ -1,4 +1,4 @@
-<div id="job" class="animated fadeInRight">
+<div id="job">
 	<h3 class="content-title">
 		{{jobs.length}} Jobs
 	</h3>
@@ -15,6 +15,7 @@
 				    <input type="text" class="form-control" placeholder="Filter" ng-model="search_key" >
 				</div>			
 			</form>	
+			<button class="pull-right btn btn-primary" ng-click="openJobModal()">Create Job</button>
 			<div class="clearfix"></div>		    
 		</div>
 		<div class="job-list col-sm-12">
@@ -32,10 +33,10 @@
 						        <span class="text-danger">Unhealthy</span>
 						    </div>								    		    		
 				    	</td>
-				    	<td at-implicit at-title="tasks" at-sortable at-attribute="tasks.length"></td>
+				    	<td at-implicit at-title="tasks" at-sortable at-attribute="total_task_len"></td>
 				    	<td at-implicit at-title="cpu" at-sortable at-attribute="used_resource.cpus.scalar.value"></td>
 				    	<td at-implicit at-title="mem" at-sortable at-attribute="used_resource.mem.scalar.value"></td>
-				    	<td at-implicit at-title="createtime" at-sortable>{{item.create_time/1000000 | relativeDate}}</td>
+				    	<td at-title="createtime" at-sortable>{{item.create_time/1000000 | relativeDate}}</td>
 				    	<td at-title="progress" at-sortable>
 							<div class="progress">
 	                        	<div style="width: {{(item.total_task_len-item.task_queue_len)/item.total_task_len*100}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{(item.total_task_len-item.task_queue_len)/item.total_task_len*100}}" role="progressbar" class="progress-bar progress-bar-success">

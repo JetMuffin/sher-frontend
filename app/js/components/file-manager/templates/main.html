@@ -1,8 +1,8 @@
 <div ng-controller="FileManagerCtrl" ngf-drop="addForUpload($files)" ngf-drag-over-class="'upload-dragover'" ngf-multiple="true">
-        <button class="btn btn-default btn-sm" ng-click="modal('newfolder') && prepareNewFolder()">
+        <button class="btn btn-default  btn-new-folder" ng-click="modal('newfolder') && prepareNewFolder()">
             <i class="glyphicon glyphicon-plus"></i> {{"new_folder" | translate}}
         </button>
-        <button class="btn btn-default btn-sm" ng-show="config.allowedActions.upload" ng-click="modal('uploadfile')">
+        <button class="btn btn-default btn-upload" ng-show="config.allowedActions.upload" ng-click="modal('uploadfile')">
             <i class="glyphicon glyphicon-cloud-upload"></i> {{"upload_files" | translate}}
         </button>
     <div class="container-fluid">

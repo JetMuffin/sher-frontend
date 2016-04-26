@@ -75,7 +75,7 @@ ins {
 
 .inmodal {
     .modal-header {
-        padding: 15px;
+        padding: 10px 15px;
         text-align: left;
     }
     .modal-title {
@@ -144,12 +144,7 @@ ins {
 }
 
 /* Input */
-.form-control {
-    font-weight: 200;
-    &:focus, &:active, &:visited{
-        border-color: #0e9aef !important;
-    }
-}
+
 
 .duplicable-row {
     div[class^=col-]:last-child .form-group {
