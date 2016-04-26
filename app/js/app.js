@@ -4,12 +4,13 @@
 angular.module('sher', [
   'ui.router',
   'sher.task',
-  'sher.detail',
+  'sher.task.detail',
   'sher.overview',
   'sher.auth',
   'sher.cluster',
   'sher.fs',
   'sher.job',
+  'sher.job.detail',
   'ngRoute',
   'ngCookies',
   'FileManager'
@@ -28,10 +29,10 @@ angular.module('sher', [
         url: "/task?query",
         templateUrl: "/app/js/templates/task.html",
         controller: 'TaskCtrl'
-      }).state("navbar.detail", {
+      }).state("navbar.taskdetail", {
         url: "/task/:taskID",
         templateUrl: "/app/js/templates/task.detail.html",
-        controller: ''
+        controller: 'TaskDetailCtrl'
       }).state("navbar.overview", {
         url: "/overview",
         templateUrl: "/app/js/templates/overview.html",
@@ -40,6 +41,10 @@ angular.module('sher', [
         url: "/job?query",
         templateUrl: "/app/js/templates/job.html",
         controller: 'JobCtrl'
+      }).state("navbar.jobdetail", {
+        url: "/job/:jobID",
+        templateUrl: "/app/js/templates/job.detail.html",
+        controller: ''
       }).state("navbar.node", {
         url: "/node?query",
         templateUrl: "/app/js/templates/cluster.html",

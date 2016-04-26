@@ -56,7 +56,7 @@ function($scope, $http, $timeout, $state, $stateParams, $uibModal, $interval, to
     }
     
     $scope.rowClick = function(taskID){
-		$state.go('navbar.detail',{taskID: taskID});
+		$state.go('navbar.taskdetail',{taskID: taskID});
 	};
 
     // 加载任务, 定时监控

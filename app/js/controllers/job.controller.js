@@ -29,8 +29,8 @@ function($scope, $stateParams, $interval, $uibModal, $state, JobManager) {
     }
 
     // 表格行点击
-    $scope.rowClick = function(taskID){
-		$state.go('navbar.detail',{taskID: taskID});
+    $scope.rowClick = function(jobID){
+		$state.go('navbar.jobdetail',{jobID: jobID});
 	};
 
     // 打开提交任务的模态框

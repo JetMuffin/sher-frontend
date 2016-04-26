@@ -70,6 +70,7 @@ angular.module('sher.job')
             // 提交任务
             submitJob: function(job, callback, errorHandle) {
                 job = checkFormat(job);
+                console.log(job);
                 $http({
                     method: 'POST',
                     url: API + '/jobs',
@@ -100,11 +101,11 @@ angular.module('sher.job')
     }]);
 
 function checkFormat(job) {
-    job.cpus = parseFloat(job.cpus);
-    job.mem = parseFloat(job.mem);
-    job.disk = parseFloat(job.disk);
     for(var i = 0; i < job.tasks.length; i++) {
         job.tasks[i].scale = parseInt(job.tasks[i].scale);
+        job.tasks[i].cpus = parseFloat(job.tasks[i].cpus);
+        job.tasks[i].mem = parseFloat(job.tasks[i].mem);
+        job.tasks[i].disk = parseFloat(job.tasks[i].disk);
     }
     return job;
 }

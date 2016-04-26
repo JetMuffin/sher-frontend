@@ -1,8 +1,8 @@
 'use strict';
 
-var detail = angular.module('sher.detail',['ngMaterial', 'ngMessages', 'chart.js', 'ui.router', 'ngAnimate', 'toastr']);
+var detail = angular.module('sher.task.detail',['ngMessages', 'chart.js', 'ui.router', 'ngAnimate', 'toastr']);
 
-detail.controller("mesCtrl", [
+detail.controller("TaskDetailCtrl", [
 	'$scope', 
 	'$http', 
 	'$stateParams', 
@@ -26,7 +26,7 @@ detail.controller("mesCtrl", [
 		// 定时刷新任务列表
 		var timer = $interval(function() {
 			reload();
-		}, 500);
+		}, 300);
 
 	    // 打开日志的模态对话框
 	    $scope.openLogModal = function (task) {
@@ -69,7 +69,7 @@ detail.controller("mesCtrl", [
 	}
 ]);
 
-detail.controller("cpuCtrl", function ($scope, $http, TaskManager) {
+detail.controller("TaskCpuCtrl", function ($scope, $http, TaskManager) {
 	var watcher = $scope.$watch('refresh_random', function(){
 		if($scope.task) {
 			var data = [];
@@ -105,7 +105,7 @@ detail.controller("cpuCtrl", function ($scope, $http, TaskManager) {
     })       
 });
 
-detail.controller("memCtrl", function ($scope, $http) {
+detail.controller("TaskMemCtrl", function ($scope, $http) {
 	var oneMegabyte = 1024 * 1024;
 	var oneGigabyte = 1024 * oneMegabyte;	
 	var watcher = $scope.$watch('refresh_random', function(){
@@ -140,27 +140,24 @@ detail.controller("memCtrl", function ($scope, $http) {
     })   
 });
 
-// 日志模块对话框控制器
-var LogModalCtrl = function ($scope, $uibModalInstance, TaskManager, task) {
-    // 默认在logtab下
-    $scope.logTab = 'stderr';
-    consoleLog('stderr')
-
-    $scope.console = function(file) {
-        consoleLog(file)
-    };
-
-    $scope.refresh = function(file) {
-        consoleLog(file)
-    }
-
-    function consoleLog(file) {
-        $scope.logTab = file;
-        TaskManager.getTaskFile(task.id, file, function(response){
+detail.controller("TaskLogCtrl", function ($scope, $stateParams, TaskManager) {
+    var reload = function (query) {
+        TaskManager.getTaskFile($stateParams.taskID, 'stderr', function(response){
             $scope.logs = response.message.split('\n');
         });
-    }
-};
+    }			
+    reload();
+});
+
+
+detail.controller("TaskOutputCtrl", function ($scope, $stateParams, TaskManager) {
+    var reload = function (query) {
+        TaskManager.getTaskFile($stateParams.taskID, 'stdout', function(response){
+            $scope.output = response.message.split('\n');
+        });
+    }			
+    reload();
+});
 
 function getInterval(current, previous) {
 	var cur = new Date(current);

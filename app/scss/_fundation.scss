@@ -1,4 +1,5 @@
 $content-bg: #232937;
+$border-color: darken(#505460, 5%);
 
 html,body {
   height: 100%;
@@ -64,6 +65,17 @@ h1, h2, h3, h4, h5 {
   color: $yellow;
 }
 
+.text-purple {
+  color: $purple;
+}
+
+.text-pink {
+  color: $pink;
+}
+
+.text-blue {
+  color: $blue;
+}
 .btn-primary {
     background-color: $purple;
     border-color: $purple;
@@ -88,4 +100,73 @@ h1, h2, h3, h4, h5 {
     &:focus, &:active, &:visited{
         border-color: $purple !important;
     }
+}
+
+
+.dcc-list {
+  th {
+    background-color: #2d3340;
+    border-bottom: 1px solid #3F4551 !important;
+    text-transform: uppercase;
+    padding: 12px !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: $gray;
+    border-radius: 0!important;
+  }
+  td {
+    background-color: $content-bg;
+    border-color: $border-color !important;
+    padding: 12px !important;
+  }
+  .progress {
+    margin: 0;
+    height: 8px;
+      background-color: #1c202b;
+    .progress-bar {
+      height: 8px;
+      background-color: #2D4351;
+    }
+  }
+}
+
+.dcc-tab {
+  .nav-tabs {
+    border-color: $gray;
+    li {
+      cursor: pointer;
+    }
+  }
+  .nav-tabs>li>a {
+    border: none;
+    cursor: pointer;
+  }
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border: none;
+    border-bottom: 3px solid $purple;
+    color: #fff;
+  }
+  .nav-tabs>li>a:hover, .nav-tabs>li>a:hover {
+    background: 0 0;
+    border: none;
+    color: #fff;
+  }
+  .tab-pane {
+    padding: 20px 0;
+  }
+}
+
+.dcc-timeline {
+  &:before {
+    background-color: #3d4350 !important;
+  }
+  .vertical-timeline-content {
+    background-color: #282e3c;
+    .vertical-date small {
+      color: #929292;
+    }
+    &::before {
+      border-right: 7px solid #272d3a;
+    }
+  }
 }

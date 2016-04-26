@@ -76,3 +76,55 @@ $border-color: darken(#505460, 5%);
 		}
 	}
 }
+
+.job-item-image {
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	background: #626875;
+	float: left;
+	margin-right: 10px;
+}
+
+.job-resource {
+	margin-top: 10px;
+	padding: 10px 0;
+	.resource-detail {
+		float: left;
+	}
+	.resource-item {
+		margin-right: 25px;
+		float: left;
+	}
+	.resource-icon {
+		float: left;
+		margin-right: 10px;
+	}
+	.resource-name {
+		font-weight: bold;
+		font-size: 1px;
+	}
+	.resource-stat {
+		font-size: 13px;
+	}
+}
+
+.job-tab {
+	margin-top: 20px;
+}
+
+#job {
+	.job-item-image {
+		width: 48px;
+		height: 48px;
+	}
+	.content-title {
+		.addon {
+			font-size: 13px;
+			margin-top: 5px;
+		}
+		.text-healthy, .text-danger {
+			margin-right: 5px;
+		}
+	}
+}

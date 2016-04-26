@@ -1,4 +1,4 @@
-<div id="job">
+<div id="job" ng-controller="JobCtrl">
 	<h3 class="content-title">
 		{{jobs.length}} Jobs
 	</h3>
@@ -18,12 +18,12 @@
 			<button class="pull-right btn btn-primary" ng-click="openJobModal()">Create Job</button>
 			<div class="clearfix"></div>		    
 		</div>
-		<div class="job-list col-sm-12">
+		<div class="job-list dcc-list col-sm-12">
 			<table class="table table-striped" at-table at-list="jobs" at-config="config">
 				<thead>
 				</thead>
 				<tbody>
-					<tr>
+					<tr ng-click="rowClick(item.id)">
 				    	<td at-implicit at-sortable at-attribute="name" width="200" at-initial-sorting="asc"></td>
 				    	<td at-title="health" at-sortable ng-switch="item.health">
 			    		    <div ng-switch-when="Healthy">
@@ -34,7 +34,7 @@
 						    </div>								    		    		
 				    	</td>
 				    	<td at-implicit at-title="tasks" at-sortable at-attribute="total_task_len"></td>
-				    	<td at-implicit at-title="cpu" at-sortable at-attribute="used_resource.cpus.scalar.value"></td>
+				    	<td at-title="cpu" at-sortable>{{item.used_resource.cpus.scalar.value|number:2}}</td>
 				    	<td at-implicit at-title="mem" at-sortable at-attribute="used_resource.mem.scalar.value"></td>
 				    	<td at-title="createtime" at-sortable>{{item.create_time/1000000 | relativeDate}}</td>
 				    	<td at-title="progress" at-sortable>

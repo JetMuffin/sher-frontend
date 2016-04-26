@@ -106,9 +106,10 @@ $sidebar-menu-active-border: #793ac6;
       }
 
       &:hover {
+        box-shadow: inset 2px 0px 0px 0px $purple;
         text-decoration: none;
       	background-color: $sidebar-menu-active-bg;
-		color: $purple;
+    		color: #fff;
 
         .sidebar-menu-item-label {
 
@@ -145,7 +146,7 @@ $sidebar-menu-active-border: #793ac6;
       }
 
       a {
-        color: $purple;
+        color: #ffffff;
 
         .sidebar-menu-item-label {
           color: $purple;
@@ -175,7 +176,7 @@ $sidebar-menu-active-border: #793ac6;
 	text-align: center;
 	.version-info {
 	    padding: 15px 0;
-	    border-bottom: 1px solid $gray;
+	    border-bottom: 1px solid #313131;
 	    p {
 	      opacity: 0.5;
 	    }		
