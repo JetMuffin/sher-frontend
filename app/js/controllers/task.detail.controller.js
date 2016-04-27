@@ -131,7 +131,8 @@ detail.controller("TaskMemCtrl", function ($scope, $http) {
     $scope.options = {
       animation: false,
       pointDot: false,
-      datasetStrokeWidth: 0.5
+      datasetStrokeWidth: 0.5,
+      backgroundColor: "#fff",
     };
 
     // 离开页面时释放监听

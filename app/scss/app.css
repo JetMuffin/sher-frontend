@@ -1036,6 +1036,17 @@ ins {
   font-size: 25px;
   top: 10px; }
 
+#task-detail .log-line {
+  padding: 5px 10px;
+  border-radius: 2px;
+  color: #b8b9bf;
+  -webkit-transition: background-color,ease,.2s;
+  -moz-transition: background-color,ease,.2s;
+  transition: background-color,ease,.2s; }
+  #task-detail .log-line:hover {
+    background-color: #2c3342;
+    color: #fff; }
+
 .login-header {
   text-align: center; }
   .login-header h1 {
@@ -1119,7 +1130,7 @@ html, body {
   height: 100%; }
 
 body {
-  background-color: #232937; }
+  background-color: #232835; }
 
 .clickable {
   cursor: pointer; }
@@ -1202,17 +1213,15 @@ h1, h2, h3, h4, h5 {
   border-radius: 0 !important; }
 
 .dcc-list td {
-  background-color: #232937;
+  background-color: #232835;
   border-color: #444852 !important;
   padding: 12px !important; }
 
 .dcc-list .progress {
   margin: 0;
-  height: 8px;
-  background-color: #1c202b; }
+  height: 8px; }
   .dcc-list .progress .progress-bar {
-    height: 8px;
-    background-color: #2D4351; }
+    height: 8px; }
 
 .dcc-tab .nav-tabs {
   border-color: #82848f; }
@@ -1403,6 +1412,14 @@ h1, h2, h3, h4, h5 {
   font-size: 20px;
   font-weight: normal;
   color: #eeeeee; }
+
+.with-header {
+  margin-top: 50px; }
+
+.header {
+  margin-left: 200px;
+  background-color: #9056df;
+  top: 0; }
 
 .allocation-chart .chart-label {
   color: #82848f; }
@@ -1602,21 +1619,8 @@ h1, h2, h3, h4, h5 {
 .job-filter .btn-group {
   float: left;
   margin-right: 10px; }
-  .job-filter .btn-group .btn {
-    background-color: #232835;
-    border-color: #444852; }
-    .job-filter .btn-group .btn.selected {
-      background-color: #3c4457; }
-      .job-filter .btn-group .btn.selected .badge-white {
-        background-color: #fff; }
-    .job-filter .btn-group .btn:focus, .job-filter .btn-group .btn:active, .job-filter .btn-group .btn:visited {
-      color: #fff; }
   .job-filter .btn-group .fa-circle {
     margin-right: 8px; }
-  .job-filter .btn-group .badge-white {
-    background-color: #626875;
-    color: #232836;
-    margin-left: 8px; }
 
 .job-filter .job-search {
   float: left;
@@ -1625,21 +1629,19 @@ h1, h2, h3, h4, h5 {
   .job-filter .job-search span {
     position: absolute;
     left: 8px;
-    top: 8px;
-    color: #444852; }
+    top: 8px; }
+
+.job-filter .badge-white {
+  margin-left: 8px; }
 
 .job-filter .form-control {
-  background-color: #232835;
   font-weight: normal;
-  border-color: #444852;
   border-radius: 3px;
   padding-left: 25px; }
   .job-filter .form-control:focus, .job-filter .form-control:active, .job-filter .form-control:visited {
     border-color: #9056df !important; }
 
 .job-list th {
-  background-color: #2d3340;
-  border-bottom: 1px solid #3F4551 !important;
   text-transform: uppercase;
   padding: 12px !important;
   border-top-left-radius: 5px;
@@ -1647,17 +1649,13 @@ h1, h2, h3, h4, h5 {
   color: #82848f; }
 
 .job-list td {
-  background-color: #232835;
-  border-color: #444852 !important;
   padding: 12px !important; }
 
 .job-list .progress {
   margin: 0;
-  height: 8px;
-  background-color: #1c202b; }
+  height: 8px; }
   .job-list .progress .progress-bar {
-    height: 8px;
-    background-color: #2D4351; }
+    height: 8px; }
 
 .job-item-image {
   width: 40px;
@@ -1924,5 +1922,98 @@ h1, h2, h3, h4, h5 {
 #task-detail .label {
   margin-right: 20px; }
 
+#task-detail .basic-information .dl-horizontal dt {
+  color: #8e929b; }
+
 .task-tab {
   margin-top: 20px; }
+
+.light-ui {
+  background-color: #fefefe; }
+  .light-ui .main-wrapper {
+    background-color: #fefefe;
+    color: #000; }
+  .light-ui .sidebar {
+    background-color: #2f323a; }
+    .light-ui .sidebar .sidebar-menu .sidebar-menu-item a {
+      color: #fff; }
+  .light-ui .content-title {
+    color: #000; }
+  .light-ui .nav > li.active > a {
+    color: #000; }
+  .light-ui .nav-tabs > li.active > a, .light-ui .nav-tabs > li.active > a:focus, .light-ui .nav-tabs > li.active > a:hover {
+    color: #000; }
+  .light-ui .nav-tabs > li > a:hover, .light-ui .nav-tabs > li > a:hover {
+    color: #000; }
+  .light-ui .dcc-tab .nav-tabs {
+    border-color: #eee; }
+  .light-ui .dcc-list th {
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #dadada !important;
+    padding: 12px !important;
+    color: #333;
+    border-radius: 0 !important; }
+  .light-ui .dcc-list td {
+    background-color: #fff;
+    border-color: #eee !important;
+    padding: 12px !important;
+    color: #727681; }
+  .light-ui .box .box-title {
+    background-color: rgba(237, 239, 245, 0.6);
+    border-bottom: 1px solid #ddd; }
+  .light-ui .box .box-content {
+    background: rgba(237, 239, 245, 0.6); }
+  .light-ui .log-line {
+    color: #666 !important; }
+  .light-ui .log-line:hover {
+    background-color: #eee !important;
+    color: #333 !important; }
+
+.dark-ui .btn-default {
+  background-color: #232835; }
+  .dark-ui .btn-default:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6); }
+
+.dark-ui .job-filter .btn-group .btn {
+  background-color: #232835;
+  border-color: #444852; }
+  .dark-ui .job-filter .btn-group .btn.selected {
+    background-color: #3c4457; }
+    .dark-ui .job-filter .btn-group .btn.selected .badge-white {
+      background-color: #fff; }
+  .dark-ui .job-filter .btn-group .btn:focus, .dark-ui .job-filter .btn-group .btn:active, .dark-ui .job-filter .btn-group .btn:visited {
+    color: #fff; }
+
+.dark-ui .job-filter .btn-group .badge-white {
+  background-color: #626875;
+  color: #232836;
+  margin-left: 8px; }
+
+.dark-ui .job-filter .job-search span {
+  color: #444852; }
+
+.dark-ui .job-filter .form-control {
+  background-color: #232835;
+  border-color: #444852; }
+  .dark-ui .job-filter .form-control:focus, .dark-ui .job-filter .form-control:active, .dark-ui .job-filter .form-control:visited {
+    border-color: #9056df !important; }
+
+.dark-ui .job-list th {
+  background-color: #2d3340;
+  border-bottom: 1px solid #3F4551 !important;
+  color: #82848f; }
+
+.dark-ui .job-list td {
+  background-color: #232835;
+  border-color: #444852 !important; }
+
+.dark-ui .job-list .progress {
+  background-color: #1c202b; }
+  .dark-ui .job-list .progress .progress-bar {
+    background-color: #2D4351; }
+
+.dark-ui .dcc-list .progress {
+  background-color: #1c202b; }
+  .dark-ui .dcc-list .progress .progress-bar {
+    background-color: #2D4351; }

@@ -3,11 +3,11 @@
 
 var sher = angular.module('sher');
 
-sher.filter('logFilter', function(){
+sher.filter('formatLogs', function(){
 
-    function logFilter(input,reference){
-        console.log(input);
+    function handle(input,reference){
+        return input;
     }
 
-    return "";
+    return handle;
 });

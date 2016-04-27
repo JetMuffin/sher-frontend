@@ -48,5 +48,19 @@
 	}
 }
 
+#task-detail {
+	.log-line {
+		padding: 5px 10px;
+	    border-radius: 2px;
+	    color: lighten($gray, 20);
+	    -webkit-transition: background-color,ease,.2s;
+	    -moz-transition: background-color,ease,.2s;
+	    transition: background-color,ease,.2s;
+		&:hover {
+			background-color: lighten(#282e3c, 2%);
+			color: #fff;
+		}	    
+	}
+}
 
 

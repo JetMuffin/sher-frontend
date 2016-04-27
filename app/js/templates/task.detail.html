@@ -35,35 +35,36 @@
     	<uib-tab index="0" heading="Detail">
     		<div class="row basic-information">
 				<dl class="dl-horizontal">
-					<dt>ID</dt>
+					<dt>ID:</dt>
 					<dd ng-bind="task.id"></dd>
-					<dt>Image</dt>
+					<dt>Image:</dt>
 					<dd ng-bind="task.docker_image"></dd>
-					<dt>Cpus</dt>
+					<dt>Cpus:</dt>
 					<dd ng-bind="task.cpus"></dd>
-					<dt>Node</dt>
+					<dt>Node:</dt>
 					<dd ng-bind="task.slave_hostname"></dd>
-					<dt>Status</dt>
+					<dt>Status:</dt>
 					<dd ng-bind="task.status"><span class="label label-{{task.label_class}}"></span></dd>
-					<dt>Create time</dt>
+					<dt>Create time:</dt>
 					<dd>{{task.create_time/1000000 | relativeDate}}</dd>
-					<dt>Mem</dt>
+					<dt>Memory:</dt>
 					<dd ng-bind="task.mem"></dd>
-					<dt>Ports</dt>
+					<dt>Ports:</dt>
 					<dd>
 						<ul>
 							<li ng-repeat="port in task.port_mappings">
 								<a ng-href="http://{{task.slave_host}}:{{port.host_port}}" target="_blank">{{port.host_port}}</a>
 							</li>
 						</ul>
-					</dd>								
+					</dd>	
+					<dt>Slave IP:</dt>
+					<dd>{{task.slave_host}}</dd>
+					<dt>Slave Hostname:</dt>
+					<dd>{{task.slave_hostname}}</dd>					
+					<dt>SlaveID:</dt>
+					<dd>{{task.slave_id}}</dd>							
 				</dl>  
 	  		</div>
-		</uib-tab>
-		<uib-tab index="1" heading="Docker">
-			<pre>
-				<code class="hljs json">{{task.docker_json}}</code>
-			</pre>
 		</uib-tab>
 		<uib-tab index="2" heading="Monitor">
 			<div class="col-sm-12">
@@ -91,14 +92,16 @@
 		<uib-tab index="3" heading="Log">
 			<div class="col-sm-12">
 				<div ng-controller="TaskLogCtrl">
-					{{logs}}
+					<div ng-repeat="log in logs" class="log-line">{{log|formatLogs}}</div>
+					<button class="btn btn-sm pull-right btn-primary">Download</button>
 				</div>
 			</div>
 		</uib-tab>
 		<uib-tab index="4" heading="Output">
 			<div class="col-sm-12">
 				<div ng-controller="TaskOutputCtrl">
-					{{output}}
+					<div ng-repeat="out in output track by $index" class="log-line">{{out|formatLogs}}</div>
+					<button class="btn btn-sm pull-right btn-primary">Download</button>
 				</div>
 			</div>
 		</uib-tab>
