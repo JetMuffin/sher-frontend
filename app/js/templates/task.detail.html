@@ -1,4 +1,5 @@
-<div id="task-detail" ng-controller="TaskDetailCtrl">
+<a back-button class="btn-back"><i class="fa fa-chevron-left"></i>Back</a>
+<div id="task-detail" ng-controller="TaskDetailCtrl" class="fadeInRight animated">
 	<h3 class="content-title">
 		{{task.id}}
 		<div class="addon">
@@ -105,6 +106,13 @@
 				</div>
 			</div>
 		</uib-tab>
+		<uib-tab index="5" heading="File">
+			<div class="col-sm-12">
+				<div>
+					<angular-filemanager></angular-filemanager>
+				</div>
+			</div>
+		</uib-tab>		
 	</uib-tabset>
 	<div class="clearfix"></div>
 </div>

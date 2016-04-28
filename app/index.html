@@ -13,7 +13,7 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="lib/angular-material/angular-material.css">
+  <link rel="stylesheet" href="lib/angular-material/angular-material.min.css">
   <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css">
   <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.css">
   <!-- <link rel="stylesheet" href="lib/angular-filemanager/dist/angular-filemanager.min.css"> -->
@@ -23,7 +23,20 @@
   <link rel="stylesheet" href="css/app.min.css">
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body class="fixed-sidebar fixed-header light-ui">
+<body class="fixed-sidebar fixed-header dark-ui with-header">
+  <div ng-view>
+    <div class="sk-spinner sk-spinner-cube-grid loading-spinner">
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+        <div class="sk-cube"></div>
+    </div>    
+  </div>
   <div ui-view></div>
 
   <!-- bower:js -->

@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('sher', [
+var app = angular.module('sher', [
   'ui.router',
   'sher.task',
   'sher.task.detail',
@@ -16,14 +16,14 @@ angular.module('sher', [
   'FileManager'
 ])
 
-.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
 	  .state("login", {
         url: "/login",
         templateUrl: "/app/js/templates/login.html",
         controller: 'LoginController'
       }).state("navbar", {
-        templateUrl: "/app/js/templates/navbar.html"
+        templateUrl: "/app/js/templates/navbar.html",
       })
       .state("navbar.task", {
         url: "/task?query",
@@ -36,11 +36,11 @@ angular.module('sher', [
       }).state("navbar.overview", {
         url: "/overview",
         templateUrl: "/app/js/templates/overview.html",
-        controller: ''
+        controller: '',
       }).state("navbar.job", {
         url: "/job?query",
         templateUrl: "/app/js/templates/job.html",
-        controller: 'JobCtrl'
+        controller: 'JobCtrl',
       }).state("navbar.jobdetail", {
         url: "/job/:jobID",
         templateUrl: "/app/js/templates/job.detail.html",
@@ -48,18 +48,19 @@ angular.module('sher', [
       }).state("navbar.node", {
         url: "/node?query",
         templateUrl: "/app/js/templates/cluster.html",
-        controller: 'ClusterCtrl'
+        controller: 'ClusterCtrl',
       }).state("navbar.filesystem", {
         url: "/fs",
         templateUrl: "/app/js/templates/fs.html",
-        controller: 'FileSystemCtrl'
+        controller: 'FileSystemCtrl',
       });
   //$locationProvider.html5Mode({enabled:true, requireBase:false});
   // $locationProvider.html5Mode({enabled:true});
   $urlRouterProvider.otherwise('/login');
 }])
 
-.run(['$rootScope', '$state', '$cookieStore', '$http',
+
+app.run(['$rootScope', '$state', '$cookieStore', '$http',
 		function ($rootScope, $state, $cookieStore, $http) {
 			// keep user logged in after page refresh
 			$rootScope.globals = $cookieStore.get('globals') || {};

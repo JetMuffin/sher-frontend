@@ -4,7 +4,7 @@
             <i class="glyphicon glyphicon-folder-open mr2"></i>
         </a>
     </li>
-    <li ng-repeat="(key, dir) in fileNavigator.currentPath track by key" ng-class="{'active':$last}" class="animated fast fadeIn">
+    <li ng-repeat="(key, dir) in fileNavigator.currentPath track by key" ng-class="{'active':$last}" class="">
         <a href="" ng-show="!$last" ng-click="fileNavigator.goTo(key)">
             <i class="glyphicon glyphicon-folder-open mr2"></i> {{dir}}
         </a>

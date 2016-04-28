@@ -701,11 +701,6 @@ h1, h2, h3, h4, h5, p {
   .details-tab .md-content .md-tabs {
     border: none; }
 
-.fixed-header .header {
-  position: fixed;
-  width: 100%;
-  z-index: 1000; }
-
 .nodata {
   position: absolute;
   top: 40px; }
@@ -719,7 +714,7 @@ html, body {
   height: 100%; }
 
 body {
-  background-color: #232835; }
+  background-color: #232937; }
 
 .clickable {
   cursor: pointer; }
@@ -772,12 +767,12 @@ h1, h2, h3, h4, h5 {
   color: #3188ff; }
 
 .btn-primary {
-  background-color: #9056df;
-  border-color: #9056df;
+  background-color: #8241db;
+  border-color: #8241db;
   color: #FFF; }
   .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
-    background-color: #8241db;
-    border-color: #8241db; }
+    background-color: #742bd7;
+    border-color: #742bd7; }
 
 .btn-primary.active[disabled], .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
   background-color: #ac81e7;
@@ -802,7 +797,7 @@ h1, h2, h3, h4, h5 {
   border-radius: 0 !important; }
 
 .dcc-list td {
-  background-color: #232835;
+  background-color: #232937;
   border-color: #444852 !important;
   padding: 12px !important; }
 
@@ -844,10 +839,27 @@ h1, h2, h3, h4, h5 {
   .dcc-timeline .vertical-timeline-content::before {
     border-right: 7px solid #272d3a; }
 
+.btn-back {
+  color: #fff;
+  font-size: 15px;
+  position: fixed;
+  top: 14px;
+  z-index: 1002; }
+  .btn-back i {
+    margin-right: 8px; }
+  .btn-back:hover {
+    color: #fff; }
+
+.loading-spinner {
+  position: absolute;
+  top: 48%;
+  left: 50%; }
+  .loading-spinner .sk-cube {
+    background-color: #9e6be3; }
+
 .header {
   height: 45px;
-  background-color: #13161d;
-  padding: 10px;
+  background-color: #9056df;
   position: relative; }
   .header .brand {
     font-weight: normal;
@@ -862,6 +874,38 @@ h1, h2, h3, h4, h5 {
     font-weight: 200; }
     .header .tab-title h3 {
       font-weight: normal; }
+
+.fixed-header .header {
+  position: fixed;
+  width: 100%;
+  z-index: 1001; }
+
+.header {
+  margin-left: 0;
+  background-color: #9056df;
+  z-index: 1001;
+  top: 0; }
+  .header .brand {
+    height: 45px;
+    width: 200px;
+    background-color: #8241db;
+    color: #fff;
+    overflow: hidden;
+    text-align: center; }
+    .header .brand img {
+      width: 45px;
+      padding: 5px;
+      vertical-align: middle;
+      display: inline-block; }
+    .header .brand h3 {
+      display: inline-block;
+      height: 45px;
+      line-height: 45px;
+      vertical-align: middle;
+      color: #fff; }
+
+.header .header-menu ul li a {
+  color: #fff; }
 
 .mail-tools button span {
   font-size: 20px; }
@@ -1259,7 +1303,7 @@ ins {
   position: fixed;
   width: 200px;
   height: 100%;
-  background-color: #1c202b;
+  background-color: #fff;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
   z-index: 1000;
@@ -1270,7 +1314,7 @@ ins {
 
 .sidebar-top {
   height: 45px;
-  background-color: #13161d; }
+  background-color: #9056df; }
 
 /*
 	sidebar-header
@@ -1313,7 +1357,7 @@ ins {
 .sidebar-menu {
   padding: 0px; }
   .sidebar-menu .sidebar-menu-item {
-    color: #a8a8a8;
+    color: #727272;
     margin: 0px;
     position: relative; }
     .sidebar-menu .sidebar-menu-item .sidebar-menu-item-label {
@@ -1328,7 +1372,7 @@ ins {
       height: 23px;
       vertical-align: middle; }
     .sidebar-menu .sidebar-menu-item a {
-      color: #a8a8a8;
+      color: #727272;
       display: block;
       padding: 12px 25px;
       cursor: pointer; }
@@ -1337,8 +1381,8 @@ ins {
       .sidebar-menu .sidebar-menu-item a:hover {
         box-shadow: inset 2px 0px 0px 0px #9056df;
         text-decoration: none;
-        background-color: #262b3a;
-        color: #fff; }
+        background-color: #faf7fe;
+        color: #9056df; }
         .sidebar-menu .sidebar-menu-item a:hover .sidebar-menu-item-icon {
           opacity: 0.8;
           filter: alpha(opacity=80); }
@@ -1349,12 +1393,12 @@ ins {
           filter: alpha(opacity=60); }
     .sidebar-menu .sidebar-menu-item.selected {
       box-shadow: inset 2px 0px 0px 0px #9056df;
-      background-color: #262b3a; }
+      background-color: #faf7fe; }
       .sidebar-menu .sidebar-menu-item.selected .sidebar-menu-item-icon {
         opacity: 1;
         filter: alpha(opacity=100); }
       .sidebar-menu .sidebar-menu-item.selected a {
-        color: #ffffff; }
+        color: #9056df; }
         .sidebar-menu .sidebar-menu-item.selected a .sidebar-menu-item-label {
           color: #9056df; }
         .sidebar-menu .sidebar-menu-item.selected a:hover .sidebar-menu-item-icon {
@@ -1374,6 +1418,9 @@ ins {
     border-bottom: 1px solid #313131; }
     .sidebar-footer .version-info p {
       opacity: 0.5; }
+
+.with-header .sidebar {
+  margin-top: 45px; }
 
 .user-dropdown {
   padding: 10px 0;
@@ -1404,9 +1451,9 @@ ins {
 .main-wrapper {
   -webkit-transition: all .5s;
   transition: all .5s;
-  background-color: #232835;
+  background-color: #232937;
   padding: 15px 35px;
-  color: #eeeeee;
+  color: #fff;
   height: 100%;
   width: 100%;
   padding-left: 235px; }
@@ -1415,15 +1462,10 @@ ins {
   padding: 20px 0;
   font-size: 20px;
   font-weight: normal;
-  color: #eeeeee; }
+  color: #fff; }
 
-.with-header {
-  margin-top: 30px; }
-
-.header {
-  margin-left: 200px;
-  background-color: #13161d;
-  top: 0; }
+.with-header .main-wrapper {
+  padding-top: 45px; }
 
 .allocation-chart .chart-label {
   color: #82848f; }
@@ -1446,7 +1488,7 @@ ins {
   margin-top: 10px; }
 
 .job-box {
-  min-height: 328px; }
+  min-height: 332px; }
   .job-box .job-title {
     padding: 5px 0 10px 0; }
   .job-box .job-stat {
@@ -1831,9 +1873,11 @@ ins {
 #fs .table-files td {
   border-color: #444852 !important; }
   #fs .table-files td a {
-    color: #eee; }
+    color: #eee;
+    font-weight: 300; }
   #fs .table-files td i {
-    color: #aaa; }
+    color: #aaa;
+    margin-right: 2px; }
 
 #fs .dropdown-menu.dropdown-right-click > li > a {
   color: #666; }
@@ -1887,12 +1931,18 @@ ins {
   color: #000; }
 
 #fs .btn-new-folder {
-  background-color: #2aa164;
-  border-color: #2aa164; }
+  background-color: #343b4b;
+  border-color: #444852; }
+  #fs .btn-new-folder:hover {
+    background-color: #3c4457;
+    color: #fff; }
 
 #fs .btn-upload {
-  background-color: #9056df;
-  border-color: #9056df; }
+  background-color: #343b4b;
+  border-color: #444852; }
+  #fs .btn-upload:hover {
+    background-color: #3c4457;
+    color: #fff; }
 
 #fs .modal-body .panel .panel-body {
   padding: 15px; }
@@ -1902,6 +1952,9 @@ ins {
 
 .mr5 {
   margin-right: 5px; }
+
+.mr2 {
+  margin-right: 2px; }
 
 .dcci {
   background-image: url("../images/icons-medium@2x.png");
@@ -1936,6 +1989,7 @@ ins {
   background-color: #fefefe; }
   .light-ui .main-wrapper {
     background-color: #fefefe;
+    padding-top: 45px;
     color: #000; }
   .light-ui .sidebar {
     background-color: #2f323a; }
@@ -1973,14 +2027,8 @@ ins {
     background-color: #eee !important;
     color: #333 !important; }
 
-.dark-ui .btn-default {
-  background-color: #232835; }
-  .dark-ui .btn-default:hover {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.6); }
-
 .dark-ui .job-filter .btn-group .btn {
-  background-color: #232835;
+  background-color: #232937;
   border-color: #444852; }
   .dark-ui .job-filter .btn-group .btn.selected {
     background-color: #3c4457; }
@@ -1998,7 +2046,7 @@ ins {
   color: #444852; }
 
 .dark-ui .job-filter .form-control {
-  background-color: #232835;
+  background-color: #232937;
   border-color: #444852; }
   .dark-ui .job-filter .form-control:focus, .dark-ui .job-filter .form-control:active, .dark-ui .job-filter .form-control:visited {
     border-color: #9056df !important; }
@@ -2009,7 +2057,7 @@ ins {
   color: #82848f; }
 
 .dark-ui .job-list td {
-  background-color: #232835;
+  background-color: #232937;
   border-color: #444852 !important; }
 
 .dark-ui .job-list .progress {

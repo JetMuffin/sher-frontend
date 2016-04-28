@@ -1,5 +1,5 @@
 $purple:		#9056df;
-$white: #eeeeee;
+$white: #fff;
 $gray: #82848f;
 $green: #34ca7d;
 $red: #f74863;
@@ -8,18 +8,19 @@ $blue: #3188ff;
 $pink: #f6478f;
 
 
-$content-bg: #232835;
+$content-bg: #232937;
 
 
-$sidebar-bg: #1c202b;
+$sidebar-bg: #fff;
 $sidebar-header-ip-color: #a364e6;
 $sidebar-header-image-bg: #d2d8df;
 
-$sidebar-menu-color:  #a8a8a8;
-$sidebar-menu-active-color: #905ae4;
-$sidebar-menu-active-bg: lighten($sidebar-bg, 5%);
+$sidebar-menu-color:  #727272;
+$sidebar-menu-active-color: $purple;
+$sidebar-menu-active-bg: #faf7fe;
 $sidebar-menu-active-border: #793ac6;
 $sidebar-width: 200px;
 
 $header-height: 45px;
-$header-bg: #13161d;
+$header-margin-left: 0;
+$header-bg: $purple;

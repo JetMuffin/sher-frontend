@@ -54,9 +54,11 @@ $border-color: darken(#505460, 5%);
 			border-color: $border-color !important;
 			a {
 				color: #eee;
+				font-weight: 300;
 			}
 			i {
 				color: #aaa;
+				margin-right: 2px;
 			}
 		}
 	}
@@ -119,12 +121,20 @@ $border-color: darken(#505460, 5%);
 		color: #000
 	}
 	.btn-new-folder {
-		background-color: darken($green, 10%);
-		border-color: darken($green, 10%);
+		background-color: darken(#3c4457, 4%);
+		border-color: #444852;
+		&:hover {
+			background-color: #3c4457;
+			color: #fff;
+		}
 	}
 	.btn-upload {
-		background-color: $purple;
-		border-color: $purple;
+		background-color: darken(#3c4457, 4%);
+		border-color: #444852;
+		&:hover {
+			background-color: #3c4457;
+			color: #fff;
+		}		
 	}
 	.modal-body .panel .panel-body {
 		padding: 15px;
@@ -137,3 +147,10 @@ $border-color: darken(#505460, 5%);
 .mr5 {
 	margin-right: 5px;
 }
+
+.mr2 {
+	margin-right: 2px;
+}
+// .btn-block:hover {
+// 	background-color: #232937 !important;
+// }
