@@ -11,6 +11,11 @@
 @import 'responsive';
 
 
+// fundation
+@import 'variables';
+@import 'fundation';
+
+
 @import 'header';
 @import 'mail';
 @import 'form';
@@ -21,9 +26,6 @@
 @import 'overview';
 @import 'cluster';
 
-// fundation
-@import 'variables';
-@import 'fundation';
 
 // modules
 @import 'sidebar';

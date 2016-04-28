@@ -23,12 +23,12 @@ $content-title-padding: 20px 0;
 }
 
 .with-header {
-    margin-top: 50px;
+    margin-top: $header-height - 15;
 }
 
 .header {
     margin-left: $sidebar-width;
-    background-color: $purple;
+    background-color: $header-bg;
     top: 0;
 }
 
