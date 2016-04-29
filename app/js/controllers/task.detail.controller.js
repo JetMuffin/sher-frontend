@@ -160,6 +160,7 @@ detail.controller("TaskOutputCtrl", function ($scope, $stateParams, TaskManager)
     reload();
 });
 
+
 function getInterval(current, previous) {
 	var cur = new Date(current);
 	var prev = new Date(previous);

@@ -75,6 +75,13 @@ var JobModalCtrl = function ($scope, $uibModalInstance, toastr, JobManager) {
         volumes: ["/"]
     }
 
+    $scope.options = {
+        breadcrumb: false,
+        optionButton: false,
+        showSizeForDirectories: true, 
+        viewTable: false,
+        optionButton: false,       
+    }
     $scope.addTask = function() {
         $scope.job.tasks.push({
             scale: 1,
@@ -109,4 +116,9 @@ var JobModalCtrl = function ($scope, $uibModalInstance, toastr, JobManager) {
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.open = function() {
+        $scope.openNavigator([]);
+        console.log($scope.modal);
+    }
 };

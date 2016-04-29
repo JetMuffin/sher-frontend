@@ -24,6 +24,8 @@
             searchForm: false,
             sidebar: false,
             breadcrumb: true,
+            optionButton: true,
+            viewTable: true,
             allowedActions: {
                 upload: true,
                 rename: true,

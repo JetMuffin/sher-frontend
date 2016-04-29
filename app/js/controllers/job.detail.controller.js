@@ -38,3 +38,26 @@ detail.controller("JobDetailCtrl", [
 	    }) 	    
 	}
 ]);
+
+detail.controller("JobFileCtrl", function ($scope, $stateParams, TaskManager) {
+    $scope.options = {
+    	breadcrumb: true,
+    	optionButton: false,
+    	showSizeForDirectories: true,
+        allowedActions: {
+            upload: true,
+            rename: false,
+            move: false,
+            copy: false,
+            edit: false,
+            changePermissions: false,
+            compress: false,
+            compressChooseName: false,
+            extract: false,
+            download: true,
+            downloadMultiple: true,
+            preview: true,
+            remove: true
+        },    	
+    }
+});

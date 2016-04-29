@@ -1,5 +1,5 @@
 <a back-button class="btn-back"><i class="fa fa-chevron-left"></i>Back</a>
-<div id="job" ng-controller="JobDetailCtrl" class="animated fadeInRight">
+<div id="job" ng-controller="JobDetailCtrl" class="animated fadeIn">
 	<h3 class="content-title">
 		<div class="job-item-image">
 			<img src="" alt="">
@@ -103,5 +103,11 @@
             </div>
 
     	</uib-tab>
+		<uib-tab index="3" heading="Files">
+			<div ng-controller="JobFileCtrl">
+				<h3>Work Directory</h3>
+				<angular-filemanager options="options"></angular-filemanager>
+			</div>
+		</uib-tab>    	
   	</uib-tabset>
 </div>

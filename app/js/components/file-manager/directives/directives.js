@@ -5,7 +5,15 @@
     app.directive('angularFilemanager', ['$parse', 'fileManagerConfig', function($parse, fileManagerConfig) {
         return {
             restrict: 'EA',
-            templateUrl: fileManagerConfig.tplPath + '/main.html'
+            templateUrl: fileManagerConfig.tplPath + '/main.html',
+            // scope: {
+            //     options: "="
+            // },
+            link: function(scope, element, attrs) {
+                for(var key in scope.options) {
+                    fileManagerConfig[key] = scope.options[key];
+                }
+            }
         };
     }]);
 

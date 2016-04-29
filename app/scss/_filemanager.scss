@@ -1,6 +1,5 @@
 $border-color: darken(#505460, 5%);
 
-
 #context-menu {
 	position: absolute;
 	display: none;
@@ -27,47 +26,31 @@ $border-color: darken(#505460, 5%);
 	margin: 3px 0
 }
 
-#fs {
+.dropdown-menu.dropdown-right-click>li>a {
+	color: #666;
+	&:hover {
+		color: $purple;
+	}
+}
+
+.file-item .selected {
+	background-color: #2e333f;
+}
+
+.filemanager-container {
 	.breadcrumb {
 		background-color: rgba(60, 67, 84, 0.42);
 		padding: 10px 15px;
 		margin: 10px 0;
-	}
+	}	
+}
+#fs {
 
 	.btn-default {
 		margin-right: 5px;
 	}
 
-	.table-files {
-		th {
-			background-color: #2d3340;
-			border-bottom: 1px solid #3F4551 !important;
-			text-transform: uppercase;
-			padding: 12px !important;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-			a {
-				color: $gray;
-			}
-		}
-		td {
-			border-color: $border-color !important;
-			a {
-				color: #eee;
-				font-weight: 300;
-			}
-			i {
-				color: #aaa;
-				margin-right: 2px;
-			}
-		}
-	}
-	.dropdown-menu.dropdown-right-click>li>a {
-		color: #666;
-		&:hover {
-			color: $purple;
-		}
-	}
+
 	.modal-content {
 		color: #666;
 	}
@@ -143,6 +126,31 @@ $border-color: darken(#505460, 5%);
 		margin-top: 5px;
 	}
 }
+
+.table-files {
+		th {
+			background-color: #2d3340;
+			border-bottom: 1px solid #3F4551 !important;
+			text-transform: uppercase;
+			padding: 12px !important;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			a {
+				color: $gray;
+			}
+		}
+		td {
+			border-color: $border-color !important;
+			a {
+				color: #eee;
+				font-weight: 300;
+			}
+			i {
+				color: #aaa;
+				margin-right: 2px;
+			}
+		}
+	}
 
 .mr5 {
 	margin-right: 5px;

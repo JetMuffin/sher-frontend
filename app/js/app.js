@@ -13,7 +13,6 @@ var app = angular.module('sher', [
   'sher.job.detail',
   'ngRoute',
   'ngCookies',
-  'FileManager'
 ])
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {

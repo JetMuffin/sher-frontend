@@ -857,6 +857,10 @@ h1, h2, h3, h4, h5 {
   .loading-spinner .sk-cube {
     background-color: #9e6be3; }
 
+.animated {
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards; }
+
 .header {
   height: 45px;
   background-color: #9056df;
@@ -1852,37 +1856,21 @@ ins {
 .dropdown-menu.dropdown-right-click .divider {
   margin: 3px 0; }
 
-#fs .breadcrumb {
+.dropdown-menu.dropdown-right-click > li > a {
+  color: #666; }
+  .dropdown-menu.dropdown-right-click > li > a:hover {
+    color: #9056df; }
+
+.file-item .selected {
+  background-color: #2e333f; }
+
+.filemanager-container .breadcrumb {
   background-color: rgba(60, 67, 84, 0.42);
   padding: 10px 15px;
   margin: 10px 0; }
 
 #fs .btn-default {
   margin-right: 5px; }
-
-#fs .table-files th {
-  background-color: #2d3340;
-  border-bottom: 1px solid #3F4551 !important;
-  text-transform: uppercase;
-  padding: 12px !important;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px; }
-  #fs .table-files th a {
-    color: #82848f; }
-
-#fs .table-files td {
-  border-color: #444852 !important; }
-  #fs .table-files td a {
-    color: #eee;
-    font-weight: 300; }
-  #fs .table-files td i {
-    color: #aaa;
-    margin-right: 2px; }
-
-#fs .dropdown-menu.dropdown-right-click > li > a {
-  color: #666; }
-  #fs .dropdown-menu.dropdown-right-click > li > a:hover {
-    color: #9056df; }
 
 #fs .modal-content {
   color: #666; }
@@ -1949,6 +1937,25 @@ ins {
 
 #fs .error-msg {
   margin-top: 5px; }
+
+.table-files th {
+  background-color: #2d3340;
+  border-bottom: 1px solid #3F4551 !important;
+  text-transform: uppercase;
+  padding: 12px !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+  .table-files th a {
+    color: #82848f; }
+
+.table-files td {
+  border-color: #444852 !important; }
+  .table-files td a {
+    color: #eee;
+    font-weight: 300; }
+  .table-files td i {
+    color: #aaa;
+    margin-right: 2px; }
 
 .mr5 {
   margin-right: 5px; }
