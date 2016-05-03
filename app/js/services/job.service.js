@@ -69,6 +69,21 @@ angular.module('sher.job')
                 }
             },   
 
+            // 按任务健康状态过滤任务
+            getJobsByHealth: function(health) {
+            if(health == 'all') {
+                    return jobs;
+                } else {
+                    var result = [];
+                    for (var i = 0; i < jobs.length; i++) {
+                        if (jobs[i].health.toLowerCase() == health.toLowerCase()) {
+                            result.push(jobs[i]);
+                        }
+                    }
+                    return result;
+                }
+            },
+
             // 按ID获取任务
             getById: function(id) {
                 if (!!jobs) {

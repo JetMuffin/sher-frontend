@@ -15,8 +15,8 @@ function($scope, $stateParams, $interval, $uibModal, $state, toastr, JobManager)
     var reload = function (query) {
         JobManager.refresh().$promise.then(function(response) {
             $scope.jobs = JobManager.getJobs(query)
-            $scope.healthyJobCount = JobManager.getJobs('healthy').length;
-            $scope.unhealthyJobCount = JobManager.getJobs('unhealthy').length;
+            $scope.healthyJobCount = JobManager.getJobsByHealth('healthy').length;
+            $scope.unhealthyJobCount = JobManager.getJobsByHealth('unhealthy').length;
             $scope.jobCount = JobManager.getAllJobs().length;
         });
     }
