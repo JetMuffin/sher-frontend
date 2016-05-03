@@ -1829,6 +1829,9 @@ ins {
     .controls a:hover {
       color: #742bd7; }
 
+.port-controls {
+  line-height: 90px; }
+
 .task-number-controls {
   margin-top: 20px; }
 

@@ -21,7 +21,7 @@
                         </uib-tab>
                         <uib-tab index="1" heading="Tasks">
                            <uib-accordion close-others="true">
-                                <uib-accordion-group heading="Task #{{$index+1}}" is-open="true" ng-repeat="task in job.tasks track by $index">
+                                <uib-accordion-group heading="Task #{{task_index+1}}" is-open="true" ng-repeat="(task_index,task) in job.tasks">
                                 <div class="row">
                                     <h5>Basic</h5>
                                     <div class="col-sm-4">
@@ -80,8 +80,32 @@
                                             <div><input type="text" id="disk-field" ng-model="resource.value" class="form-control" ></div>
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>  
+                                <div class="row">
+                                    <h5>Ports</h5>
+                                </div>
+                                <div class="row" ng-repeat="(port_index,port) in task.port_mappings">
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label for="disk-field" class="control-label">Container Port</label>
+                                            <div><input type="text" id="disk-field" ng-model="port.container_port" class="form-control" ></div>
+                                        </div>          
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label for="disk-field" class="control-label">Host Port</label>
+                                            <div><input type="text" id="disk-field" ng-model="port.host_port" class="form-control" ></div>
+                                            <p class="tips">Auto assigment if host port set to 0</p>
+
+                                        </div>          
+                                    </div>
+                                    <div class="col-sm-2 controls port-controls">
+                                        <a ng-click="addPort(task_index)"><span class="si-plus"></span></a>
+                                        <a ng-show="port_index!=0" ng-click="deletePort(task_index,port_index)"><span class="si-less"></span></a>                                    
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>                                
+                                    <div class="clearfix"></div>
                                 </uib-accordion-group>
                             </uib-accordion>
                             <div class="task-number-controls controls pull-right">

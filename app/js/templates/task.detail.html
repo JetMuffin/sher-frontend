@@ -74,7 +74,7 @@
 					<div ng-if="nodata" class="nodata">
 						Task is not running now, no  data to show.
 					</div>
-					<canvas id="cpu" class="chart chart-line" chart-data="data" chart-options="options" chart-labels="labels" chart-legend="true" chart-series="series"
+					<canvas id="cpu" class="chart chart-line" chart-data="data" chart-options="options" chart-labels="labels" chart-legend="true" chart-series="series" chart-colours="colours"
 					  height="60">
 					</canvas>
 				</div>
@@ -84,7 +84,7 @@
 						Task is not running now, no  data to show.
 					</div>	
 					<canvas id="mem" class="chart chart-line" chart-data="data"
-					  chart-labels="labels" chart-legend="true" chart-options="options" chart-series="series"
+					  chart-labels="labels" chart-legend="true" chart-options="options" chart-series="series" chart-colours="colours"
 					  height="60">
 					</canvas> 
 				</div>
@@ -94,7 +94,7 @@
 			<div class="col-sm-12">
 				<div ng-controller="TaskLogCtrl">
 					<div ng-repeat="log in logs" class="log-line">{{log|formatLogs}}</div>
-					<button class="btn btn-sm pull-right btn-primary">Download</button>
+					<button class="btn btn-sm pull-right btn-primary" ng-click="download()">Download</button>
 				</div>
 			</div>
 		</uib-tab>
@@ -102,7 +102,7 @@
 			<div class="col-sm-12">
 				<div ng-controller="TaskOutputCtrl">
 					<div ng-repeat="out in output track by $index" class="log-line">{{out|formatLogs}}</div>
-					<button class="btn btn-sm pull-right btn-primary">Download</button>
+					<button class="btn btn-sm pull-right btn-primary" ng-click="download()">Download</button>
 				</div>
 			</div>
 		</uib-tab>

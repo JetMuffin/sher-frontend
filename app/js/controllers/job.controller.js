@@ -6,8 +6,9 @@ angular.module('sher.job', ['ngResource', 'ui.bootstrap', 'ngAnimate', 'angular-
     '$interval',
     '$uibModal',
     '$state',
+    'toastr',
     'JobManager',
-function($scope, $stateParams, $interval, $uibModal, $state, JobManager) {
+function($scope, $stateParams, $interval, $uibModal, $state, toastr, JobManager) {
     $scope.query = $stateParams.query || "all";
 
     // 加载数据
@@ -69,7 +70,13 @@ var JobModalCtrl = function ($scope, $uibModalInstance, toastr, JobManager) {
                 cmd: "ls",
                 cpus: 0.1,
                 mem: 32,
-                disk: 0
+                disk: 0,
+                port_mappings: [
+                    {
+                        container_port: 8080,
+                        host_port: 0
+                    }
+                ]
             }
         ],
         volumes: ["/"]
@@ -88,12 +95,31 @@ var JobModalCtrl = function ($scope, $uibModalInstance, toastr, JobManager) {
             cmd: "ls",
             cpus: 0.1,
             mem: 32,
-            disk: 0            
+            disk: 0,
+            port_mappings: [
+                {
+                    container_port: 8080,
+                    host_port: 0
+                }
+            ]                        
         })
     }
 
     $scope.deleteTask = function() {
         $scope.job.tasks.pop();
+    }
+
+    $scope.addPort = function(taskIndex) {
+        console.log(taskIndex);
+        $scope.job.tasks[taskIndex].port_mappings.push({
+            container_port: 8080,
+            host_port: 0
+        })
+    }
+
+    $scope.deletePort = function(taskIndex, portIndex) {
+        console.log(taskIndex);
+        $scope.job.tasks[taskIndex].port_mappings.splice(portIndex, 1);
     }
 
     $scope.addVolume = function() {
@@ -106,9 +132,9 @@ var JobModalCtrl = function ($scope, $uibModalInstance, toastr, JobManager) {
 
     $scope.submit = function () {
         JobManager.submitJob($scope.job, function(){
-            toastr.success('Create job successful!', 'Notification');
+            toastr.success('Create job successful!');
         }, function() {
-            toastr.error('Create job failed!', 'Error');
+            toastr.error('Create job failed!');
         });
         $uibModalInstance.close();
     };

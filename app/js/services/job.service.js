@@ -54,6 +54,21 @@ angular.module('sher.job')
                 }
             },
 
+            // 按状态过滤任务
+            getJobsByStatus: function(status) {
+                if(status == 'all') {
+                    return jobs;
+                } else {
+                    var result = [];
+                    for (var i = 0; i < jobs.length; i++) {
+                        if (jobs[i].status.toLowerCase() == status.toLowerCase()) {
+                            result.push(jobs[i]);
+                        }
+                    }
+                    return result;
+                }
+            },   
+
             // 按ID获取任务
             getById: function(id) {
                 if (!!jobs) {
@@ -70,7 +85,6 @@ angular.module('sher.job')
             // 提交任务
             submitJob: function(job, callback, errorHandle) {
                 job = checkFormat(job);
-                console.log(job);
                 $http({
                     method: 'POST',
                     url: API + '/jobs',

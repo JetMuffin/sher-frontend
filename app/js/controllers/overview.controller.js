@@ -79,10 +79,10 @@ overview.controller("jobCtrl", ['$scope', '$interval', '$state', 'JobManager', f
     var reload = function () {
         JobManager.refresh().$promise.then(function(response) {
             $scope.jobs = {
-                total: JobManager.getJobs('all'),
-                running: JobManager.getJobs('running'),
-                finished: JobManager.getJobs('finished'),
-                failed: JobManager.getJobs('failed')
+                total: JobManager.getJobsByStatus('all'),
+                running: JobManager.getJobsByStatus('running'),
+                finished: JobManager.getJobsByStatus('finished'),
+                failed: JobManager.getJobsByStatus('failed')
             }
 
             $scope.job = {

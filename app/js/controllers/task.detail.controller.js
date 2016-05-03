@@ -96,8 +96,9 @@ detail.controller("TaskCpuCtrl", function ($scope, $http, TaskManager) {
     $scope.options = {
       animation: false,
       pointDot: false,
-      datasetStrokeWidth: 0.5
+      datasetStrokeWidth: 2,
     };
+    $scope.colours = ['#9048d6', '#3d365e',];
 
     // 离开页面时释放监听
     $scope.$on("$destroy", function(event) {
@@ -131,9 +132,11 @@ detail.controller("TaskMemCtrl", function ($scope, $http) {
     $scope.options = {
       animation: false,
       pointDot: false,
-      datasetStrokeWidth: 0.5,
+      datasetStrokeWidth: 2,
       backgroundColor: "#fff",
     };
+    $scope.colours = ['#f6478f', '#c64079',];
+
 
     // 离开页面时释放监听
     $scope.$on("$destroy", function(event) {
@@ -146,7 +149,7 @@ detail.controller("TaskLogCtrl", function ($scope, $stateParams, TaskManager) {
         TaskManager.getTaskFile($stateParams.taskID, 'stderr', function(response){
             $scope.logs = response.message.split('\n');
         });
-    }			
+    }		
     reload();
 });
 
@@ -156,7 +159,8 @@ detail.controller("TaskOutputCtrl", function ($scope, $stateParams, TaskManager)
         TaskManager.getTaskFile($stateParams.taskID, 'stdout', function(response){
             $scope.output = response.message.split('\n');
         });
-    }			
+    }	
+
     reload();
 });
 

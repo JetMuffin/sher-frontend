@@ -118,6 +118,15 @@ angular.module('sher.task')
                 })
             },
 
+            downloadTaskFile: function(id, file, callback) {
+                $http({
+                    method: 'GET',
+                    url: API + '/tasks/' + id + '/file/' + file + '/download'
+                }).success(function(response) {
+                    return callback && callback(response);
+                })
+            },
+
             systemUsage: function(callback) {
                 $http({
                     method: 'GET',
