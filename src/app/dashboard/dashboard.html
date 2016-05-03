@@ -1,0 +1,224 @@
+<div id="overview" class="animated fadeIn">
+	<h3 class="content-title">
+		Dashboard
+	</h3>
+	<div class="row">
+	<div class="box col-md-6 col-sm-12">
+		<div class="box-title">
+			<h2>System Status <span class="text-healthy">Healthy</span></h2>
+		</div>
+		<div class="box-content" ng-controller="DashboardHealthController">
+			<div class="row">
+				<div class="col-sm-8 allocation-chart chart purple">
+					<h5 class="chart-label">CPU Allocation</h5>
+					<div class="chart-stat">{{cpu.data[cpu.data.length-1] | number:2}}<small>%</small></div>
+			
+					<div class="chart-svg">
+						<p class="chart-title"><span class="legend">-</span>CPU Allocation(%)</p>
+						<div class="chart-yavis">
+							<p>100%</p>
+							<p>50%</p>
+							<p>0%</p>
+						</div>
+						<line-chart data="cpu.data" options="cpu.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
+					</div>
+				</div>
+				<div class="col-sm-4 allocation-chart small chart">
+					<div class="chart-label">Disk Allocation</div>
+					<div class="chart-stat">{{disk.data[disk.data.length-1] | number:2 }}<small>%</small></div>	
+					
+					<div class="chart-svg">
+						<line-chart data="disk.data" options="disk.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
+					</div>									
+				</div>
+				<div class="col-sm-4 allocation-chart small chart">
+					<div class="chart-label">Memory Allocation</div>
+					<div class="chart-stat">{{mem.data[mem.data.length-1] | number:2}}<small>%</small></div>	
+					
+					<div class="chart-svg">
+						<line-chart data="mem.data" options="mem.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</line-chart>	
+					</div>									
+				</div>				
+			</div>
+		</div>
+	</div>		
+	<div class="box col-md-6 col-sm-12">
+		<div class="box-content job-box" ng-controller="DashboardJobController">
+			<div class="row">
+				<div class="job-title">
+				<div class="col-sm-6 job-stat">
+					<div class="row">
+						<pie-chart data="job.data" options="job.options" class="job-piechart col-sm-4"></pie-chart>
+						<span class="job-count col-sm-4">{{jobs.total.length}}</span>
+						<span class="job-count-label col-sm-4">Total Jobs</span>	
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row">
+					<div class="job-kind col-sm-4">
+						<div class="job-kind-num">
+							{{jobs.running.length}}
+						</div>
+						<div class="job-kind-label text-healthy">
+							Running
+						</div>
+					</div>
+					<div class="job-kind col-sm-4">
+						<div class="job-kind-num">
+							{{jobs.finished.length}}
+						</div>
+						<div class="job-kind-label text-lost">
+							Finished
+						</div>
+					</div>	
+					<div class="job-kind col-sm-4">
+						<div class="job-kind-num">
+							{{jobs.failed.length}}
+						</div>
+						<div class="job-kind-label text-danger">
+							Failed
+						</div>
+					</div>	
+					</div>
+				</div>
+				</div>		
+				<div class="job-divider col-sm-12">
+					RECENT ACTIVE JOBS
+				</div>	
+				<div class="clearfix"></div>
+				<div class="job-items">
+					<div class="col-sm-6 job-item" ng-repeat="job in jobs.total | limitTo:6" ng-switch="job.status">
+						<div class="job-item-image">
+							<img src="" alt="">
+						</div>
+						<div class="job-item-title">
+							{{job.name}}
+						</div>
+						<div class="job-item-status text-healthy" ng-switch-when="Running">
+							<span class="fa fa-circle"></span>
+							{{job.status}} ({{job.total_task_len}} Tasks)
+						</div>
+						<div class="job-item-status text-gray" ng-switch-when="Finished">
+							<span class="fa fa-circle"></span>
+							{{job.status}} ({{job.total_task_len}} Tasks)
+						</div>
+						<div class="job-item-status text-danger" ng-switch-when="Failed">
+							<span class="fa fa-circle"></span>
+							{{job.status}} ({{job.total_task_len}} Tasks)
+						</div>												
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>	
+	<div class="box col-md-4 col-sm-12">
+		<div class="box-content task-overview-box" ng-controller="DashboardTaskController">
+			<div class="task-overview-svg">
+				<pie-chart data="overview.data" options="overview.options"></pie-chart>
+				<div class="task-overview-stat">
+					{{tasks.running+tasks.waiting}}
+					<small>Queue Tasks</small>
+				</div>				
+			</div>
+			<div class="task-overview-addon">
+				<div class="task-overview-item col-sm-6">{{tasks.running}}<small class="text-healthy">Running Tasks</small></div>
+				<div class="task-overview-item col-sm-6">{{tasks.waiting}}<small class="text-warning">Waiting Tasks</small></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>	
+	<div class="box col-md-4 col-sm-12">
+		<div class="box-content task-waittime-box" ng-controller="DashboardTaskController">
+			<div class="task-waittime-svg">
+				<div class="col-sm-8 waittime-chart chart middle yellow">
+					<div class="chart-stat">{{waitTime.data[waitTime.data.length-1] | number:2}}<small>s</small></div>
+					<h5 class="chart-label text-warning">Task Wait Time</h5>
+			
+					<div class="chart-svg">
+						<bar-chart data="waitTime.data" options="waitTime.options" class="chart-graph no-avis">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</bar-chart>	
+					</div>
+					<p class="chart-title"><span class="legend">-</span>Task Wait Time Per Minute (s)</p>					
+				</div>			
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>		
+	<div class="box col-md-4 col-sm-12">
+		<div class="box-content task-waittime-box" ng-controller="DashboardTaskController">
+			<div class="task-waittime-svg">
+				<div class="col-sm-8 waittime-chart chart middle red">
+					<div class="chart-stat">{{failRate.data[failRate.data.length-1] | number:2}}<small>%</small></div>
+					<h5 class="chart-label text-danger">Task Failure Rate</h5>
+			
+					<div class="chart-svg">
+
+						<div class="chart-yavis">
+							<p>100%</p>
+							<p>50%</p>
+							<p>0%</p>
+						</div>
+						<bar-chart data="failRate.data" options="failRate.options" class="chart-graph">
+							<div class="chart-bg">
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+								<li class="chart-bg-grid"></li>
+							</div>
+						</bar-chart>	
+					</div>
+					<p class="chart-title"><span class="legend">-</span>Failure Rate Per Minute (%)</p>					
+				</div>			
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>				
+</div>
+</div>

@@ -1,0 +1,19 @@
+.dcci {
+	background-image: url('../assets/images/icons-medium@2x.png');
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-size: 96px 544px;
+}
+
+.dcci-cpu {
+	background-position: 32px 160px;
+}
+
+.dcci-mem {
+	background-position: 32px 128px;
+}
+
+.dcci-disk {
+	background-position: 32px 96px;
+}

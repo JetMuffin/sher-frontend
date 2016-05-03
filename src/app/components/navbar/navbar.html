@@ -1,0 +1,39 @@
+<div class="header">
+  <div class="brand pull-left">
+    <img src="assets/images/logo.png" alt="">
+    <h3>DCC</h3>
+  </div>
+
+</div>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-image">
+        <div class="sidebar-header-image-inner">
+        </div>
+      </div>
+      <h3>Datacenter</h3>
+      <p class="sidebar-header-ip">192.168.33.1</p>
+    </div>
+    <div class="sidebar-menu">
+      <ul>
+        <li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".dashboard"><span class="sidebar-menu-item-icon si-cloud"></span><span class="nav-label">Dashboard</span></a></li>
+        <li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".job"><span class="sidebar-menu-item-icon si-browser"></span><span class="nav-label">Jobs</span></a></li>
+        <li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".node"><span class="sidebar-menu-item-icon si-server"></span><span class="nav-label">Nodes</span></a></li>       
+        <li ui-sref-active="selected" class="sidebar-menu-item "><a ui-sref=".filesystem"><span class="sidebar-menu-item-icon si-folder"></span><span class="nav-label">File</span></a></li>        
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <div class="version-info">
+        <p>DCC Sher v0.3</p>
+      </div>
+      <div class="user-dropdown">
+        <span class="si-user user-icon"></span>
+        jeffchen328@gmail.com
+      </div>
+    </div>
+  </div>  
+
+  <div class="main-wrapper with-header" id="main-wrapper">
+              <!-- <h3 class="tab-title">Task Manager | </h3> -->
+  <div ui-view class="main-ui-view"></div>
+  </div>

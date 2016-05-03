@@ -1,0 +1,56 @@
+$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+$fa-font-path: "../../bower_components/font-awesome/fonts";
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+// variables
+// @import 'baseui';
+@import 'variables';
+
+// // font
+// @import 'font';
+// // responsive
+// @import 'responsive';
+
+
+// // fundation
+// @import 'variables';
+// @import 'fundation';
+
+
+// @import 'header';
+// @import 'mail';
+// @import 'form';
+// @import 'panel';
+// @import 'tab';
+// @import 'log';
+// @import 'login';
+// @import 'overview';
+// @import 'cluster';
+
+
+// // modules
+// @import 'sidebar';
+// @import 'content';
+// @import 'dashboard';
+// @import 'chart';
+// @import 'job';
+// @import 'node';
+// @import 'modal';
+// @import 'filemanager';
+// @import 'icons';
+// @import 'task';
+// @import 'dark-ui';
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
+
