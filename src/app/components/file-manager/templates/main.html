@@ -1,0 +1,22 @@
+<div ng-controller="FileManagerCtrl" ngf-drop="addForUpload($files)" ngf-drag-over-class="'upload-dragover'" ngf-multiple="true">
+    <div class="option-button" ng-show="config.optionButton">
+        <button class="btn  btn-new-folder  " ng-click="modal('newfolder') && prepareNewFolder()">
+            {{"new_folder" | translate}}
+        </button>
+        <button class="btn btn-upload" ng-show="config.allowedActions.upload" ng-click="modal('uploadfile')">
+             {{"upload_files" | translate}}
+        </button>
+    </div>        
+    <div class="container-fluid filemanager-container">
+        <div class="row">
+
+            <div class="main" ng-class="config.sidebar &amp;&amp; fileNavigator.history[0] &amp;&amp; 'col-sm-9 col-md-10'">
+                <div ng-include="config.tplPath + '/current-folder-breadcrumb.html'" ng-show="config.breadcrumb"></div>
+                <div ng-include="config.tplPath + '/' + viewTemplate" class="main-navigation clearfix" ng-show="config.viewTable"></div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="config.tplPath + '/modals.html'"></div>
+    <div ng-include="config.tplPath + '/item-context-menu.html'"></div>
+</div>

@@ -10,11 +10,10 @@
   function JobDetailController($scope, $http, $stateParams, jobManager, $uibModal, $state, $interval, toastr){
       // 加载数据
       var reload = function (query) {
-      jobManager.refresh().$promise.then(function(response) {
-              //TODO 错误处理
-        $scope.job = jobManager.getById($stateParams.jobID);
-        $scope.refresh_random = Math.random();
-          });
+        jobManager.refresh().$promise.then(function(response) {
+          $scope.job = jobManager.getById($stateParams.jobID);
+          $scope.refresh_random = Math.random();
+        });
       }   
 
       reload();
@@ -34,26 +33,41 @@
       })      
   }
 
-  function JobDetailFileController($scope, $stateParams, taskManager) {
+  function JobDetailFileController($scope, $stateParams, jobManager) {
+    var reload = function (query) {
+      jobManager.refresh().$promise.then(function(response) {
+        $scope.job = jobManager.getById($stateParams.jobID);
+        $scope.currentPath = $scope.job.output_path.split("/");
+        $scope.currentPath.shift();
+        $scope.$broadcast("setCurrentPath", $scope.currentPath) 
+      });
+    }   
+
+    reload();    
+        
+    $scope.$on("handshake", function() {
+      reload();    
+    })
+
     $scope.options = {
       breadcrumb: true,
       optionButton: false,
       showSizeForDirectories: true,
-        allowedActions: {
-            upload: true,
-            rename: false,
-            move: false,
-            copy: false,
-            edit: false,
-            changePermissions: false,
-            compress: false,
-            compressChooseName: false,
-            extract: false,
-            download: true,
-            downloadMultiple: true,
-            preview: true,
-            remove: true
-        },      
+      allowedActions: {
+          upload: true,
+          rename: false,
+          move: false,
+          copy: false,
+          edit: false,
+          changePermissions: false,
+          compress: false,
+          compressChooseName: false,
+          extract: false,
+          download: true,
+          downloadMultiple: true,
+          preview: true,
+          remove: true
+      },      
     }
-}
+  }
 })();

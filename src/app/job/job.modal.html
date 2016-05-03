@@ -114,14 +114,10 @@
                             </div>
                         </uib-tab>
                         <uib-tab index="2" heading="Volumes">
-                            <div class="form-group" ng-repeat="volume in job.volumes track by $index">
-                                <label for="name-field" class="control-label">Directory</label>
-                                <div><input type="text" id="name-field" ng-model="job.volumes[$index]" class="form-control"></div>
+                            <div class="form-group">
+                                <label for="name-field" class="control-label">Output Directory</label>
+                                <div><input type="text" id="name-field" ng-model="job.output_path" class="form-control"></div>
                             </div> 
-                            <div class="controls pull-right">
-                                <a ng-click="addVolume()"><span class="si-plus"></span></a>
-                                <a ng-show="job.volumes.length>1" ng-click="deleteVolume()"><span class="si-less"></span></a>
-                            </div>          
                             <p class="tips">The specified directories will be mapping to the same path of docker containers.</p>
                         </uib-tab>
                     </uib-tabset>

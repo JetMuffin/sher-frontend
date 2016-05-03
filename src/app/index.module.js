@@ -16,7 +16,8 @@
             'angular-peity',
             'angular-table',
     		'toastr',
-            'chart.js'
+            'chart.js',
+            'FileManager'
     	]);
 
 })();

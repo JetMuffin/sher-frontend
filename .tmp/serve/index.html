@@ -25,7 +25,7 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
- <!--    <div ng-view>
+<!--     <div ng-view>
         <div class="sk-spinner sk-spinner-cube-grid loading-spinner">
             <div class="sk-cube"></div>
             <div class="sk-cube"></div>
@@ -58,34 +58,50 @@
     <script src="../bower_components/peity/jquery.peity.js"></script>
     <script src="../bower_components/angular-peity/angular-peity.js"></script>
     <script src="../bower_components/tabs/tabs.js"></script>
-    <script src="../bower_components/Chart.js/dist/Chart.js"></script>
+    <script src="../bower_components/Chart.js/Chart.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="../bower_components/at-table/dist/angular-table.js"></script>
     <script src="../bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
+    <script src="app/components/file-manager/app.js"></script>
+    <script src="app/components/file-manager/services/filenavigator.js"></script>
+    <script src="app/components/file-manager/services/apimiddleware.js"></script>
+    <script src="app/components/file-manager/services/apihandler.js"></script>
+    <script src="app/components/file-manager/filters/filters.js"></script>
+    <script src="app/components/file-manager/providers/translations.js"></script>
+    <script src="app/components/file-manager/providers/transilations.js"></script>
+    <script src="app/components/file-manager/providers/config.js"></script>
+    <script src="app/components/file-manager/entities/item.js"></script>
+    <script src="app/components/file-manager/entities/chmod.js"></script>
+    <script src="app/components/file-manager/directives/directives.js"></script>
+    <script src="app/components/file-manager/controllers/selector-controller.js"></script>
+    <script src="app/components/file-manager/controllers/main.js"></script>
     <script src="app/components/relative-time/relative-time.js"></script>
     <script src="app/index.module.js"></script>
     <script src="app/components/relative-time/relative-time.directive.js"></script>
     <script src="app/components/navbar/navbar.directive.js"></script>
     <script src="app/components/log/log.filter.js"></script>
     <script src="app/components/back/back.directive.js"></script>
+    <script src="app/node/node.service.js"></script>
+    <script src="app/node/node.controller.js"></script>
     <script src="app/task/task.service.js"></script>
     <script src="app/task/task.filter.js"></script>
     <script src="app/task/task.detail.controller.js"></script>
     <script src="app/task/task.controller.js"></script>
-    <script src="app/node/node.service.js"></script>
-    <script src="app/node/node.controller.js"></script>
-    <script src="app/login/login.controller.js"></script>
-    <script src="app/login/auth.service.js"></script>
     <script src="app/job/job.service.js"></script>
     <script src="app/job/job.detail.controller.js"></script>
     <script src="app/job/job.controller.js"></script>
-    <script src="app/config/config.provider.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    <script src="app/login/auth.service.js"></script>
     <script src="app/dashboard/dashboard.controller.js"></script>
+    <script src="app/fs/fs.controller.js"></script>
+    <script src="app/config/config.provider.js"></script>
     <script src="app/index.run.js"></script>
     <script src="app/index.route.js"></script>
     <script src="app/index.constants.js"></script>

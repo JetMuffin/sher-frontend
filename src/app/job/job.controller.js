@@ -77,7 +77,7 @@
                   ]
               }
           ],
-          volumes: ["/"]
+          output_path: "/"
       }
 
       $scope.options = {

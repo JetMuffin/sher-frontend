@@ -24,7 +24,7 @@
     // 定时刷新任务列表
     var timer = $interval(function() {
       reload();
-    }, 300);
+    }, 3000);
 
     // 离开页面时删除计时器
     $scope.$on("$destroy", function(event) {
