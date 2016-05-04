@@ -277,3 +277,35 @@ h1, h2, h3, h4, h5 {
 .modal {
   overflow-y: auto;
 }
+
+.dcc-suggest-box {
+  .input {
+    padding: 0px 8px !important;
+  }
+
+  .select button {
+    padding: 8px 11px;
+  }
+
+  .select {
+    border: 1px solid #e5e6e7;
+    .input {
+      border-right: 1px solid #e5e6e7;
+    }
+  }
+
+  .item {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 8px 12px;
+  }
+}
+
+
+.validation-invalid{
+  color: $red;
+  font-size: 12px;
+  margin-top: 2px;
+}

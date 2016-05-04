@@ -3,20 +3,42 @@
                     <h4 class="modal-title">Create Job</h4>
                 </div>
                 <div class="modal-body job">
+                    <form name="Job">
                     <uib-tabset active="activePill" vertical="true" type="pills" class="vertical-tabs">
                         <uib-tab index="0" heading="Build">
                             <div class="form-group">
                                 <label for="name-field" class="control-label">Job Name</label>
-                                <div><input type="text" id="name-field" ng-model="job.name" class="form-control"></div>
+                                <div><input type="text" id="name-field" ng-model="job.name" class="form-control" validator="required" valid-method="blur"></div>
                             </div>                           
                             <div class="form-group">
                                 <label for="name-field" class="control-label">Image</label>
-                                <div><input type="text" id="name-field" ng-model="job.image" class="form-control"></div>
-                                <p class="tips">The image will be ignored if context directory was specified.</p>
+                                <!-- <div><input type="text" id="name-field" ng-model="job.image" class="form-control"></div> -->
+                                <div az-suggest-box sb-list="images" class="suggest-box dcc-suggest-box" sb-selected-list-item-class="sb-list-item-checked" sb-close-list-on-select="true" sb-max-selection="1" sb-on-selection-change="onImageChange()" sb-model="selected_images" sb-select-first-list-item="true"> 
+                                    <div class="select"> 
+                                        <div class="input"> 
+                                            <div sb-selection-item >{{s.name}}</div>  
+                                            <input sb-trigger-area sb-type-ahead tabindex="1" class="form-control" ng-model="job.image"> 
+                                        </div> 
+                                        <button sb-trigger-area><i class="fa fa-chevron-down"></i></button> 
+                                    </div> 
+                                    <ul class="dropdown"> 
+                                        <li sb-dropdown-item class="item" style=""> 
+                                            <div style="margin-right: 10px;"> 
+                                            <div class="job-item-image">
+                                                <img ng-src="{{i.icon}}" alt="">
+                                            </div>
+                                      </div> 
+                                      <div> 
+                                            <div><span>{{i.name}} </span><span style="color: #ccc; padding-right: 10px;">({{i.image}})</span></div> 
+                                      </div> 
+                                    </li> 
+                                    </ul> 
+                                </div>                                
                             </div>
                             <div class="form-group">
-                                <label for="name-field" class="control-label">Context Directory</label>
+                                <label for="name-field" class="control-label">Context Directory <strong>(Dockerfile required)</strong></label>
                                 <div><input type="text" id="name-field" ng-model="job.context_dir" class="form-control"></div>
+                                <p class="tips">Image will be ignored if context directory was specified. This will build a image from dockerfile in context directory.</p>
                             </div>                            
                         </uib-tab>
                         <uib-tab index="1" heading="Tasks">
@@ -27,34 +49,38 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="cpus-field" class="control-label">Instance</label>
-                                            <div><input type="text" id="cpus-field" ng-model="task.scale" class="form-control" ></div>
+                                            <div><input type="text" id="cpus-field" ng-model="task.scale" class="form-control" validator="required,number" valid-method="blur"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="cmd-field" class="control-label">Command</label>
-                                            <div><textarea type="text" id="cmd-field" ng-model="task.cmd" class="form-control"></textarea></div>
+                                            <div><textarea type="text" id="cmd-field" ng-model="task.cmd" class="form-control" validator="required" valid-method="blur"></textarea></div>
                                         </div>                 
                                     </div>               
                                 </div>
                                 <div class="row">
-                                    <h5>Resource</h5>
+                                    <div class="title-with-option">
+                                        <h5>Resources</h5>
+                                        <a ng-click="addResource(task_index)"><span class="si-plus"></span></a>
+                                        <a ng-show="task.custom_resources.length>0" ng-click="deleteResources(task_index)"><span class="si-less"></span></a>
+                                    </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="cpus-field" class="control-label">Cpus</label>
-                                            <div><input type="text" id="cpus-field" ng-model="task.cpus" class="form-control" ></div>
+                                            <div><input type="text" id="cpus-field" ng-model="task.cpus" class="form-control" validator="required" valid-method="blur"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="mem-field" class="control-label">Memory(MB)</label>
-                                            <div><input type="text" id="mem-field" ng-model="task.mem" class="form-control" ></div>
+                                            <div><input type="text" id="mem-field" ng-model="task.mem" class="form-control" validator="required" valid-method="blur"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="disk-field" class="control-label">Disk Space(MB)</label>
-                                            <div><input type="text" id="disk-field" ng-model="task.disk" class="form-control" ></div>
+                                            <div><input type="text" id="disk-field" ng-model="task.disk" class="form-control" validator="required" valid-method="blur"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,26 +108,26 @@
                                     </div>
                                 </div>  
                                 <div class="row">
-                                    <h5>Ports</h5>
+                                    <div class="title-with-option">
+                                        <h5>Ports</h5>
+                                        <a ng-click="addPort(task_index)"><span class="si-plus"></span></a>
+                                        <a ng-show="task.port_mappings.length>0" ng-click="deletePort(task_index)"><span class="si-less"></span></a>
+                                    </div>
                                 </div>
                                 <div class="row" ng-repeat="(port_index,port) in task.port_mappings">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="disk-field" class="control-label">Container Port</label>
-                                            <div><input type="text" id="disk-field" ng-model="port.container_port" class="form-control" ></div>
+                                            <div><input type="text" id="disk-field" ng-model="port.container_port" class="form-control" validator="required,number" valid-method="blur"></div>
                                         </div>          
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="disk-field" class="control-label">Host Port</label>
-                                            <div><input type="text" id="disk-field" ng-model="port.host_port" class="form-control" ></div>
+                                            <div><input type="text" id="disk-field" ng-model="port.host_port" class="form-control" validator="required,number" valid-method="blur"></div>
                                             <p class="tips">Auto assigment if host port set to 0</p>
 
                                         </div>          
-                                    </div>
-                                    <div class="col-sm-2 controls port-controls">
-                                        <a ng-click="addPort(task_index)"><span class="si-plus"></span></a>
-                                        <a ng-show="port_index!=0" ng-click="deletePort(task_index,port_index)"><span class="si-less"></span></a>                                    
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>                                
@@ -122,10 +148,12 @@
                             <!-- <button class="btn" ng-click="open()">open</button> -->
                         </uib-tab>
                     </uib-tabset>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
-                    <button type="button" class="btn btn-primary" ng-click="submit()">Create</button>
+                    <button type="button" class="btn btn-primary" ng-click="submit(Job)" ng-disabled="!checkValid(Job)">Create</button>
                 </div>
+

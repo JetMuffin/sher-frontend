@@ -3,7 +3,11 @@
 
   angular
     .module('sherFrontend')
-    .controller('JobController', JobController);
+    .controller('JobController', JobController)
+    .config(['$validationProvider', function ($validationProvider) {
+        $validationProvider.showSuccessMessage = false;
+        $validationProvider.showErrorMessage = true; 
+    }]);
 
   /** @ngInject */
    function JobController($scope, $stateParams, $interval, $uibModal, $state, toastr, jobManager) {
@@ -81,28 +85,35 @@
   }
 
   // 模块对话框控制器
-  var JobModalCtrl = function ($scope, $rootScope, $uibModalInstance, toastr, jobManager) {
+  var JobModalCtrl = function ($scope, $rootScope, $uibModalInstance, toastr, jobManager, $injector) {
+      var $validationProvider = $injector.get('$validation');
       $scope.job = {
-          image: "busybox",
-          context_dir: "",
           tasks: [
               {
-                  scale: 1,
-                  cmd: "ls",
-                  cpus: 0.1,
-                  mem: 32,
-                  disk: 0,
-                  port_mappings: [
-                      {
-                          container_port: 8080,
-                          host_port: 0
-                      }
-                  ]
+                  port_mappings: []
               }
           ],
           output_path: "/"
       }
 
+      $scope.images = [
+        {
+          "name": "busybox",
+          "image": "busybox",
+          "icon": "/assets/images/services/docker.png"
+        },
+        {
+          "name": "matlab",
+          "image": "mcr",
+          "icon": "/assets/images/services/matlab.png"
+        },
+        {
+          "name": "golang",
+          "image": "docker.io/golang",
+          "icon": "/assets/images/services/golang.png"
+        }
+      ]
+      
       $scope.options = {
           breadcrumb: false,
           optionButton: false,
@@ -111,16 +122,8 @@
       }
       $scope.addTask = function() {
           $scope.job.tasks.push({
-              scale: 1,
-              cmd: "ls",
-              cpus: 0.1,
-              mem: 32,
-              disk: 0,
               port_mappings: [
-                  {
-                      container_port: 8080,
-                      host_port: 0
-                  }
+
               ]                        
           })
       }
@@ -137,25 +140,17 @@
       }
 
       $scope.deletePort = function(taskIndex, portIndex) {
-          console.log(taskIndex);
-          $scope.job.tasks[taskIndex].port_mappings.splice(portIndex, 1);
+        $scope.job.tasks[taskIndex].port_mappings.pop();
       }
 
-      $scope.addVolume = function() {
-          $scope.job.volumes.push('');
-      }
-
-      $scope.deleteVolume = function(index) {
-          $scope.job.volumes.pop();
-      }
-
-      $scope.submit = function () {
-          jobManager.submitJob($scope.job, function(){
-              toastr.success('Create job successful!');
-          }, function() {
-              toastr.error('Create job failed!');
-          });
-          $uibModalInstance.close();
+      $scope.submit = function (form) {
+        $validationProvider.validate(form);
+        jobManager.submitJob($scope.job, function(){
+            toastr.success('Create job successful!');
+        }, function() {
+            toastr.error('Create job failed!');
+        });
+        $uibModalInstance.close();
       };
 
       $scope.cancel = function () {
@@ -166,6 +161,20 @@
           $rootScope.openNavigator([]);
       }
 
+      $scope.selected_images = [{
+          "name": "busybox",
+          "image": "busybox",
+          "icon": "/assets/images/services/docker.png"
+        }];
+      $scope.onImageChange = function() {
+        if($scope.selected_images.length > 0) {
+          $scope.job.image = $scope.selected_images[0].image;
+        }
+      }
+
+      $scope.checkValid = $validationProvider.checkValid;
+
+      // 与隐藏的filemanager交互
       var watcher = $scope.$watch('selectedModalPath', function(){
         var prefix = $scope.selectedModalPath[0] == "" ? '':'/'; 
         $scope.job.output_path = prefix + $scope.selectedModalPath.join('/');

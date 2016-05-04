@@ -25,6 +25,7 @@ exports.paths = {
  */
 exports.wiredep = {
   // exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/],
+  exclude: ['bower_components/angular-suggestbox/server/server.js'],
   directory: 'bower_components'
 };
 

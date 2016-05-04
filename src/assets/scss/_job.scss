@@ -57,6 +57,11 @@
 	background: #626875;
 	float: left;
 	margin-right: 10px;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: auto;
+	}
 }
 
 .job-resource {

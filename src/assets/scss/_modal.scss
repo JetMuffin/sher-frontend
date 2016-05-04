@@ -103,3 +103,16 @@
 .panel-group .panel+.panel {
 	margin-top: 0;
 }
+
+.title-with-option {
+	h5 {
+		float: left;
+	}
+	a {
+		font-size: 25px;
+		color: $purple;
+		&:hover {
+			color: darken($purple, 10%);
+		}
+	}
+}

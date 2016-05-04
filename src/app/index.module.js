@@ -17,7 +17,10 @@
             'angular-table',
     		'toastr',
             'chart.js',
-            'FileManager'
+            'FileManager',
+            'azSuggestBox',
+            'validation', 
+            'validation.rule'
     	]);
 
 })();
