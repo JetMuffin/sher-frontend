@@ -116,9 +116,10 @@
                         <uib-tab index="2" heading="Volumes">
                             <div class="form-group">
                                 <label for="name-field" class="control-label">Output Directory</label>
-                                <div><input type="text" id="name-field" ng-model="job.output_path" class="form-control"></div>
+                                <div><input type="text" id="name-field" ng-model="job.output_path" class="form-control" ng-click="open()"></div>
                             </div> 
                             <p class="tips">The specified directories will be mapping to the same path of docker containers.</p>
+                            <!-- <button class="btn" ng-click="open()">open</button> -->
                         </uib-tab>
                     </uib-tabset>
                     <div class="clearfix"></div>

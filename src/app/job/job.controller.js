@@ -29,8 +29,31 @@
 
       // 表格行点击
       $scope.rowClick = function(jobID){
-      $state.go('navbar.jobdetail',{jobID: jobID});
-    };
+        $state.go('navbar.jobdetail',{jobID: jobID});
+      };
+
+      // 隐藏的文件管理器
+      $scope.options = {
+        breadcrumb: false,
+        optionButton: false,
+        showSizeForDirectories: false,
+        viewTable: false,
+        allowedActions: {
+            upload: false,
+            rename: false,
+            move: false,
+            copy: false,
+            edit: false,
+            changePermissions: false,
+            compress: false,
+            compressChooseName: false,
+            extract: false,
+            download: true,
+            downloadMultiple: true,
+            preview: true,
+            remove: true
+        },      
+      }      
 
       // 打开提交任务的模态框
       $scope.openJobModal = function () {
@@ -58,7 +81,7 @@
   }
 
   // 模块对话框控制器
-  var JobModalCtrl = function ($scope, $uibModalInstance, toastr, jobManager) {
+  var JobModalCtrl = function ($scope, $rootScope, $uibModalInstance, toastr, jobManager) {
       $scope.job = {
           image: "busybox",
           context_dir: "",
@@ -140,9 +163,18 @@
       };
 
       $scope.open = function() {
-          $scope.openNavigator([]);
-          console.log($scope.modal);
+          $rootScope.openNavigator([]);
       }
+
+      var watcher = $scope.$watch('selectedModalPath', function(){
+        var prefix = $scope.selectedModalPath[0] == "" ? '':'/'; 
+        $scope.job.output_path = prefix + $scope.selectedModalPath.join('/');
+      });
+
+      // 离开页面时释放监听
+      $scope.$on("$destroy", function(event) {
+        watcher();
+      })         
   };
 
 

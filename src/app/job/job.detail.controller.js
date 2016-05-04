@@ -53,6 +53,7 @@
       breadcrumb: true,
       optionButton: false,
       showSizeForDirectories: true,
+      viewTable: true,
       allowedActions: {
           upload: true,
           rename: false,

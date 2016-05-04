@@ -40,7 +40,6 @@
         };
 
         $rootScope.openNavigator = function(path) {
-            console.log(123);
             $scope.fileNavigator.currentPath = path;
             $scope.fileNavigator.refresh();
             $scope.modal('selector');
