@@ -7,7 +7,8 @@
 
   function sherConfig() {
     var values = {
-      API: "http://192.168.33.1:3030/api"
+      API: "http://114.212.189.126:3030/api",
+      listened_host: "114.212.189.126",
     }
 
     return {

@@ -1,0 +1,40 @@
+<div id="job" class="animated fadeIn">
+    <h3 class="content-title">
+        {{tasks.length}} {{filter}} tasks 
+    </h3>
+    <div class="row">
+        <div class="job-filter m-b col-sm-12">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" ui-sref-active="selected" class="btn btn-default" ui-sref="navbar.job({query: 'all'})">All <span class="badge badge-white selected">{{jobCount}}</span></button>
+                <button type="button" class="btn btn-default" ui-sref-active="selected"  ui-sref="navbar.job({query: 'healthy'})"><i class="fa fa-circle text-healthy"></i>Healthy<span class="badge badge-white">{{healthyJobCount}}</span></button>
+                <button type="button" class="btn btn-default" ui-sref-active="selected" ui-sref="navbar.job({query: 'unhealthy'})"><i class="fa fa-circle text-danger"></i>Unhealty<span class="badge badge-white">{{unhealthyJobCount}}</span></button>
+            </div>
+            <form ng-submit="search()">
+                <div class="job-search">
+                    <span><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Filter" ng-model="search_key" >
+                </div>          
+            </form> 
+            <div class="clearfix"></div>            
+        </div>
+        <div class="job-list dcc-list col-sm-12">
+            <table class="table table-striped" at-table at-list="tasks" at-config="config">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr ng-click="rowClick(item.id)">
+                        <td at-implicit at-sortable at-attribute="id" width="200" at-initial-sorting="asc"></td>
+                        <td at-implicit at-sortable at-attribute="docker_image" at-initial-sorting="asc" at-title="image"></td>
+                        <td at-title="slave" at-implicit at-sortable at-attribute="slave_host"></td>
+                        <td at-title="cpu" at-implicit at-attribute="cpus" at-sortable></td>
+                        <td at-implicit at-title="mem" at-sortable at-attribute="mem"></td>
+                        <td at-title="createtime" at-sortable>{{item.create_time/1000000 | relativeDate}}</td>
+                        <td at-title="status" at-sortable>
+                            <span class="label label-{{item.label_class}}">{{item.status}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    </div>
+</div>

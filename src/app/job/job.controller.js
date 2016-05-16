@@ -104,14 +104,29 @@
         },
         {
           "name": "matlab",
-          "image": "mcr",
+          "image": "colin-rhodes/docker-matlab-mcr",
           "icon": "/assets/images/services/matlab.png"
         },
         {
           "name": "golang",
           "image": "docker.io/golang",
           "icon": "/assets/images/services/golang.png"
-        }
+        },
+        {
+          "name": "nodejs",
+          "image": "dockerfile/nodejs",
+          "icon": "/assets/images/services/nodejs.png"
+        },
+        {
+          "name": "java",
+          "image": "dockerfile/java",
+          "icon": "/assets/images/services/java.png"
+        },
+        {
+          "name": "2048",
+          "image": "alexwhen/docker-2048",
+          "icon": "/assets/images/services/docker.png"
+        },
       ]
       
       $scope.options = {
@@ -134,8 +149,6 @@
 
       $scope.addPort = function(taskIndex) {
           $scope.job.tasks[taskIndex].port_mappings.push({
-              container_port: 8080,
-              host_port: 0
           })
       }
 

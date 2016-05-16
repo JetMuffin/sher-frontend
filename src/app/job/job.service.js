@@ -33,6 +33,10 @@
             job.tasks[i].cpus = parseFloat(job.tasks[i].cpus);
             job.tasks[i].mem = parseFloat(job.tasks[i].mem);
             job.tasks[i].disk = parseFloat(job.tasks[i].disk);
+            job.tasks[i].port_mappings.forEach(function(port) {
+              port.host_port = parseInt(port.host_port);
+              port.container_port = parseInt(port.container_port);
+            })
         }
         return job;
     }

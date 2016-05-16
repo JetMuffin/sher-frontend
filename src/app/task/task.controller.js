@@ -3,35 +3,45 @@
 
   angular
     .module('sherFrontend')
-    .controller('JobDetailController', JobDetailController)
-    .controller('JobDetailFileController', JobDetailFileController);
+    .controller('TaskController', TaskController);
 
   /** @ngInject */
-  function JobDetailController($scope, $http, $stateParams, jobManager, $uibModal, $state, $interval, toastr){
-      // 加载数据
-      var reload = function (query) {
-      jobManager.refresh().$promise.then(function(response) {
-              //TODO 错误处理
-        $scope.job = jobManager.getById($stateParams.jobID);
-        $scope.refresh_random = Math.random();
-          });
-      }   
+  function TaskController($scope, $http, $stateParams, jobManager, $uibModal, $state, $interval, taskManager){
+    $scope.query = $stateParams.query || "all";
+    $scope.filter = $scope.query
+  
+    // 加载数据
+    var reload = function (query) {
+        taskManager.refresh().$promise.then(function(response) {
+            //TODO 错误处理
+            $scope.tasks = taskManager.getTasks(query)
+            console.log($scope.tasks)
+        });
+    }
 
-      reload();
+    // 初次加载数据
+    reload();
 
-      $scope.rowClick = function(taskID) {
-      $state.go('navbar.taskdetail',{taskID: taskID});
-      }
+    // 搜索任务
+    $scope.search = function () {
+        $state.go('navbar.task', {query: $scope.search_key})
+    }
 
-      // 加载任务, 定时监控
-      var timer = $interval(function() {
-          reload($scope.query);
-      }, 1000);
+    
+    $scope.rowClick = function(taskID){
+        console.log(taskID);
+        $state.go('navbar.taskdetail',{taskID: taskID});
+      };
 
-      // 离开页面时删除计时器
-      $scope.$on("$destroy", function(event) {
-          $interval.cancel(timer);
-      })      
+    // // 加载任务, 定时监控
+    // var timer = $interval(function() {
+    //     reload($scope.query);
+    // }, 1000);
+
+    // // 离开页面时删除计时器
+    // $scope.$on("$destroy", function(event) {
+    //     $interval.cancel(timer);
+    // })       
   }
 
   /** @ngInject */
